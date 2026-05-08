@@ -1,0 +1,1236 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Sulo Systems — Enterprise-grade software. Built to last.</title>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&family=Crimson+Text:wght@400;600&display=swap" rel="stylesheet">
+  <style>
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+    }
+
+    html {
+      scroll-behavior: smooth;
+    }
+
+    body {
+      font-family: 'Inter', sans-serif;
+      background: #F7F7FA;
+      color: #0A0914;
+      line-height: 1.65;
+    }
+
+    /* ── ANIMATIONS ── */
+    @keyframes float {
+      0%, 100% { transform: translateY(0px); }
+      50% { transform: translateY(-16px); }
+    }
+    @keyframes pulse-glow {
+      0%, 100% { opacity: 0.3; }
+      50% { opacity: 0.7; }
+    }
+    @keyframes fade-up {
+      from { opacity: 0; transform: translateY(24px); }
+      to { opacity: 1; transform: translateY(0); }
+    }
+    @keyframes slide-in {
+      from { opacity: 0; transform: translateX(-16px); }
+      to { opacity: 1; transform: translateX(0); }
+    }
+
+    .animate-float { animation: float 4s ease-in-out infinite; }
+    .animate-pulse-glow { animation: pulse-glow 3s ease-in-out infinite; }
+    .animate-fade-up { animation: fade-up 0.7s ease forwards; }
+    .animate-slide-in { animation: slide-in 0.5s ease forwards; }
+
+    .delay-100 { animation-delay: 0.1s; opacity: 0; }
+    .delay-200 { animation-delay: 0.2s; opacity: 0; }
+    .delay-300 { animation-delay: 0.3s; opacity: 0; }
+    .delay-400 { animation-delay: 0.4s; opacity: 0; }
+    .delay-500 { animation-delay: 0.5s; opacity: 0; }
+    .delay-600 { animation-delay: 0.6s; opacity: 0; }
+
+    /* ── NAVBAR ── */
+    nav {
+      position: fixed;
+      top: 0;
+      left: 0;
+      right: 0;
+      z-index: 100;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      padding: 0 2.5rem;
+      height: 60px;
+      background: rgba(247, 247, 250, 0.88);
+      backdrop-filter: blur(12px);
+      border-bottom: 0.5px solid rgba(0, 0, 0, 0.07);
+      transition: all 0.3s ease;
+    }
+
+    .navbar-logo {
+      display: flex;
+      align-items: center;
+      gap: 8px;
+      text-decoration: none;
+      font-size: clamp(13px, 2vw, 19.5px);
+      font-weight: 500;
+      letter-spacing: -0.02em;
+      color: #0A0914;
+    }
+
+    .hex-small {
+      width: 22px;
+      height: 22px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+    }
+
+    nav .nav-links {
+      display: flex;
+      align-items: center;
+      gap: 24px;
+    }
+
+    nav a {
+      font-size: clamp(12px, 1.5vw, 18px);
+      color: rgba(0, 0, 0, 0.4);
+      text-decoration: none;
+      letter-spacing: -0.01em;
+      transition: color 0.2s;
+    }
+
+    nav a:hover {
+      color: rgba(0, 0, 0, 0.8);
+    }
+
+    /* ── HERO ── */
+    .hero {
+      min-height: 100vh;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      text-align: center;
+      padding: 8rem 1.5rem 5rem;
+      position: relative;
+      overflow: hidden;
+    }
+
+    .hero::before {
+      content: '';
+      position: absolute;
+      top: -80px;
+      left: 50%;
+      transform: translateX(-50%);
+      width: 600px;
+      height: 500px;
+      background: radial-gradient(ellipse at 50% 30%, rgba(83, 74, 183, 0.09) 0%, transparent 65%);
+      pointer-events: none;
+    }
+
+    .hero-content {
+      position: relative;
+      z-index: 2;
+      max-width: 700px;
+    }
+
+    .hex-container {
+      position: relative;
+      margin-bottom: 2.5rem;
+      display: inline-block;
+    }
+
+    .hex-glow {
+      position: absolute;
+      inset: -40px;
+      background: radial-gradient(ellipse at center, rgba(83, 74, 183, 0.13) 0%, transparent 70%);
+      border-radius: 50%;
+      animation: pulse-glow 3s ease-in-out infinite;
+      pointer-events: none;
+    }
+
+    .hex-mark {
+      width: 300px;
+      height: 300px;
+      animation: float 4s ease-in-out infinite;
+    }
+
+    .hero h1 {
+      font-family: 'Crimson Text', serif;
+      font-size: clamp(42px, 10vw, 85px);
+      font-weight: 400;
+      line-height: 1;
+      letter-spacing: -0.05em;
+      color: #0A0914;
+      margin-bottom: 0;
+      margin-top: 1.5rem;
+    }
+
+    .hero h1 span {
+      color: rgba(0, 0, 0, 0.18);
+    }
+
+    .hero p {
+      font-size: clamp(15px, 3vw, 19px);
+      font-weight: 300;
+      color: rgba(0, 0, 0, 0.42);
+      line-height: 1.65;
+      max-width: 500px;
+      margin: 1.75rem auto 3rem;
+    }
+
+    .hero-ctas {
+      display: flex;
+      gap: 12px;
+      justify-content: center;
+      flex-wrap: wrap;
+      margin-bottom: 4rem;
+    }
+
+    .btn {
+      font-size: 14px;
+      font-weight: 600;
+      padding: 14px 30px;
+      border-radius: 8px;
+      letter-spacing: -0.02em;
+      text-decoration: none;
+      transition: all 0.2s;
+      border: none;
+      cursor: pointer;
+    }
+
+    .btn-primary {
+      background: #534AB7;
+      color: #fff;
+      box-shadow: 0 2px 12px rgba(83, 74, 183, 0.3);
+    }
+
+    .btn-primary:hover {
+      background: #443ea0;
+      box-shadow: 0 4px 20px rgba(83, 74, 183, 0.4);
+      transform: translateY(-1px);
+    }
+
+    .btn-secondary {
+      background: #fff;
+      color: rgba(0, 0, 0, 0.4);
+      border: 0.5px solid rgba(0, 0, 0, 0.1);
+    }
+
+    .btn-secondary:hover {
+      border-color: rgba(0, 0, 0, 0.2);
+      color: rgba(0, 0, 0, 0.7);
+    }
+
+    .capabilities-frame {
+      margin-top: 4rem;
+      width: 100%;
+      max-width: 650px;
+      margin-left: auto;
+      margin-right: auto;
+      border: 0.5px solid rgba(0, 0, 0, 0.08);
+      border-radius: 10px;
+      overflow: hidden;
+      background: #fff;
+      box-shadow: 0 4px 32px rgba(0, 0, 0, 0.06);
+    }
+
+    .frame-header {
+      display: flex;
+      align-items: center;
+      gap: 6px;
+      padding: 12px 16px;
+      border-bottom: 0.5px solid rgba(0, 0, 0, 0.06);
+      background: #F9F9FB;
+    }
+
+    .frame-dot {
+      width: 9px;
+      height: 9px;
+      border-radius: 50%;
+    }
+
+    .frame-title {
+      font-size: 11px;
+      color: rgba(0, 0, 0, 0.25);
+      margin: 0 auto;
+      letter-spacing: 0.02em;
+    }
+
+    .frame-body {
+      padding: 20px;
+      display: flex;
+      flex-direction: column;
+      gap: 15px;
+    }
+
+    .cap-grid {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 10px;
+    }
+
+    .cap-card {
+      background: #F7F7FA;
+      border: 0.5px solid rgba(0, 0, 0, 0.07);
+      border-radius: 6px;
+      padding: 14px 16px;
+    }
+
+    .cap-card.accent {
+      background: #EEEDFE;
+      border-color: rgba(83, 74, 183, 0.2);
+    }
+
+    .cap-icon {
+      font-size: 16px;
+      margin-bottom: 8px;
+      color: rgba(0, 0, 0, 0.3);
+    }
+
+    .cap-card.accent .cap-icon {
+      color: #534AB7;
+    }
+
+    .cap-title {
+      font-size: 13px;
+      font-weight: 500;
+      color: rgba(0, 0, 0, 0.6);
+      letter-spacing: -0.01em;
+      margin-bottom: 4px;
+    }
+
+    .cap-card.accent .cap-title {
+      color: #26215C;
+    }
+
+    .cap-desc {
+      font-size: 11px;
+      color: rgba(0, 0, 0, 0.35);
+      letter-spacing: 0.01em;
+      line-height: 1.5;
+    }
+
+    .frame-footer {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      padding: 10px 4px 0;
+      border-top: 0.5px solid rgba(0, 0, 0, 0.05);
+      margin-top: 2px;
+      flex-wrap: wrap;
+      gap: 6px;
+    }
+
+    .frame-footer-text {
+      font-size: 10px;
+      color: rgba(0, 0, 0, 0.28);
+      letter-spacing: 0.06em;
+      text-transform: uppercase;
+    }
+
+    .frame-footer-status {
+      display: flex;
+      align-items: center;
+      gap: 5px;
+      font-size: 10px;
+      color: rgba(0, 0, 0, 0.35);
+    }
+
+    .status-dot {
+      width: 6px;
+      height: 6px;
+      border-radius: 50%;
+      background: #2d9e6b;
+      box-shadow: 0 0 4px rgba(45, 158, 107, 0.6);
+    }
+
+    /* ── STATS ── */
+    .stats {
+      border-top: 0.5px solid rgba(0, 0, 0, 0.07);
+      border-bottom: 0.5px solid rgba(0, 0, 0, 0.07);
+      background: #fff;
+    }
+
+    .stats-grid {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+    }
+
+    .stat-item {
+      padding: 2.5rem 3rem;
+      text-align: center;
+      border-right: 0.5px solid rgba(0, 0, 0, 0.07);
+    }
+
+    .stat-item:last-child {
+      border-right: none;
+    }
+
+    .stat-number {
+      font-size: clamp(32px, 5vw, 45px);
+      font-weight: 600;
+      letter-spacing: -0.05em;
+      color: #0A0914;
+      margin-bottom: 6px;
+    }
+
+    .stat-number .accent {
+      color: #534AB7;
+      font-style: normal;
+    }
+
+    .stat-label {
+      font-size: 13px;
+      color: rgba(0, 0, 0, 0.3);
+      letter-spacing: -0.005em;
+    }
+
+    @media (max-width: 480px) {
+      .stats-grid {
+        grid-template-columns: 1fr;
+      }
+      .stat-item {
+        border-right: none;
+        border-bottom: 0.5px solid rgba(0, 0, 0, 0.07);
+        padding: 2rem 1.5rem;
+      }
+      .stat-item:last-child {
+        border-bottom: none;
+      }
+    }
+
+    /* ── SERVICES ── */
+    .services {
+      padding: 6.25rem 2rem;
+      background: #F7F7FA;
+    }
+
+    .section-header {
+      font-size: 12px;
+      color: rgba(0, 0, 0, 0.25);
+      letter-spacing: 0.14em;
+      text-transform: uppercase;
+      margin-bottom: 3rem;
+      max-width: 960px;
+      margin-left: auto;
+      margin-right: auto;
+    }
+
+    .services-list {
+      max-width: 960px;
+      margin: 0 auto;
+    }
+
+    .service-row {
+      display: flex;
+      align-items: flex-start;
+      justify-content: space-between;
+      padding: 1.75rem 1.5rem;
+      border: 0.5px solid rgba(0, 0, 0, 0.12);
+      border-radius: 8px;
+      background: rgba(0, 0, 0, 0.01);
+      margin-bottom: 1rem;
+      gap: 1.5rem;
+      cursor: default;
+      transition: all 0.2s;
+    }
+
+    .service-row:hover {
+      padding-left: 2rem;
+    }
+
+    .service-num {
+      font-size: 13px;
+      color: rgba(0, 0, 0, 0.15);
+      letter-spacing: 0.06em;
+      min-width: 24px;
+      margin-top: 2px;
+    }
+
+    .service-content {
+      flex: 1;
+    }
+
+    .service-name {
+      font-size: 19px;
+      font-weight: 400;
+      color: rgba(0, 0, 0, 0.72);
+      letter-spacing: -0.025em;
+      margin-bottom: 6px;
+    }
+
+    .service-desc {
+      font-size: 14px;
+      color: rgba(0, 0, 0, 0.38);
+      line-height: 1.6;
+      max-width: 520px;
+    }
+
+    .service-tag {
+      display: inline-flex;
+      align-items: center;
+      gap: 10px;
+      flex-shrink: 0;
+      margin-top: 4px;
+    }
+
+    .badge {
+      font-size: 10px;
+      font-weight: 500;
+      color: #534AB7;
+      background: rgba(83, 74, 183, 0.08);
+      border: 0.5px solid rgba(83, 74, 183, 0.18);
+      padding: 4px 12px;
+      border-radius: 20px;
+      letter-spacing: 0.04em;
+      text-transform: uppercase;
+    }
+
+    .service-arrow {
+      font-size: 14px;
+      color: rgba(0, 0, 0, 0.15);
+    }
+
+    /* ── CASE STUDIES ── */
+    .case-studies {
+      padding: 6.25rem 2rem;
+      background: #fff;
+    }
+
+    .case-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(260px, 1fr));
+      gap: 1.25rem;
+      max-width: 960px;
+      margin: 0 auto;
+    }
+
+    .case-card {
+      border: 0.5px solid rgba(0, 0, 0, 0.08);
+      border-radius: 10px;
+      padding: 1.875rem;
+      background: #FAFAFA;
+      transition: all 0.2s;
+    }
+
+    .case-card:hover {
+      border-color: rgba(83, 74, 183, 0.25);
+      background: #fff;
+      box-shadow: 0 4px 20px rgba(0, 0, 0, 0.06);
+    }
+
+    .case-tag {
+      font-size: 11px;
+      color: #534AB7;
+      letter-spacing: 0.12em;
+      text-transform: uppercase;
+      margin-bottom: 10px;
+    }
+
+    .case-title {
+      font-size: 19px;
+      font-weight: 500;
+      color: #0A0914;
+      letter-spacing: -0.02em;
+      margin-bottom: 12px;
+    }
+
+    .case-desc {
+      font-size: 14px;
+      color: rgba(0, 0, 0, 0.45);
+      line-height: 1.65;
+      margin-bottom: 18px;
+    }
+
+    .case-outcome {
+      font-size: 13px;
+      color: #26215C;
+      font-weight: 500;
+      letter-spacing: -0.01em;
+      padding-top: 15px;
+      border-top: 0.5px solid rgba(0, 0, 0, 0.06);
+    }
+
+    /* ── TESTIMONIALS ── */
+    .testimonials {
+      padding: 6.25rem 2rem;
+      background: #F7F7FA;
+    }
+
+    .testimonials-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+      gap: 1.25rem;
+      max-width: 960px;
+      margin: 0 auto;
+    }
+
+    .testimonial-card {
+      background: #fff;
+      border: 0.5px solid rgba(0, 0, 0, 0.07);
+      border-radius: 10px;
+      padding: 2.2rem;
+    }
+
+    .quote-mark {
+      font-size: 40px;
+      line-height: 1;
+      color: rgba(83, 74, 183, 0.15);
+      margin-bottom: 1.25rem;
+      font-family: Georgia, serif;
+    }
+
+    .testimonial-text {
+      font-size: 15px;
+      color: rgba(0, 0, 0, 0.6);
+      line-height: 1.75;
+      letter-spacing: -0.01em;
+      margin-bottom: 1.75rem;
+      font-style: italic;
+    }
+
+    .testimonial-author {
+      display: flex;
+      align-items: center;
+      gap: 12px;
+    }
+
+    .author-avatar {
+      width: 40px;
+      height: 40px;
+      border-radius: 50%;
+      background: #EEEDFE;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 12px;
+      font-weight: 600;
+      color: #534AB7;
+      flex-shrink: 0;
+    }
+
+    .author-name {
+      font-size: 13px;
+      color: rgba(0, 0, 0, 0.35);
+      letter-spacing: -0.01em;
+    }
+
+    /* ── ABOUT ── */
+    .about {
+      padding: 6.25rem 2rem;
+      background: #fff;
+    }
+
+    .about-grid {
+      max-width: 960px;
+      margin: 0 auto;
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+      gap: 3.75rem;
+      align-items: start;
+    }
+
+    .about-content h2 {
+      font-family: 'Crimson Text', serif;
+      font-size: clamp(28px, 3.5vw, 40px);
+      font-weight: 600;
+      letter-spacing: -0.04em;
+      color: #0A0914;
+      line-height: 1.15;
+      margin-bottom: 1.5rem;
+    }
+
+    .about-content h2 span {
+      color: rgba(0, 0, 0, 0.25);
+    }
+
+    .about-content p {
+      font-size: 15px;
+      color: rgba(0, 0, 0, 0.5);
+      line-height: 1.75;
+      letter-spacing: -0.01em;
+      margin-bottom: 1.25rem;
+    }
+
+    .value-props {
+      display: flex;
+      flex-direction: column;
+      gap: 1.25rem;
+    }
+
+    .value-prop {
+      display: flex;
+      gap: 17px;
+      align-items: flex-start;
+      padding: 1.25rem 1.5rem;
+      background: #F7F7FA;
+      border: 0.5px solid rgba(0, 0, 0, 0.06);
+      border-radius: 10px;
+    }
+
+    .value-icon {
+      font-size: 22px;
+      flex-shrink: 0;
+      margin-top: 1px;
+    }
+
+    .value-title {
+      font-size: 15px;
+      font-weight: 500;
+      color: #0A0914;
+      letter-spacing: -0.02em;
+      margin-bottom: 4px;
+    }
+
+    .value-desc {
+      font-size: 14px;
+      color: rgba(0, 0, 0, 0.42);
+      line-height: 1.6;
+    }
+
+    /* ── CONTACT ── */
+    .contact {
+      padding: 6.25rem 2rem;
+      background: #F7F7FA;
+    }
+
+    .contact-wrapper {
+      max-width: 640px;
+      margin: 0 auto;
+    }
+
+    .contact h2 {
+      font-family: 'Crimson Text', serif;
+      font-size: clamp(28px, 3.5vw, 45px);
+      font-weight: 600;
+      letter-spacing: -0.04em;
+      color: #0A0914;
+      line-height: 1.1;
+      margin-bottom: 0.875rem;
+    }
+
+    .contact-intro {
+      font-size: 15px;
+      color: rgba(0, 0, 0, 0.42);
+      line-height: 1.65;
+      margin-bottom: 3rem;
+    }
+
+    .contact-form {
+      display: flex;
+      flex-direction: column;
+      gap: 1.25rem;
+    }
+
+    .form-group {
+      display: flex;
+      flex-direction: column;
+      gap: 0.5rem;
+    }
+
+    .form-row {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 1.25rem;
+    }
+
+    label {
+      font-size: 13px;
+      color: rgba(0, 0, 0, 0.4);
+      letter-spacing: -0.01em;
+    }
+
+    input, textarea {
+      padding: 12px 16px;
+      font-size: 15px;
+      color: #0A0914;
+      background: #fff;
+      border: 0.5px solid rgba(0, 0, 0, 0.12);
+      border-radius: 6px;
+      outline: none;
+      font-family: 'Inter', sans-serif;
+      transition: border-color 0.2s;
+      letter-spacing: -0.01em;
+    }
+
+    input:focus, textarea:focus {
+      border-color: rgba(83, 74, 183, 0.4);
+    }
+
+    textarea {
+      resize: vertical;
+      line-height: 1.6;
+    }
+
+    .submit-btn {
+      align-self: flex-start;
+      margin-top: 0.5rem;
+    }
+
+    .submit-btn:disabled {
+      opacity: 0.5;
+      cursor: not-allowed;
+    }
+
+    .form-message {
+      font-size: 13px;
+      padding: 12px;
+      border-radius: 6px;
+      text-align: center;
+    }
+
+    .success-message {
+      background: rgba(45, 158, 107, 0.08);
+      border: 0.5px solid rgba(45, 158, 107, 0.25);
+      color: #0A0914;
+    }
+
+    .success-icon {
+      font-size: 30px;
+      margin-bottom: 15px;
+    }
+
+    .error-message {
+      background: rgba(192, 57, 43, 0.08);
+      border: 0.5px solid rgba(192, 57, 43, 0.25);
+      color: #c0392b;
+    }
+
+    /* ── FOOTER ── */
+    footer {
+      background: #fff;
+      border-top: 0.5px solid rgba(0, 0, 0, 0.07);
+      padding: 2rem 2.5rem;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      flex-wrap: wrap;
+      gap: 1rem;
+    }
+
+    .footer-left {
+      display: flex;
+      align-items: center;
+      gap: 10px;
+    }
+
+    .footer-copyright {
+      font-size: 13px;
+      color: rgba(0, 0, 0, 0.3);
+      letter-spacing: -0.01em;
+    }
+
+    .footer-links {
+      display: flex;
+      gap: 24px;
+    }
+
+    footer a {
+      font-size: 13px;
+      color: rgba(0, 0, 0, 0.28);
+      text-decoration: none;
+      letter-spacing: -0.01em;
+      transition: color 0.2s;
+    }
+
+    footer a:hover {
+      color: rgba(0, 0, 0, 0.6);
+    }
+
+    /* ── RESPONSIVE ── */
+    @media (max-width: 768px) {
+      nav {
+        padding: 0 1.5rem;
+      }
+
+      .hero {
+        padding: 6rem 1.5rem 3rem;
+      }
+
+      .services {
+        padding: 4rem 1.5rem;
+      }
+
+      .case-studies {
+        padding: 4rem 1.5rem;
+      }
+
+      .testimonials {
+        padding: 4rem 1.5rem;
+      }
+
+      .about {
+        padding: 4rem 1.5rem;
+      }
+
+      .contact {
+        padding: 4rem 1.5rem;
+      }
+
+      .form-row {
+        grid-template-columns: 1fr;
+      }
+
+      .about-grid {
+        gap: 2rem;
+      }
+
+      footer {
+        padding: 1.5rem;
+        flex-direction: column;
+        text-align: center;
+      }
+    }
+  </style>
+</head>
+<body>
+
+<!-- NAVBAR -->
+<nav>
+  <a href="#" class="navbar-logo">
+    <img src="./Log.png" alt="Sulo Systems" class="hex-small" style="width: 22px; height: auto;">
+    Sulo Systems
+  </a>
+  <div class="nav-links">
+    <a href="#services">Services</a>
+    <a href="#work">Work</a>
+    <a href="#about">About</a>
+    <a href="#contact">Contact</a>
+  </div>
+</nav>
+
+<!-- HERO -->
+<section class="hero">
+  <div class="hero-content">
+    <div class="hex-container animate-fade-up delay-100">
+      <div class="hex-glow"></div>
+      <svg class="hex-mark animate-float" style="width: 300px; height: 300px;">
+        <image href="./Log.png" width="250" height="250" preserveAspectRatio="xMidYMid meet"/>
+      </svg>
+    </div>
+
+    <h1 class="animate-fade-up delay-200">
+      Enterprise-grade software.
+      <br>
+      <span>Built to last.</span>
+    </h1>
+
+    <p class="animate-fade-up delay-300">
+      We build the software your business actually needs — custom apps, AI voice agents, and enterprise integrations. Without the markup.
+    </p>
+
+    <div class="hero-ctas animate-fade-up delay-400">
+      <a href="#contact" class="btn btn-primary">Request a demo</a>
+      <a href="#work" class="btn btn-secondary">See our work →</a>
+    </div>
+
+    <div class="capabilities-frame animate-fade-up delay-500">
+      <div class="frame-header">
+        <div class="frame-dot" style="background: #ff5f57;"></div>
+        <div class="frame-dot" style="background: #febc2e;"></div>
+        <div class="frame-dot" style="background: #28c840;"></div>
+        <span class="frame-title">Sulo Systems · Capabilities</span>
+      </div>
+      <div class="frame-body">
+        <div class="cap-grid">
+          <div class="cap-card accent">
+            <div class="cap-icon">◈</div>
+            <div class="cap-title">Custom Web App</div>
+            <div class="cap-desc">End-to-end build — design, development, and deployment</div>
+          </div>
+          <div class="cap-card">
+            <div class="cap-icon">⬡</div>
+            <div class="cap-title">AI Voice Agent</div>
+            <div class="cap-desc">Natural language, real-time response, fully integrated</div>
+          </div>
+          <div class="cap-card">
+            <div class="cap-icon">⇄</div>
+            <div class="cap-title">CRM & Integrations</div>
+            <div class="cap-desc">Enterprise bridges that work without complexity</div>
+          </div>
+          <div class="cap-card">
+            <div class="cap-icon">◎</div>
+            <div class="cap-title">Landing Pages</div>
+            <div class="cap-desc">Conversion-optimised and live in days</div>
+          </div>
+        </div>
+        <div class="frame-footer">
+          <span class="frame-footer-text">All talent onshore · Toronto, CA</span>
+          <div class="frame-footer-status">
+            <div class="status-dot"></div>
+            Accepting new clients
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- STATS -->
+<section class="stats">
+  <div class="stats-grid">
+    <div class="stat-item">
+      <div class="stat-number">100<span class="accent">%</span></div>
+      <div class="stat-label">Canadian talent</div>
+    </div>
+    <div class="stat-item">
+      <div class="stat-number"><span class="accent">AI</span>-first</div>
+      <div class="stat-label">Every engagement</div>
+    </div>
+    <div class="stat-item">
+      <div class="stat-number">4<span class="accent">x</span></div>
+      <div class="stat-label">Faster than agencies</div>
+    </div>
+  </div>
+</section>
+
+<!-- SERVICES -->
+<section class="services" id="services">
+  <div class="section-header">What we build</div>
+  <div class="services-list">
+    <div class="service-row">
+      <div class="service-num">01</div>
+      <div class="service-content">
+        <div class="service-name">Custom Web Apps & CRM</div>
+        <div class="service-desc">Tailored systems built around your workflow, not the other way around. From customer portals to full CRM replacements.</div>
+      </div>
+      <div class="service-tag">
+        <span class="badge">Web</span>
+        <span class="service-arrow">→</span>
+      </div>
+    </div>
+
+    <div class="service-row">
+      <div class="service-num">02</div>
+      <div class="service-content">
+        <div class="service-name">AI Agents, Chatbots & Voice</div>
+        <div class="service-desc">Intelligent voice agents and chatbots that convert visitors, answer questions, and integrate with your existing systems.</div>
+      </div>
+      <div class="service-tag">
+        <span class="badge">AI</span>
+        <span class="service-arrow">→</span>
+      </div>
+    </div>
+
+    <div class="service-row">
+      <div class="service-num">03</div>
+      <div class="service-content">
+        <div class="service-name">Salesforce Integrations</div>
+        <div class="service-desc">Enterprise-grade data bridges between your tools — without the enterprise complexity or price tag.</div>
+      </div>
+      <div class="service-tag">
+        <span class="badge">Integration</span>
+        <span class="service-arrow">→</span>
+      </div>
+    </div>
+
+    <div class="service-row">
+      <div class="service-num">04</div>
+      <div class="service-content">
+        <div class="service-name">Landing Pages</div>
+        <div class="service-desc">High-converting pages built fast, tested thoroughly, and deployed with confidence.</div>
+      </div>
+      <div class="service-tag">
+        <span class="badge">Design</span>
+        <span class="service-arrow">→</span>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- CASE STUDIES -->
+<section class="case-studies" id="work">
+  <div class="section-header">Recent work</div>
+  <div class="case-grid">
+    <div class="case-card">
+      <div class="case-tag">AI · Chatbot</div>
+      <div class="case-title">Quinn AI</div>
+      <div class="case-desc">Intelligent trip planning chatbot that answers questions about canoe trips, winter cabins, lodges, and corporate retreats — and delivers formatted booking recommendations.</div>
+      <div class="case-outcome">Conversion-focused AI assistant with smart follow-up questions and real-time recommendations.</div>
+    </div>
+
+    <div class="case-card">
+      <div class="case-tag">Web App</div>
+      <div class="case-title">Custom CRM Portal</div>
+      <div class="case-desc">End-to-end client management system built to replace an expensive third-party SaaS subscription — fully tailored to the client's unique workflow.</div>
+      <div class="case-outcome">Reduced software costs by 70% with a fully custom solution.</div>
+    </div>
+
+    <div class="case-card">
+      <div class="case-tag">Integration</div>
+      <div class="case-title">Salesforce Data Bridge</div>
+      <div class="case-desc">Real-time synchronization between a legacy ERP system and Salesforce CRM, eliminating manual data entry and reducing reporting lag.</div>
+      <div class="case-outcome">Zero manual data entry. Live reporting across both systems.</div>
+    </div>
+  </div>
+</section>
+
+<!-- TESTIMONIALS -->
+<section class="testimonials">
+  <div class="section-header">What clients say</div>
+  <div class="testimonials-grid">
+    <div class="testimonial-card">
+      <div class="quote-mark">"</div>
+      <p class="testimonial-text">Sulo Systems built exactly what we needed — no bloat, no unnecessary features. They understood our business from day one and delivered ahead of schedule.</p>
+      <div class="testimonial-author">
+        <div class="author-avatar">TH</div>
+        <span class="author-name">Client — Tourism & Hospitality</span>
+      </div>
+    </div>
+
+    <div class="testimonial-card">
+      <div class="quote-mark">"</div>
+      <p class="testimonial-text">The AI chatbot they built for us handles questions we used to answer manually all day. Our team can focus on what matters now. The ROI was immediate.</p>
+      <div class="testimonial-author">
+        <div class="author-avatar">SB</div>
+        <span class="author-name">Client — Small Business Owner</span>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ABOUT -->
+<section class="about" id="about">
+  <div class="about-grid">
+    <div class="about-content">
+      <h2>
+        Built by engineers.
+        <br>
+        <span>Priced for growth.</span>
+      </h2>
+      <p>Sulo Systems was founded on a simple idea: small businesses deserve the same quality of technology as enterprise companies — without the enterprise price tag or the offshore handoff.</p>
+      <p>Every project is delivered by our team based in Toronto, Canada. No outsourcing, no surprises. Just clean, reliable software built to last.</p>
+    </div>
+
+    <div class="value-props">
+      <div class="value-prop">
+        <span class="value-icon">🇨🇦</span>
+        <div>
+          <div class="value-title">100% Canadian</div>
+          <div class="value-desc">All talent is onshore in Canada. You always know who you're working with.</div>
+        </div>
+      </div>
+      <div class="value-prop">
+        <span class="value-icon">⚡</span>
+        <div>
+          <div class="value-title">AI-first approach</div>
+          <div class="value-desc">We build AI into every engagement — not as an add-on, but from the ground up.</div>
+        </div>
+      </div>
+      <div class="value-prop">
+        <span class="value-icon">🎯</span>
+        <div>
+          <div class="value-title">Fixed scope, no drift</div>
+          <div class="value-desc">We define the project clearly before we start. No bill shock at the end.</div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- CONTACT -->
+<section class="contact" id="contact">
+  <div class="contact-wrapper">
+    <h2>Let's build something.</h2>
+    <p class="contact-intro">Tell us what you're working on. We'll get back to you within one business day.</p>
+
+    <form class="contact-form" id="contact-form" action="https://formspree.io/f/mgodnvaq" method="POST">
+      <div class="form-row">
+        <div class="form-group">
+          <label for="name">Name *</label>
+          <input type="text" id="name" name="name" placeholder="Jane Smith" required>
+        </div>
+        <div class="form-group">
+          <label for="email">Email *</label>
+          <input type="email" id="email" name="email" placeholder="jane@company.com" required>
+        </div>
+      </div>
+
+      <div class="form-group">
+        <label for="company">Company</label>
+        <input type="text" id="company" name="company" placeholder="Acme Inc.">
+      </div>
+
+      <div class="form-group">
+        <label for="message">What are you building? *</label>
+        <textarea id="message" name="message" placeholder="Tell us about your project, timeline, and any specific requirements..." rows="5" required></textarea>
+      </div>
+
+      <button type="submit" class="btn btn-primary submit-btn">Send message →</button>
+    </form>
+
+    <div id="form-response" style="margin-top: 1.5rem; display: none;"></div>
+  </div>
+</section>
+
+<!-- FOOTER -->
+<footer>
+  <div class="footer-left">
+    <img src="./Log.png" alt="Sulo Systems" style="width: 22px; height: auto;">
+    <span class="footer-copyright">© 2025 Sulo Systems Inc. · Toronto, Canada</span>
+  </div>
+  <div class="footer-links">
+    <a href="#">Privacy</a>
+    <a href="#">LinkedIn</a>
+    <a href="#contact">Contact</a>
+  </div>
+</footer>
+
+<script>
+  // Form handling with Formspree
+  const form = document.getElementById('contact-form');
+  const responseDiv = document.getElementById('form-response');
+
+  form.addEventListener('submit', async (e) => {
+    e.preventDefault();
+
+    const submitBtn = form.querySelector('button[type="submit"]');
+    submitBtn.disabled = true;
+    submitBtn.textContent = 'Sending...';
+
+    try {
+      const response = await fetch(form.action, {
+        method: 'POST',
+        body: new FormData(form),
+        headers: {
+          'Accept': 'application/json'
+        }
+      });
+
+      if (response.ok) {
+        responseDiv.innerHTML = '<div class="form-message success-message"><div class="success-icon">✓</div><div><strong>Message sent</strong></div><div>We\'ll be in touch within one business day.</div></div>';
+        responseDiv.style.display = 'block';
+        form.reset();
+        submitBtn.disabled = false;
+        submitBtn.textContent = 'Send message →';
+      } else {
+        throw new Error('Form submission failed');
+      }
+    } catch (error) {
+      responseDiv.innerHTML = '<div class="form-message error-message">Something went wrong. Please email us at sulosystems@gmail.com</div>';
+      responseDiv.style.display = 'block';
+      submitBtn.disabled = false;
+      submitBtn.textContent = 'Send message →';
+    }
+  });
+
+  // Smooth scroll for anchor links
+  document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+    anchor.addEventListener('click', function (e) {
+      e.preventDefault();
+      const target = document.querySelector(this.getAttribute('href'));
+      if (target) {
+        target.scrollIntoView({ behavior: 'smooth' });
+      }
+    });
+  });
+</script>
+
+</body>
+</html>
