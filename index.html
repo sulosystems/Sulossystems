@@ -40,6 +40,53 @@
       from { opacity: 0; transform: translateX(-16px); }
       to { opacity: 1; transform: translateX(0); }
     }
+    @keyframes successSlide {
+      0% {
+        opacity: 0;
+        transform: translateY(16px);
+        filter: blur(4px);
+      }
+      100% {
+        opacity: 1;
+        transform: translateY(0);
+        filter: blur(0);
+      }
+    }
+    @keyframes successPulse {
+      0% {
+        box-shadow: 0 0 0 0 rgba(45, 158, 107, 0.4);
+      }
+      70% {
+        box-shadow: 0 0 0 12px rgba(45, 158, 107, 0);
+      }
+      100% {
+        box-shadow: 0 0 0 0 rgba(45, 158, 107, 0);
+      }
+    }
+    @keyframes errorShakeSlide {
+      0% {
+        opacity: 0;
+        transform: translateX(-20px) rotateZ(-1deg);
+      }
+      50% {
+        transform: translateX(8px) rotateZ(0.5deg);
+      }
+      100% {
+        opacity: 1;
+        transform: translateX(0) rotateZ(0);
+      }
+    }
+    @keyframes errorPulse {
+      0% {
+        box-shadow: 0 0 0 0 rgba(192, 57, 43, 0.5);
+      }
+      70% {
+        box-shadow: 0 0 0 10px rgba(192, 57, 43, 0);
+      }
+      100% {
+        box-shadow: 0 0 0 0 rgba(192, 57, 43, 0);
+      }
+    }
 
     .animate-float { animation: float 4s ease-in-out infinite; }
     .animate-pulse-glow { animation: pulse-glow 3s ease-in-out infinite; }
@@ -157,7 +204,13 @@
     .hex-mark {
       width: 300px;
       height: 300px;
-      animation: float 4s ease-in-out infinite;
+      animation: float 4s ease-in-out infinite, logo-pulse 2s ease-in-out infinite;
+      filter: drop-shadow(0 0 20px rgba(83, 74, 183, 0.4));
+    }
+
+    @keyframes logo-pulse {
+      0%, 100% { filter: drop-shadow(0 0 10px rgba(83, 74, 183, 0.4)); }
+      50% { filter: drop-shadow(0 0 30px rgba(83, 74, 183, 0.8)); }
     }
 
     .hero h1 {
@@ -230,7 +283,7 @@
     .capabilities-frame {
       margin-top: 4rem;
       width: 100%;
-      max-width: 650px;
+      max-width: 1105px;
       margin-left: auto;
       margin-right: auto;
       border: 0.5px solid rgba(0, 0, 0, 0.08);
@@ -244,42 +297,42 @@
       display: flex;
       align-items: center;
       gap: 6px;
-      padding: 12px 16px;
+      padding: 20px 27px;
       border-bottom: 0.5px solid rgba(0, 0, 0, 0.06);
       background: #F9F9FB;
     }
 
     .frame-dot {
-      width: 9px;
-      height: 9px;
+      width: 15px;
+      height: 15px;
       border-radius: 50%;
     }
 
     .frame-title {
-      font-size: 11px;
+      font-size: 18px;
       color: rgba(0, 0, 0, 0.25);
       margin: 0 auto;
       letter-spacing: 0.02em;
     }
 
     .frame-body {
-      padding: 20px;
+      padding: 34px;
       display: flex;
       flex-direction: column;
-      gap: 15px;
+      gap: 25px;
     }
 
     .cap-grid {
       display: grid;
       grid-template-columns: 1fr 1fr;
-      gap: 10px;
+      gap: 17px;
     }
 
     .cap-card {
       background: #F7F7FA;
       border: 0.5px solid rgba(0, 0, 0, 0.07);
       border-radius: 6px;
-      padding: 14px 16px;
+      padding: 24px 27px;
     }
 
     .cap-card.accent {
@@ -288,8 +341,8 @@
     }
 
     .cap-icon {
-      font-size: 16px;
-      margin-bottom: 8px;
+      font-size: 27px;
+      margin-bottom: 13px;
       color: rgba(0, 0, 0, 0.3);
     }
 
@@ -298,11 +351,11 @@
     }
 
     .cap-title {
-      font-size: 13px;
+      font-size: 22px;
       font-weight: 500;
       color: rgba(0, 0, 0, 0.6);
       letter-spacing: -0.01em;
-      margin-bottom: 4px;
+      margin-bottom: 7px;
     }
 
     .cap-card.accent .cap-title {
@@ -310,7 +363,7 @@
     }
 
     .cap-desc {
-      font-size: 11px;
+      font-size: 18px;
       color: rgba(0, 0, 0, 0.35);
       letter-spacing: 0.01em;
       line-height: 1.5;
@@ -320,15 +373,15 @@
       display: flex;
       align-items: center;
       justify-content: space-between;
-      padding: 10px 4px 0;
+      padding: 17px 7px 0;
       border-top: 0.5px solid rgba(0, 0, 0, 0.05);
-      margin-top: 2px;
+      margin-top: 3px;
       flex-wrap: wrap;
-      gap: 6px;
+      gap: 10px;
     }
 
     .frame-footer-text {
-      font-size: 10px;
+      font-size: 17px;
       color: rgba(0, 0, 0, 0.28);
       letter-spacing: 0.06em;
       text-transform: uppercase;
@@ -337,17 +390,17 @@
     .frame-footer-status {
       display: flex;
       align-items: center;
-      gap: 5px;
-      font-size: 10px;
+      gap: 8px;
+      font-size: 17px;
       color: rgba(0, 0, 0, 0.35);
     }
 
     .status-dot {
-      width: 6px;
-      height: 6px;
+      width: 10px;
+      height: 10px;
       border-radius: 50%;
       background: #2d9e6b;
-      box-shadow: 0 0 4px rgba(45, 158, 107, 0.6);
+      box-shadow: 0 0 7px rgba(45, 158, 107, 0.6);
     }
 
     /* ── STATS ── */
@@ -789,6 +842,7 @@
       background: rgba(45, 158, 107, 0.08);
       border: 0.5px solid rgba(45, 158, 107, 0.25);
       color: #0A0914;
+      animation: successSlide 0.8s cubic-bezier(0.34, 1.56, 0.64, 1) forwards, successPulse 1.2s ease-out 0.3s forwards;
     }
 
     .success-icon {
@@ -800,6 +854,7 @@
       background: rgba(192, 57, 43, 0.08);
       border: 0.5px solid rgba(192, 57, 43, 0.25);
       color: #c0392b;
+      animation: errorShakeSlide 0.6s cubic-bezier(0.34, 1.56, 0.64, 1) forwards, errorPulse 1s ease-out 0.2s forwards;
     }
 
     /* ── FOOTER ── */
@@ -911,7 +966,7 @@
     <div class="hex-container animate-fade-up delay-100">
       <div class="hex-glow"></div>
       <svg class="hex-mark animate-float" style="width: 300px; height: 300px;">
-        <image href="./Log.png" width="250" height="250" preserveAspectRatio="xMidYMid meet"/>
+        <image href="./Log.png" width="300" height="300" preserveAspectRatio="xMidYMid meet"/>
       </svg>
     </div>
 
