@@ -1,0 +1,380 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Portfolio | Sulo Systems Inc.</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:wght@300;400;500&family=DM+Sans:wght@300;400;500&display=swap" rel="stylesheet">
+<style>
+  *, *::before, *::after { margin: 0; padding: 0; box-sizing: border-box; }
+
+  body {
+    background: #0c0c0e;
+    color: #e8e4dc;
+    font-family: 'DM Sans', sans-serif;
+    min-height: 100vh;
+  }
+
+  /* ── Nav ── */
+  nav {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    padding: 2rem 4rem;
+    border-bottom: 1px solid rgba(255,255,255,0.06);
+    position: sticky;
+    top: 0;
+    background: #0c0c0e;
+    z-index: 100;
+  }
+  .logo {
+    font-family: 'Cormorant Garamond', serif;
+    font-size: 1.4rem;
+    font-weight: 300;
+    letter-spacing: 0.08em;
+    color: #e8e4dc;
+    text-decoration: none;
+    line-height: 1;
+  }
+  .logo span { color: #c9aa71; }
+  .logo-sub {
+    font-size: 0.6rem;
+    letter-spacing: 0.18em;
+    text-transform: uppercase;
+    color: rgba(201,170,113,0.5);
+    display: block;
+    margin-top: 3px;
+    font-family: 'DM Sans', sans-serif;
+    font-weight: 300;
+  }
+  .nav-links {
+    display: flex;
+    gap: 2.5rem;
+    list-style: none;
+  }
+  .nav-links a {
+    font-size: 0.8rem;
+    letter-spacing: 0.12em;
+    text-transform: uppercase;
+    color: rgba(232,228,220,0.5);
+    text-decoration: none;
+    transition: color 0.2s;
+  }
+  .nav-links a:hover,
+  .nav-links a.active { color: #c9aa71; }
+
+  /* ── Header ── */
+  header {
+    padding: 6rem 4rem 4rem;
+    max-width: 1200px;
+    margin: 0 auto;
+  }
+  .eyebrow {
+    font-size: 0.7rem;
+    letter-spacing: 0.25em;
+    text-transform: uppercase;
+    color: #c9aa71;
+    margin-bottom: 1.2rem;
+  }
+  h1 {
+    font-family: 'Cormorant Garamond', serif;
+    font-size: clamp(3rem, 6vw, 5rem);
+    font-weight: 300;
+    line-height: 1.05;
+    letter-spacing: -0.01em;
+    color: #e8e4dc;
+  }
+  h1 em {
+    font-style: italic;
+    color: #c9aa71;
+  }
+  .header-sub {
+    font-size: 0.95rem;
+    color: rgba(232,228,220,0.45);
+    margin-top: 1.5rem;
+    max-width: 440px;
+    line-height: 1.7;
+    font-weight: 300;
+  }
+
+  .divider {
+    width: 100%;
+    height: 1px;
+    background: rgba(255,255,255,0.06);
+  }
+
+  /* ── Grid ── */
+  .projects-section {
+    padding: 5rem 4rem;
+    max-width: 1200px;
+    margin: 0 auto;
+  }
+  .projects-grid {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 2px;
+    background: rgba(255,255,255,0.06);
+  }
+
+  /* ── Cards ── */
+  .project-card {
+    background: #0c0c0e;
+    padding: 3rem;
+    position: relative;
+    overflow: hidden;
+    cursor: pointer;
+    transition: background 0.3s;
+  }
+  .project-card:hover { background: #141416; }
+  .project-card::before {
+    content: '';
+    position: absolute;
+    top: 0; left: 0; right: 0;
+    height: 2px;
+    background: #c9aa71;
+    transform: scaleX(0);
+    transition: transform 0.4s ease;
+    transform-origin: left;
+  }
+  .project-card:hover::before { transform: scaleX(1); }
+
+  .card-wide { grid-column: 1 / -1; }
+  .card-wide .card-image { aspect-ratio: 16 / 6; }
+
+  .card-number {
+    font-size: 0.68rem;
+    letter-spacing: 0.2em;
+    color: rgba(232,228,220,0.2);
+    margin-bottom: 3rem;
+    font-weight: 400;
+  }
+  .card-image {
+    width: 100%;
+    aspect-ratio: 16 / 8;
+    background: #171719;
+    overflow: hidden;
+    margin-bottom: 2rem;
+    position: relative;
+  }
+  .card-image img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    filter: grayscale(30%) brightness(0.85);
+    transition: filter 0.4s, transform 0.5s;
+  }
+  .project-card:hover .card-image img {
+    filter: grayscale(0%) brightness(1);
+    transform: scale(1.03);
+  }
+  .card-placeholder {
+    width: 100%; height: 100%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    background: linear-gradient(135deg, #171719 0%, #1e1e22 100%);
+    position: absolute;
+    inset: 0;
+  }
+  .card-placeholder-text {
+    font-family: 'Cormorant Garamond', serif;
+    font-size: 1.8rem;
+    font-weight: 300;
+    color: rgba(201,170,113,0.25);
+    letter-spacing: 0.05em;
+  }
+  .card-tag {
+    display: inline-block;
+    font-size: 0.65rem;
+    letter-spacing: 0.18em;
+    text-transform: uppercase;
+    color: #c9aa71;
+    background: rgba(201,170,113,0.08);
+    padding: 0.3rem 0.8rem;
+    border: 1px solid rgba(201,170,113,0.2);
+    margin-bottom: 1rem;
+  }
+  .card-title {
+    font-family: 'Cormorant Garamond', serif;
+    font-size: 1.8rem;
+    font-weight: 400;
+    color: #e8e4dc;
+    margin-bottom: 0.5rem;
+    letter-spacing: 0.01em;
+  }
+  .card-desc {
+    font-size: 0.82rem;
+    color: rgba(232,228,220,0.4);
+    line-height: 1.7;
+    margin-bottom: 2rem;
+    font-weight: 300;
+  }
+  .card-link {
+    display: inline-flex;
+    align-items: center;
+    gap: 0.5rem;
+    font-size: 0.72rem;
+    letter-spacing: 0.15em;
+    text-transform: uppercase;
+    color: #c9aa71;
+    text-decoration: none;
+    transition: gap 0.2s;
+  }
+  .card-link:hover { gap: 0.9rem; }
+  .card-link svg {
+    width: 14px; height: 14px;
+    stroke: #c9aa71;
+    fill: none;
+    stroke-width: 1.5;
+    transition: transform 0.2s;
+  }
+  .card-link:hover svg { transform: translateX(3px); }
+
+  /* ── Footer ── */
+  footer {
+    border-top: 1px solid rgba(255,255,255,0.06);
+    padding: 2.5rem 4rem;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+  }
+  .footer-copy {
+    font-size: 0.72rem;
+    color: rgba(232,228,220,0.25);
+    letter-spacing: 0.05em;
+  }
+  .footer-links { display: flex; gap: 2rem; }
+  .footer-links a {
+    font-size: 0.72rem;
+    color: rgba(232,228,220,0.3);
+    text-decoration: none;
+    letter-spacing: 0.05em;
+    transition: color 0.2s;
+  }
+  .footer-links a:hover { color: #c9aa71; }
+
+  /* ── Responsive ── */
+  @media (max-width: 768px) {
+    nav { padding: 1.5rem 1.5rem; }
+    .nav-links { display: none; }
+    header { padding: 4rem 1.5rem 2.5rem; }
+    .projects-section { padding: 3rem 1.5rem; }
+    .projects-grid { grid-template-columns: 1fr; }
+    .card-wide { grid-column: 1; }
+    .card-wide .card-image { aspect-ratio: 16 / 8; }
+    .project-card { padding: 2rem 1.5rem; }
+    footer { padding: 2rem 1.5rem; flex-direction: column; gap: 1rem; text-align: center; }
+  }
+</style>
+</head>
+<body>
+
+<nav>
+  <a class="logo" href="index.html">SULO <span>SYSTEMS</span><span class="logo-sub">Inc.</span></a>
+  <ul class="nav-links">
+    <li><a href="index.html">Home</a></li>
+  </ul>
+</nav>
+
+<header>
+  <p class="eyebrow">Portfolio</p>
+  <h1>A few things<br>we've <em>built</em></h1>
+  <p class="header-sub">Each project starts with listening. Here's a look at some of the work we've had the privilege of doing for our clients.</p>
+</header>
+
+<div class="divider"></div>
+
+<section class="projects-section">
+  <div class="projects-grid">
+
+    <!-- 01 IP Silver House -->
+    <div class="project-card">
+      <p class="card-number">01 / 06</p>
+      <div class="card-image">
+        <img src="https://static.wixstatic.com/media/2f0e31_f87bf122ae2745bfbd1d624b77b92de6~mv2.png/v1/fit/w_774,h_366,q_87,enc_avif,quality_auto/2f0e31_f87bf122ae2745bfbd1d624b77b92de6~mv2.png" alt="IP Silver House" onerror="this.style.display='none';this.nextElementSibling.style.display='flex'">
+        <div class="card-placeholder" style="display:none"><span class="card-placeholder-text">IP Silver House</span></div>
+      </div>
+      <span class="card-tag">Real Estate</span>
+      <h2 class="card-title">IP Silver House</h2>
+      <p class="card-desc">A refined property showcase website for a premium real estate brand, emphasising elegance and trust.</p>
+      <a class="card-link" href="https://ipsilverhouse.com/" target="_blank" rel="noopener">Visit site<svg viewBox="0 0 24 24"><line x1="5" y1="12" x2="19" y2="12"/><polyline points="12 5 19 12 12 19"/></svg></a>
+    </div>
+
+    <!-- 02 Gems by Abi -->
+    <div class="project-card">
+      <p class="card-number">02 / 06</p>
+      <div class="card-image">
+        <img src="https://static.wixstatic.com/media/2f0e31_86fd299430604d2b8fbf6913849c73f0~mv2.png/v1/fit/w_774,h_439,q_87,enc_avif,quality_auto/2f0e31_86fd299430604d2b8fbf6913849c73f0~mv2.png" alt="Gems by Abi" onerror="this.style.display='none';this.nextElementSibling.style.display='flex'">
+        <div class="card-placeholder" style="display:none"><span class="card-placeholder-text">Gems by Abi</span></div>
+      </div>
+      <span class="card-tag">Jewellery & Retail</span>
+      <h2 class="card-title">Gems by Abi</h2>
+      <p class="card-desc">A boutique jewellery brand brought to life online — warm, luxurious, and crafted for a discerning audience.</p>
+      <a class="card-link" href="https://gemsbyabi.com/" target="_blank" rel="noopener">Visit site<svg viewBox="0 0 24 24"><line x1="5" y1="12" x2="19" y2="12"/><polyline points="12 5 19 12 12 19"/></svg></a>
+    </div>
+
+    <!-- 03 OutNo.d -->
+    <div class="project-card">
+      <p class="card-number">03 / 06</p>
+      <div class="card-image">
+        <img src="http://outnod.com/cdn/shop/files/IIIES12001.jpg?v=1668882858" alt="OutNo.d" onerror="this.style.display='none';this.nextElementSibling.style.display='flex'">
+        <div class="card-placeholder" style="display:none"><span class="card-placeholder-text">OutNo.d</span></div>
+      </div>
+      <span class="card-tag">Beauty & Wellness</span>
+      <h2 class="card-title">OutNo.d</h2>
+      <p class="card-desc">A premium curly hair care brand — researched formulas, thoughtful design, and an e-commerce experience built around healthy hair.</p>
+      <a class="card-link" href="https://outnod.com/" target="_blank" rel="noopener">Visit site<svg viewBox="0 0 24 24"><line x1="5" y1="12" x2="19" y2="12"/><polyline points="12 5 19 12 12 19"/></svg></a>
+    </div>
+
+    <!-- 04 LinenBNB -->
+    <div class="project-card">
+      <p class="card-number">04 / 06</p>
+      <div class="card-image">
+        <div class="card-placeholder" style="display:flex"><span class="card-placeholder-text">LinenBNB</span></div>
+      </div>
+      <span class="card-tag">Hospitality & Services</span>
+      <h2 class="card-title">LinenBNB</h2>
+      <p class="card-desc">A service website for a premium linen and towel rental company catering to Airbnb and vacation rental hosts in Miami and Orlando.</p>
+      <a class="card-link" href="https://linenbnb.com/" target="_blank" rel="noopener">Visit site<svg viewBox="0 0 24 24"><line x1="5" y1="12" x2="19" y2="12"/><polyline points="12 5 19 12 12 19"/></svg></a>
+    </div>
+
+    <!-- 05 Ang Law PC -->
+    <div class="project-card">
+      <p class="card-number">05 / 06</p>
+      <div class="card-image">
+        <img src="https://i0.wp.com/anglawpc.com/wp-content/uploads/2025/03/1-1-Photoroom-2.png?fit=236%2C236&ssl=1" alt="Ang Law PC" onerror="this.style.display='none';this.nextElementSibling.style.display='flex'">
+        <div class="card-placeholder" style="display:none"><span class="card-placeholder-text">Ang Law PC</span></div>
+      </div>
+      <span class="card-tag">Legal</span>
+      <h2 class="card-title">Ang Law PC</h2>
+      <p class="card-desc">A professional and trustworthy web presence for a North York law firm specialising in real estate, wills, and family law.</p>
+      <a class="card-link" href="https://anglawpc.com/" target="_blank" rel="noopener">Visit site<svg viewBox="0 0 24 24"><line x1="5" y1="12" x2="19" y2="12"/><polyline points="12 5 19 12 12 19"/></svg></a>
+    </div>
+
+    <!-- 06 Teambuilding Adventure -->
+    <div class="project-card">
+      <p class="card-number">06 / 06</p>
+      <div class="card-image">
+        <div class="card-placeholder" style="display:flex"><span class="card-placeholder-text">Teambuilding Adventure</span></div>
+      </div>
+      <span class="card-tag">Events & Recreation</span>
+      <h2 class="card-title">Teambuilding Adventure</h2>
+      <p class="card-desc">An outdoor team building platform for corporate and school groups — connecting organisations with guided programs across Toronto Island and Algonquin Park.</p>
+      <a class="card-link" href="https://teambuildingadventure.ca/" target="_blank" rel="noopener">Visit site<svg viewBox="0 0 24 24"><line x1="5" y1="12" x2="19" y2="12"/><polyline points="12 5 19 12 12 19"/></svg></a>
+    </div>
+
+  </div>
+</section>
+
+<footer>
+  <p class="footer-copy">© 2024 Sulo Systems Inc. All rights reserved.</p>
+  <div class="footer-links">
+    <a href="https://www.instagram.com/" target="_blank" rel="noopener">Instagram</a>
+    <a href="https://www.linkedin.com/" target="_blank" rel="noopener">LinkedIn</a>
+    <a href="https://www.facebook.com/" target="_blank" rel="noopener">Facebook</a>
+  </div>
+</footer>
+
+</body>
+</html>
