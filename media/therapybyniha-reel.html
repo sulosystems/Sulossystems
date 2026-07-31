@@ -1,0 +1,865 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Therapy by Niha — Reel</title>
+<link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,400;0,500;0,600;1,400;1,500&family=DM+Sans:wght@300;400;500&display=swap" rel="stylesheet">
+<style>
+  /*
+    PALETTE
+    Sage green:   #6B8F71
+    Warm cream:   #F9F5EF
+    Terracotta:   #C4845A
+    Deep green:   #2D4A35
+    Warm white:   #FFFDF9
+    Text dark:    #1C1A18
+    Text mid:     #6B6560
+    Text light:   #A09890
+  */
+
+  * { box-sizing: border-box; margin: 0; padding: 0; }
+  body {
+    background: #1a1714;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    min-height: 100vh;
+    font-family: 'DM Sans', sans-serif;
+  }
+
+  /* ── 9:16 FRAME ── */
+  .reel-frame {
+    width: 390px;
+    height: 693px;
+    border-radius: 28px;
+    overflow: hidden;
+    position: relative;
+    box-shadow: 0 40px 100px rgba(0,0,0,0.65), 0 0 0 1px rgba(255,255,255,0.05);
+    background: #F9F5EF;
+  }
+
+  /* ── SCENE WRAPPER ── */
+  .scene {
+    position: absolute;
+    inset: 0;
+    display: flex;
+    flex-direction: column;
+    opacity: 0;
+    transition: opacity 0.7s ease;
+    pointer-events: none;
+  }
+  .scene.active {
+    opacity: 1;
+    pointer-events: auto;
+  }
+
+  /* ════════════════════════════════════
+     SCENE 1 — HERO
+  ════════════════════════════════════ */
+  .s1 { background: #F9F5EF; }
+
+  .s1-nav {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    padding: 20px 24px 16px;
+    border-bottom: 0.5px solid rgba(107,143,113,0.2);
+    flex-shrink: 0;
+  }
+  .s1-logo {
+    font-family: 'Cormorant Garamond', serif;
+    font-size: 15px;
+    font-weight: 600;
+    color: #1C1A18;
+    letter-spacing: 0.01em;
+  }
+  .s1-nav-links {
+    display: flex;
+    gap: 14px;
+    font-size: 9px;
+    letter-spacing: 0.1em;
+    color: #A09890;
+    text-transform: uppercase;
+  }
+
+  .s1-tag {
+    font-size: 9px;
+    font-weight: 500;
+    letter-spacing: 0.14em;
+    text-transform: uppercase;
+    color: #6B8F71;
+    padding: 20px 24px 0;
+    flex-shrink: 0;
+  }
+
+  .s1-headline {
+    font-family: 'Cormorant Garamond', serif;
+    font-size: 36px;
+    font-weight: 500;
+    line-height: 1.18;
+    color: #1C1A18;
+    padding: 12px 24px 0;
+    flex-shrink: 0;
+    min-height: 172px;
+  }
+  .s1-headline em {
+    font-style: italic;
+    color: #6B8F71;
+  }
+
+  .s1-sub {
+    font-size: 11.5px;
+    color: #6B6560;
+    line-height: 1.65;
+    padding: 14px 24px 0;
+    font-weight: 300;
+    flex-shrink: 0;
+    opacity: 0;
+    transform: translateY(8px);
+    transition: opacity 0.6s ease, transform 0.6s ease;
+  }
+  .s1-sub.show { opacity: 1; transform: translateY(0); }
+
+  .s1-btns {
+    display: flex;
+    gap: 10px;
+    padding: 18px 24px 0;
+    flex-shrink: 0;
+    opacity: 0;
+    transform: translateY(8px);
+    transition: opacity 0.6s 0.15s ease, transform 0.6s 0.15s ease;
+  }
+  .s1-btns.show { opacity: 1; transform: translateY(0); }
+  .btn-primary {
+    background: #2D4A35;
+    color: #FFFDF9;
+    padding: 10px 16px;
+    border-radius: 4px;
+    font-size: 10px;
+    font-weight: 500;
+    letter-spacing: 0.08em;
+    white-space: nowrap;
+  }
+  .btn-ghost {
+    background: transparent;
+    color: #2D4A35;
+    padding: 10px 16px;
+    border-radius: 4px;
+    font-size: 10px;
+    font-weight: 500;
+    letter-spacing: 0.08em;
+    border: 1px solid rgba(45,74,53,0.3);
+    white-space: nowrap;
+  }
+
+  /* Stats strip */
+  .s1-stats {
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+    gap: 1px;
+    background: rgba(107,143,113,0.15);
+    border-top: 0.5px solid rgba(107,143,113,0.15);
+    border-bottom: 0.5px solid rgba(107,143,113,0.15);
+    margin-top: auto;
+    flex-shrink: 0;
+  }
+  .stat-box {
+    background: #F9F5EF;
+    padding: 14px 16px;
+    opacity: 0;
+    transform: translateY(12px);
+    transition: opacity 0.5s ease, transform 0.5s ease;
+  }
+  .stat-box.show { opacity: 1; transform: translateY(0); }
+  .stat-val {
+    font-family: 'Cormorant Garamond', serif;
+    font-size: 22px;
+    font-weight: 600;
+    color: #2D4A35;
+    margin-bottom: 2px;
+  }
+  .stat-lbl {
+    font-size: 9px;
+    color: #A09890;
+    letter-spacing: 0.1em;
+    text-transform: uppercase;
+    font-weight: 500;
+  }
+
+  /* Accepting banner */
+  .s1-banner {
+    background: #2D4A35;
+    padding: 11px 24px;
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    flex-shrink: 0;
+    opacity: 0;
+    transition: opacity 0.5s 0.4s ease;
+  }
+  .s1-banner.show { opacity: 1; }
+  .banner-dot {
+    width: 7px; height: 7px;
+    border-radius: 50%;
+    background: #6B8F71;
+    flex-shrink: 0;
+    animation: pulse-dot 1.8s ease infinite;
+  }
+  @keyframes pulse-dot {
+    0%,100%{ box-shadow: 0 0 0 0 rgba(107,143,113,0.5); }
+    50%    { box-shadow: 0 0 0 5px rgba(107,143,113,0); }
+  }
+  .banner-text {
+    font-size: 10px;
+    color: rgba(255,253,249,0.85);
+    letter-spacing: 0.06em;
+    font-weight: 400;
+  }
+
+  /* ════════════════════════════════════
+     SCENE 2 — AREAS OF FOCUS
+  ════════════════════════════════════ */
+  .s2 { background: #FFFDF9; }
+
+  .s2-header {
+    padding: 24px 24px 6px;
+    flex-shrink: 0;
+    border-bottom: 0.5px solid rgba(107,143,113,0.15);
+    margin-bottom: 16px;
+  }
+  .s2-eyebrow {
+    font-size: 9px;
+    font-weight: 500;
+    letter-spacing: 0.16em;
+    text-transform: uppercase;
+    color: #6B8F71;
+    margin-bottom: 8px;
+  }
+  .s2-title {
+    font-family: 'Cormorant Garamond', serif;
+    font-size: 26px;
+    font-weight: 500;
+    color: #1C1A18;
+    line-height: 1.2;
+    padding-bottom: 18px;
+  }
+  .s2-title em { font-style: italic; color: #6B8F71; }
+
+  .focus-grid {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 10px;
+    padding: 0 20px;
+    flex: 1;
+  }
+  .focus-card {
+    background: #F9F5EF;
+    border-radius: 10px;
+    padding: 14px 14px 12px;
+    border: 0.5px solid rgba(107,143,113,0.15);
+    opacity: 0;
+    transform: translateY(14px) scale(0.97);
+    transition: opacity 0.45s ease, transform 0.45s ease;
+  }
+  .focus-card.show { opacity: 1; transform: translateY(0) scale(1); }
+  .focus-emoji { font-size: 18px; margin-bottom: 7px; display: block; }
+  .focus-name {
+    font-size: 11px;
+    font-weight: 500;
+    color: #1C1A18;
+    margin-bottom: 4px;
+    letter-spacing: 0.01em;
+  }
+  .focus-desc {
+    font-size: 9.5px;
+    color: #6B6560;
+    line-height: 1.55;
+    font-weight: 300;
+  }
+
+  .s2-quote {
+    padding: 16px 20px 14px;
+    flex-shrink: 0;
+    opacity: 0;
+    transition: opacity 0.6s ease;
+  }
+  .s2-quote.show { opacity: 1; }
+  .quote-bar {
+    width: 24px; height: 2px;
+    background: #C4845A;
+    margin-bottom: 8px;
+    border-radius: 1px;
+  }
+  .quote-text {
+    font-family: 'Cormorant Garamond', serif;
+    font-size: 13px;
+    font-style: italic;
+    color: #6B6560;
+    line-height: 1.6;
+  }
+
+  /* ════════════════════════════════════
+     SCENE 3 — BOOK CONSULTATION
+  ════════════════════════════════════ */
+  .s3 { background: #2D4A35; }
+
+  .s3-top {
+    padding: 28px 24px 24px;
+    flex-shrink: 0;
+  }
+  .s3-eyebrow {
+    font-size: 9px;
+    letter-spacing: 0.18em;
+    text-transform: uppercase;
+    color: rgba(255,253,249,0.45);
+    margin-bottom: 12px;
+    font-weight: 500;
+  }
+  .s3-title {
+    font-family: 'Cormorant Garamond', serif;
+    font-size: 32px;
+    font-weight: 500;
+    color: #FFFDF9;
+    line-height: 1.18;
+    margin-bottom: 10px;
+  }
+  .s3-title em { font-style: italic; color: #A8C5A0; }
+  .s3-sub {
+    font-size: 11px;
+    color: rgba(255,253,249,0.6);
+    line-height: 1.65;
+    font-weight: 300;
+    opacity: 0;
+    transform: translateY(8px);
+    transition: opacity 0.5s ease, transform 0.5s ease;
+  }
+  .s3-sub.show { opacity: 1; transform: translateY(0); }
+
+  /* Booking card */
+  .booking-card {
+    margin: 0 20px;
+    background: #FFFDF9;
+    border-radius: 14px;
+    overflow: hidden;
+    opacity: 0;
+    transform: translateY(20px);
+    transition: opacity 0.6s 0.2s ease, transform 0.6s 0.2s ease;
+    flex-shrink: 0;
+  }
+  .booking-card.show { opacity: 1; transform: translateY(0); }
+  .booking-header {
+    background: #F9F5EF;
+    padding: 14px 16px 12px;
+    border-bottom: 0.5px solid rgba(107,143,113,0.15);
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+  }
+  .booking-title {
+    font-size: 12px;
+    font-weight: 500;
+    color: #1C1A18;
+    letter-spacing: 0.01em;
+  }
+  .booking-free {
+    font-size: 9px;
+    background: rgba(107,143,113,0.12);
+    color: #2D4A35;
+    padding: 3px 8px;
+    border-radius: 10px;
+    font-weight: 500;
+    letter-spacing: 0.06em;
+  }
+  .booking-row {
+    padding: 12px 16px;
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    border-bottom: 0.5px solid rgba(107,143,113,0.08);
+  }
+  .booking-row:last-child { border-bottom: none; }
+  .booking-icon {
+    width: 28px; height: 28px;
+    border-radius: 50%;
+    background: rgba(107,143,113,0.1);
+    display: flex; align-items: center; justify-content: center;
+    font-size: 12px;
+    flex-shrink: 0;
+  }
+  .booking-label { font-size: 10px; color: #6B6560; font-weight: 400; }
+  .booking-val { font-size: 11px; color: #1C1A18; font-weight: 500; margin-top: 1px; }
+
+  /* Approach tags */
+  .s3-approaches {
+    padding: 0 20px;
+    display: flex;
+    flex-wrap: wrap;
+    gap: 7px;
+    margin-top: 16px;
+    opacity: 0;
+    transition: opacity 0.5s 0.4s ease;
+    flex-shrink: 0;
+  }
+  .s3-approaches.show { opacity: 1; }
+  .approach-tag {
+    background: rgba(255,253,249,0.1);
+    color: rgba(255,253,249,0.7);
+    padding: 5px 10px;
+    border-radius: 20px;
+    font-size: 9px;
+    letter-spacing: 0.06em;
+    border: 0.5px solid rgba(255,253,249,0.15);
+  }
+
+  /* CTA button */
+  .s3-cta {
+    margin: 16px 20px 0;
+    background: #C4845A;
+    color: #FFFDF9;
+    padding: 15px;
+    border-radius: 8px;
+    text-align: center;
+    font-size: 11px;
+    font-weight: 500;
+    letter-spacing: 0.1em;
+    text-transform: uppercase;
+    flex-shrink: 0;
+    opacity: 0;
+    transform: translateY(10px);
+    transition: opacity 0.5s 0.5s ease, transform 0.5s 0.5s ease;
+    animation: none;
+  }
+  .s3-cta.show {
+    opacity: 1;
+    transform: translateY(0);
+    animation: cta-glow 2.5s 1.2s ease infinite;
+  }
+  @keyframes cta-glow {
+    0%,100%{ box-shadow: 0 0 0 0 rgba(196,132,90,0); }
+    50%    { box-shadow: 0 0 0 8px rgba(196,132,90,0.18); }
+  }
+
+  .s3-footer {
+    margin-top: auto;
+    padding: 14px 20px;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    flex-shrink: 0;
+    opacity: 0;
+    transition: opacity 0.5s 0.6s ease;
+  }
+  .s3-footer.show { opacity: 1; }
+  .s3-phone { font-size: 10px; color: rgba(255,253,249,0.55); letter-spacing: 0.04em; }
+  .s3-crpo { font-size: 9px; color: rgba(255,253,249,0.3); letter-spacing: 0.06em; }
+
+  /* ── SHARED ── */
+  .cursor {
+    display: inline-block;
+    width: 2px; height: 0.85em;
+    background: #1C1A18;
+    margin-left: 1px;
+    vertical-align: middle;
+    animation: blink 0.7s step-end infinite;
+  }
+  .cursor.light { background: #FFFDF9; }
+  .cursor.off { opacity: 0; animation: none; }
+  @keyframes blink { 0%,100%{opacity:1} 50%{opacity:0} }
+
+  /* Shimmer */
+  #shimmer {
+    position: absolute;
+    inset: 0;
+    pointer-events: none;
+    background: linear-gradient(108deg, transparent 38%, rgba(255,255,255,0.14) 50%, transparent 62%);
+    background-size: 200% 100%;
+    animation: shimmer-sweep 5s ease-in-out infinite;
+    z-index: 10;
+  }
+  @keyframes shimmer-sweep {
+    0%   { background-position: 200% 0; opacity: 0; }
+    8%   { opacity: 1; }
+    55%  { background-position: -200% 0; opacity: 1; }
+    65%  { opacity: 0; }
+    100% { background-position: -200% 0; opacity: 0; }
+  }
+
+  /* REC dot */
+  .rec-dot {
+    position: absolute;
+    top: 14px; right: 16px;
+    display: flex; align-items: center; gap: 5px;
+    font-size: 8px; font-weight: 700;
+    letter-spacing: 0.1em;
+    color: rgba(255,255,255,0.5);
+    z-index: 90;
+    pointer-events: none;
+  }
+  .rec-dot::before {
+    content: '';
+    width: 6px; height: 6px;
+    border-radius: 50%;
+    background: #ef4444;
+    animation: rec 1.2s step-end infinite;
+  }
+  @keyframes rec { 0%,100%{opacity:1} 50%{opacity:0.15} }
+
+  /* Fade overlay */
+  #fade-overlay {
+    position: absolute;
+    inset: 0;
+    background: #F9F5EF;
+    opacity: 0;
+    pointer-events: none;
+    z-index: 50;
+    transition: opacity 0.65s ease;
+  }
+  #fade-overlay.dark { background: #2D4A35; }
+  #fade-overlay.fading { opacity: 1; }
+</style>
+</head>
+<body>
+
+<div class="reel-frame">
+
+  <!-- ══ SCENE 1: HERO ══ -->
+  <div class="scene s1 active" id="scene1">
+    <div class="s1-nav">
+      <span class="s1-logo">Therapy by Niha</span>
+      <div class="s1-nav-links">
+        <span>Home</span><span>About</span><span>Services</span>
+      </div>
+    </div>
+
+    <div class="s1-tag">Registered Psychotherapist · Mississauga, ON</div>
+
+    <div class="s1-headline" id="s1-hl">
+      <span id="s1-hl-text"></span><span id="s1-hl-cur" class="cursor off"></span>
+    </div>
+
+    <div class="s1-sub" id="s1-sub">
+      Culturally sensitive, compassionate therapy for anxiety,
+      identity, relationships, and life transitions.
+      <strong style="color:#1C1A18;">You deserve to be seen.</strong>
+    </div>
+
+    <div class="s1-btns" id="s1-btns">
+      <div class="btn-primary">Book Free Consultation</div>
+      <div class="btn-ghost">Meet Niha</div>
+    </div>
+
+    <div class="s1-stats" id="s1-stats">
+      <div class="stat-box" id="stat0">
+        <div class="stat-val" id="sv0">0+</div>
+        <div class="stat-lbl">Years in Practice</div>
+      </div>
+      <div class="stat-box" id="stat1">
+        <div class="stat-val" id="sv1">Free</div>
+        <div class="stat-lbl">15-Min Consultation</div>
+      </div>
+      <div class="stat-box" id="stat2">
+        <div class="stat-val" id="sv2">$0</div>
+        <div class="stat-lbl">Per Session</div>
+      </div>
+      <div class="stat-box" id="stat3">
+        <div class="stat-val" id="sv3">0</div>
+        <div class="stat-lbl">Languages Spoken</div>
+      </div>
+    </div>
+
+    <div class="s1-banner" id="s1-banner">
+      <div class="banner-dot"></div>
+      <span class="banner-text">Now accepting new clients · Online sessions available</span>
+    </div>
+  </div>
+
+  <!-- ══ SCENE 2: AREAS OF FOCUS ══ -->
+  <div class="scene s2" id="scene2">
+    <div class="s2-header">
+      <div class="s2-eyebrow">Areas of Focus</div>
+      <div class="s2-title">You don't have to navigate this <em>alone</em></div>
+    </div>
+
+    <div class="focus-grid">
+      <div class="focus-card" id="fc0">
+        <span class="focus-emoji">🌿</span>
+        <div class="focus-name">Anxiety & Stress</div>
+        <div class="focus-desc">Evidence-based techniques to manage racing thoughts and overwhelm.</div>
+      </div>
+      <div class="focus-card" id="fc1">
+        <span class="focus-emoji">🌍</span>
+        <div class="focus-name">Cultural Identity</div>
+        <div class="focus-desc">Honouring your roots while building your own identity with confidence.</div>
+      </div>
+      <div class="focus-card" id="fc2">
+        <span class="focus-emoji">💛</span>
+        <div class="focus-name">Self-Esteem</div>
+        <div class="focus-desc">Reconnecting with your worth and living a life that feels authentic.</div>
+      </div>
+      <div class="focus-card" id="fc3">
+        <span class="focus-emoji">🤝</span>
+        <div class="focus-name">Relationships</div>
+        <div class="focus-desc">Setting boundaries and building healthier connections.</div>
+      </div>
+      <div class="focus-card" id="fc4">
+        <span class="focus-emoji">🌱</span>
+        <div class="focus-name">Life Transitions</div>
+        <div class="focus-desc">Grief, divorce, career shifts — navigating change together.</div>
+      </div>
+      <div class="focus-card" id="fc5">
+        <span class="focus-emoji">💭</span>
+        <div class="focus-name">Depression & Grief</div>
+        <div class="focus-desc">Compassionate support toward healing and hope.</div>
+      </div>
+    </div>
+
+    <div class="s2-quote" id="s2-quote">
+      <div class="quote-bar"></div>
+      <div class="quote-text">"As a Person of Colour, I understand the deep challenges of navigating multiple cultural identities."<br><br>— Niha Idrees, RPQ</div>
+    </div>
+  </div>
+
+  <!-- ══ SCENE 3: BOOK ══ -->
+  <div class="scene s3" id="scene3">
+    <div class="s3-top">
+      <div class="s3-eyebrow">Ready to Begin?</div>
+      <div class="s3-title">Your first step<br>starts <em>here</em></div>
+      <div class="s3-sub" id="s3-sub">
+        Book a free 15-minute consultation — no commitment,
+        no pressure. Just a conversation.
+      </div>
+    </div>
+
+    <div class="booking-card" id="booking-card">
+      <div class="booking-header">
+        <div class="booking-title">Free Consultation</div>
+        <div class="booking-free">15 MIN · FREE</div>
+      </div>
+      <div class="booking-row">
+        <div class="booking-icon">📅</div>
+        <div>
+          <div class="booking-label">Format</div>
+          <div class="booking-val">Online · Video Call</div>
+        </div>
+      </div>
+      <div class="booking-row">
+        <div class="booking-icon">🌐</div>
+        <div>
+          <div class="booking-label">Languages</div>
+          <div class="booking-val">English · Urdu · Hindi</div>
+        </div>
+      </div>
+      <div class="booking-row">
+        <div class="booking-icon">✅</div>
+        <div>
+          <div class="booking-label">Credentials</div>
+          <div class="booking-val">CRPO Registered · RPQ</div>
+        </div>
+      </div>
+    </div>
+
+    <div class="s3-approaches" id="s3-approaches">
+      <span class="approach-tag">CBT</span>
+      <span class="approach-tag">Narrative Therapy</span>
+      <span class="approach-tag">Person-Centred</span>
+      <span class="approach-tag">DBT</span>
+      <span class="approach-tag">Mindfulness</span>
+      <span class="approach-tag">Trauma-Focused</span>
+    </div>
+
+    <div class="s3-cta" id="s3-cta">Book My Free Consultation →</div>
+
+    <div class="s3-footer" id="s3-footer">
+      <div class="s3-phone">(365) 305-1702</div>
+      <div class="s3-crpo">CRPO #19892 · OAMHP #8116-S</div>
+    </div>
+  </div>
+
+  <!-- Shimmer + fade -->
+  <div id="shimmer"></div>
+  <div id="fade-overlay"></div>
+  <div class="rec-dot">LIVE</div>
+</div>
+
+<script>
+  const delay = ms => new Promise(r => setTimeout(r, ms));
+
+  // ── TYPEWRITER ────────────────────────────────────────
+  function typewrite(text, textEl, curEl, speed = 38) {
+    return new Promise(resolve => {
+      curEl.classList.remove('off');
+      textEl.innerHTML = '';
+      let i = 0;
+      const iv = setInterval(() => {
+        if (i >= text.length) {
+          clearInterval(iv);
+          setTimeout(() => { curEl.classList.add('off'); resolve(); }, 500);
+          return;
+        }
+        const ch = text[i++];
+        if (ch === '\n') textEl.innerHTML += '<br>';
+        else textEl.innerHTML += ch === '*' ? '<em>' : ch === '|' ? '</em>' : ch;
+      }, speed);
+    });
+  }
+
+  // ── COUNT UP ──────────────────────────────────────────
+  function countUp(el, target, suffix = '', duration = 800) {
+    return new Promise(resolve => {
+      const start = performance.now();
+      const from = 0;
+      function frame(now) {
+        const t = Math.min((now - start) / duration, 1);
+        const ease = 1 - Math.pow(1 - t, 3);
+        const val = Math.round(from + (target - from) * ease);
+        el.textContent = val + suffix;
+        if (t < 1) requestAnimationFrame(frame);
+        else resolve();
+      }
+      requestAnimationFrame(frame);
+    });
+  }
+
+  // ── FADE TRANSITION ───────────────────────────────────
+  const overlay = document.getElementById('fade-overlay');
+
+  async function fadeOut(dark = false) {
+    overlay.classList.toggle('dark', dark);
+    overlay.classList.add('fading');
+    await delay(700);
+  }
+  async function fadeIn() {
+    overlay.classList.remove('fading');
+    await delay(400);
+  }
+
+  function show(id) {
+    document.querySelectorAll('.scene').forEach(s => s.classList.remove('active'));
+    document.getElementById(id).classList.add('active');
+  }
+
+  // ── RESET HELPERS ─────────────────────────────────────
+  function resetS1() {
+    document.getElementById('s1-hl-text').innerHTML = '';
+    document.getElementById('s1-hl-cur').classList.add('off');
+    document.getElementById('s1-sub').classList.remove('show');
+    document.getElementById('s1-btns').classList.remove('show');
+    document.getElementById('s1-banner').classList.remove('show');
+    document.querySelectorAll('.stat-box').forEach(b => b.classList.remove('show'));
+    document.getElementById('sv0').textContent = '0+';
+    document.getElementById('sv2').textContent = '$0';
+    document.getElementById('sv3').textContent = '0';
+  }
+
+  function resetS2() {
+    document.querySelectorAll('.focus-card').forEach(c => c.classList.remove('show'));
+    document.getElementById('s2-quote').classList.remove('show');
+  }
+
+  function resetS3() {
+    document.getElementById('s3-sub').classList.remove('show');
+    document.getElementById('booking-card').classList.remove('show');
+    document.getElementById('s3-approaches').classList.remove('show');
+    document.getElementById('s3-cta').classList.remove('show');
+    document.getElementById('s3-footer').classList.remove('show');
+  }
+
+  // ── SCENE 1 ───────────────────────────────────────────
+  async function runScene1() {
+    resetS1();
+    show('scene1');
+    await fadeIn();
+
+    // Typewrite headline (use * to open <em>, | to close)
+    await delay(400);
+    await typewrite('A space where\nyou feel *truly|\nunderstood.',
+      document.getElementById('s1-hl-text'),
+      document.getElementById('s1-hl-cur'), 42);
+
+    // Subtitle
+    document.getElementById('s1-sub').classList.add('show');
+    await delay(500);
+
+    // Buttons
+    document.getElementById('s1-btns').classList.add('show');
+    await delay(600);
+
+    // Stats count up
+    document.querySelectorAll('.stat-box').forEach((b, i) => {
+      setTimeout(() => b.classList.add('show'), i * 120);
+    });
+    await delay(300);
+    countUp(document.getElementById('sv0'), 4, '+');
+    await delay(100);
+    countUp(document.getElementById('sv2'), 150, '$'.replace('$','$'), 700);
+    document.getElementById('sv2').textContent = '$150';
+    await delay(100);
+    countUp(document.getElementById('sv3'), 3, '');
+    await delay(900);
+
+    // Banner
+    document.getElementById('s1-banner').classList.add('show');
+    await delay(4500);
+  }
+
+  // ── SCENE 2 ───────────────────────────────────────────
+  async function runScene2() {
+    resetS2();
+    await fadeOut(false);
+    show('scene2');
+    await fadeIn();
+
+    // Cards stagger
+    const cards = document.querySelectorAll('.focus-card');
+    for (let i = 0; i < cards.length; i++) {
+      setTimeout(() => cards[i].classList.add('show'), i * 200);
+    }
+    await delay(cards.length * 200 + 400);
+
+    // Quote
+    document.getElementById('s2-quote').classList.add('show');
+    await delay(4000);
+  }
+
+  // ── SCENE 3 ───────────────────────────────────────────
+  async function runScene3() {
+    resetS3();
+    await fadeOut(true);
+    show('scene3');
+    overlay.classList.add('dark');
+    await fadeIn();
+
+    document.getElementById('s3-sub').classList.add('show');
+    await delay(500);
+
+    document.getElementById('booking-card').classList.add('show');
+    await delay(700);
+
+    document.getElementById('s3-approaches').classList.add('show');
+    await delay(400);
+
+    document.getElementById('s3-cta').classList.add('show');
+    await delay(300);
+
+    document.getElementById('s3-footer').classList.add('show');
+    await delay(4500);
+  }
+
+  // ── MAIN LOOP ─────────────────────────────────────────
+  async function loop() {
+    while (true) {
+      await runScene1();
+      await runScene2();
+      await runScene3();
+      await fadeOut(false);
+      await delay(200);
+    }
+  }
+
+  // Boot
+  overlay.classList.add('fading');
+  setTimeout(loop, 200);
+</script>
+</body>
+</html>
