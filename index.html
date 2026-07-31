@@ -297,7 +297,25 @@
       margin-bottom: 3rem;
     }
 
-    .carousel-wrap { position: relative; max-width: 1400px; margin: 0 auto; }
+    .video-card-wrap {
+      display: flex;
+      flex-direction: column;
+      gap: 10px;
+      flex: 0 0 calc(33.333% - 1rem);
+      text-decoration: none;
+    }
+    .video-card-url {
+      text-align: center;
+      font-size: 0.7rem;
+      font-weight: 700;
+      letter-spacing: 0.1em;
+      text-transform: uppercase;
+      color: #6B7280;
+      font-family: 'Josefin Sans', sans-serif;
+      transition: color 0.2s;
+    }
+    .video-card-wrap:hover .video-card-url { color: #7C3AED; }
+    .video-card-wrap .video-card { flex: unset; }
     .carousel-container { overflow: hidden; }
     .carousel-track {
       display: flex;
@@ -665,54 +683,90 @@
     <div class="carousel-container">
       <div class="carousel-track" id="carouselTrack">
         <!-- Portfolio Video 1 -->
-		<div class="video-card">
-		<div class="video-card">
-		  <iframe
-			src="media/opus-panel-video.html"
-			style="width:100%;height:100%;border:none;border-radius:16px;"
-			scrolling="no"
-		  ></iframe>
-		</div>
-		</div>
+        <a class="video-card-wrap" href="" target="_blank">
+          <div class="video-card">
+            <div class="video-card">
+              <iframe
+                src="media/opus-panel-video.html"
+                style="width:100%;height:100%;border:none;border-radius:16px;"
+                scrolling="no"
+              ></iframe>
+            </div>
+          </div>
+          <div class="video-card-url">↗</div>
+        </a>
         <!-- Portfolio Video 2 -->
-		<div class="video-card">
-		<div class="video-card" style="position:relative;">
-		  <iframe
-			id="vm1"
-			src="https://player.vimeo.com/video/1214643039?badge=0&autopause=0&autoplay=1&muted=1&loop=1&background=1"
-			style="width:100%;height:100%;border:none;border-radius:16px;"
-			allow="autoplay; fullscreen; picture-in-picture"
-		  ></iframe>
-
-		  <button onclick="toggleVimeo('vm1', this)" style="
-			position:absolute;
-			bottom:16px;
-			right:16px;
-			width:44px;
-			height:44px;
-			border-radius:50%;
-			border:none;
-			background:rgba(255,255,255,0.92);
-			cursor:pointer;
-			font-size:16px;
-			box-shadow:0 4px 12px rgba(0,0,0,0.2);
-			z-index:10;
-		  ">🔊</button>
-		</div>
-		</div>
-		<!-- Portfolio Video 3 -->
-        <div class="video-card">
-		<div class="video-card">
-		  <iframe
-			src="media/therapybyniha-reel.html"
-			style="width:100%;height:100%;border:none;border-radius:16px;"
-			scrolling="no"
-		  ></iframe>
-		</div>
-		</div>
-        <div class="video-card"><div class="video-placeholder" style="background:linear-gradient(135deg,#43e97b,#38f9d7)"><div class="play-button"></div></div></div>
-        <div class="video-card"><div class="video-placeholder" style="background:linear-gradient(135deg,#fa709a,#fee140)"><div class="play-button"></div></div></div>
-        <div class="video-card"><div class="video-placeholder" style="background:linear-gradient(135deg,#a18cd1,#fbc2eb)"><div class="play-button"></div></div></div>
+        <a class="video-card-wrap" href="https://www.voyageurquest.com" target="_blank">
+          <div class="video-card">
+            <div class="video-card">
+              <iframe
+                src="media/quinn-vq-reel.html"
+                style="width:100%;height:100%;border:none;border-radius:16px;"
+                scrolling="no"
+              ></iframe>
+            </div>
+          </div>
+          <div class="video-card-url">www.voyageurquest.com ↗</div>
+        </a>
+        <!-- Portfolio Video 3 -->
+        <a class="video-card-wrap" href="https://www.therapybyniha.com" target="_blank">
+          <div class="video-card">
+            <div class="video-card">
+              <iframe
+                src="media/therapybyniha-reel.html"
+                style="width:100%;height:100%;border:none;border-radius:16px;"
+                scrolling="no"
+              ></iframe>
+            </div>
+          </div>
+          <div class="video-card-url">www.therapybyniha.com ↗</div>
+        </a>
+        <!-- Portfolio Video 4 -->
+        <a class="video-card-wrap" href="https://www.voyageurquest.com" target="_blank">
+          <div class="video-card">
+            <div class="video-card" style="position:relative;">
+              <iframe
+                id="vm1"
+                src="https://player.vimeo.com/video/1214643039?badge=0&autopause=0&autoplay=1&muted=1&loop=1&background=1"
+                style="width:100%;height:100%;border:none;border-radius:16px;"
+                allow="autoplay; fullscreen; picture-in-picture"
+              ></iframe>
+              <button onclick="toggleVimeo('vm1', this)" style="
+                position:absolute;
+                bottom:16px;
+                right:16px;
+                width:44px;
+                height:44px;
+                border-radius:50%;
+                border:none;
+                background:rgba(255,255,255,0.92);
+                cursor:pointer;
+                font-size:16px;
+                box-shadow:0 4px 12px rgba(0,0,0,0.2);
+                z-index:10;
+              ">🔊</button>
+            </div>
+          </div>
+          <div class="video-card-url">www.voyageurquest.com ↗</div>
+        </a>
+        <!-- Portfolio Video 5 -->
+        <a class="video-card-wrap" href="https://www.example.com" target="_blank">
+          <div class="video-card">
+            <div class="video-placeholder" style="background:linear-gradient(135deg,#fa709a,#fee140)">
+              <div class="play-button"></div>
+            </div>
+          </div>
+          <div class="video-card-url">www.example.com ↗</div>
+        </a>
+        <!-- Portfolio Video 6 -->
+        <a class="video-card-wrap" href="https://www.example.com" target="_blank">
+          <div class="video-card">
+            <div class="video-placeholder" style="background:linear-gradient(135deg,#a18cd1,#fbc2eb)">
+              <div class="play-button"></div>
+            </div>
+          </div>
+          <div class="video-card-url">www.example.com ↗</div>
+        </a>
       </div>
     </div>
     <div class="carousel-controls">
