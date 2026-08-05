@@ -297,25 +297,7 @@
       margin-bottom: 3rem;
     }
 
-    .video-card-wrap {
-      display: flex;
-      flex-direction: column;
-      gap: 10px;
-      flex: 0 0 calc(33.333% - 1rem);
-      text-decoration: none;
-    }
-    .video-card-url {
-      text-align: center;
-      font-size: 0.7rem;
-      font-weight: 700;
-      letter-spacing: 0.1em;
-      text-transform: uppercase;
-      color: #6B7280;
-      font-family: 'Josefin Sans', sans-serif;
-      transition: color 0.2s;
-    }
-    .video-card-wrap:hover .video-card-url { color: #7C3AED; }
-    .video-card-wrap .video-card { flex: unset; }
+    .carousel-wrap { position: relative; max-width: 1400px; margin: 0 auto; }
     .carousel-container { overflow: hidden; }
     .carousel-track {
       display: flex;
@@ -594,20 +576,143 @@
       letter-spacing: 0.06em;
     }
 
+    /* ── Mobile Nav ───────────────────────── */
+    .nav-hamburger {
+      display: none;
+      flex-direction: column;
+      gap: 5px;
+      cursor: pointer;
+      padding: 4px;
+      background: none;
+      border: none;
+    }
+    .nav-hamburger span {
+      display: block;
+      width: 22px;
+      height: 2px;
+      background: #1E1B4B;
+      border-radius: 2px;
+      transition: all 0.3s ease;
+    }
+    .nav-mobile-menu {
+      display: none;
+      position: fixed;
+      inset: 0;
+      background: #FAFAFA;
+      z-index: 200;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      gap: 2rem;
+    }
+    .nav-mobile-menu.open { display: flex; }
+    .nav-mobile-menu a {
+      font-size: 1.4rem;
+      font-weight: 700;
+      letter-spacing: 0.08em;
+      text-transform: uppercase;
+      color: #1E1B4B;
+      text-decoration: none;
+    }
+    .nav-mobile-menu a:hover { color: #7C3AED; }
+    .nav-mobile-close {
+      position: absolute;
+      top: 1.5rem;
+      right: 1.5rem;
+      font-size: 1.8rem;
+      background: none;
+      border: none;
+      cursor: pointer;
+      color: #1E1B4B;
+      line-height: 1;
+    }
+    .nav-mobile-cta {
+      background: #7C3AED !important;
+      color: #fff !important;
+      padding: 0.8rem 2rem;
+      border-radius: 6px;
+      font-size: 1rem !important;
+    }
+
     /* ── Responsive ───────────────────────── */
     @media (max-width: 900px) {
+      /* Nav */
       nav { padding: 1rem 1.5rem; }
-      .hero { padding: 4rem 1.5rem 3rem; }
-      .hero-headline { font-size: 2.1rem; }
-      .narrative-grid { grid-template-columns: 1fr; gap: 1rem; margin-bottom: 2.5rem; }
+      .nav-links { display: none; }
+      .nav-hamburger { display: flex; }
+
+      /* Hero */
+      .hero { padding: 3.5rem 1.5rem 2.5rem; }
+      .hero-headline { font-size: 2rem; }
+      .hero-eyebrow { font-size: 0.62rem; }
+      .hero-sub { font-size: 0.9rem; max-width: 100%; }
+      .narrative-grid { grid-template-columns: 1fr; gap: 0.9rem; margin-bottom: 2rem; }
+      .narrative-card { padding: 1.5rem; }
+      .card-title { font-size: 0.9rem; }
+      .card-body { font-size: 0.82rem; }
+      .hero-ctas { flex-direction: column; gap: 0.8rem; }
+      .btn-primary, .btn-secondary { width: 100%; text-align: center; display: block; }
+
+      /* Stats */
       .stats { padding: 2rem 1.5rem; }
-      .stats-grid { grid-template-columns: 1fr; gap: 1rem; }
-      .portfolio-videos, .work, .services-grid-section, .about, .contact { padding: 3rem 1.5rem; }
-      .video-card { flex: 0 0 100%; }
-      .work-grid, .services-grid, .testimonials-grid, .about-pillars { grid-template-columns: 1fr; }
+      .stats-grid { grid-template-columns: repeat(3, 1fr); gap: 0.5rem; }
+      .stat-value { font-size: 1.4rem; }
+      .stat-label { font-size: 0.62rem; }
+
+      /* Portfolio — vertical stack */
+      .portfolio-videos { padding: 3rem 1.5rem; }
+      .carousel-container { overflow: visible; }
+      .carousel-track {
+        flex-direction: column;
+        gap: 2rem;
+        transform: none !important;
+        transition: none;
+      }
+      .video-card-wrap {
+        flex: unset;
+        width: 100%;
+        max-width: 360px;
+        margin: 0 auto;
+      }
+      .video-card {
+        flex: unset;
+        width: 100%;
+        max-height: none;
+      }
+      .carousel-controls { display: none; }
+
+      /* Work */
+      .work { padding: 3rem 1.5rem; }
+      .work-grid { grid-template-columns: 1fr; gap: 1rem; }
+      .work-title { font-size: 1.1rem; }
+
+      /* Services */
+      .services-grid-section { padding: 3rem 1.5rem; }
+      .services-grid { grid-template-columns: 1fr; gap: 1rem; }
+      .service-card { padding: 1.5rem; }
+
+      /* Testimonials */
       .testimonials { padding: 3rem 1.5rem; }
-      .hero-ctas { flex-direction: column; }
-      .btn-primary, .btn-secondary { width: 100%; text-align: center; }
+      .testimonials-grid { grid-template-columns: 1fr; gap: 1rem; }
+      .testimonial { padding: 1.8rem 1.5rem; }
+
+      /* About */
+      .about { padding: 3rem 1.5rem; }
+      .about-pillars { grid-template-columns: 1fr; gap: 1rem; }
+      .about-text { font-size: 0.9rem; }
+
+      /* Contact */
+      .contact { padding: 3rem 1.5rem; }
+      .section-title { font-size: 1.7rem; }
+    }
+
+    @media (max-width: 480px) {
+      .hero-headline { font-size: 1.7rem; }
+      .stats-grid { grid-template-columns: 1fr; gap: 1rem; }
+      .section-title { font-size: 1.5rem; }
+      .hero { padding: 2.5rem 1.2rem 2rem; }
+      .narrative-card { padding: 1.2rem; }
+      .video-card-wrap { max-width: 100%; }
     }
   </style>
 </head>
@@ -622,7 +727,19 @@
     <li><a href="#about">About</a></li>
     <li><a href="#contact" class="nav-cta">Get started</a></li>
   </ul>
+  <button class="nav-hamburger" onclick="document.getElementById('mobileMenu').classList.add('open')" aria-label="Open menu">
+    <span></span><span></span><span></span>
+  </button>
 </nav>
+
+<!-- Mobile Menu Overlay -->
+<div class="nav-mobile-menu" id="mobileMenu">
+  <button class="nav-mobile-close" onclick="document.getElementById('mobileMenu').classList.remove('open')">✕</button>
+  <a href="#services-detail" onclick="document.getElementById('mobileMenu').classList.remove('open')">Services</a>
+  <a href="#portfolio-videos" onclick="document.getElementById('mobileMenu').classList.remove('open')">Portfolio</a>
+  <a href="#about" onclick="document.getElementById('mobileMenu').classList.remove('open')">About</a>
+  <a href="#contact" class="nav-mobile-cta" onclick="document.getElementById('mobileMenu').classList.remove('open')">Get started</a>
+</div>
 
 <!-- Hero -->
 <section class="hero" id="hero">
@@ -683,91 +800,63 @@
     <div class="carousel-container">
       <div class="carousel-track" id="carouselTrack">
         <!-- Portfolio Video 1 -->
-        <a class="video-card-wrap" href="" target="_blank">
-          <div class="video-card">
-            <div class="video-card">
-              <iframe
-                src="media/opus-panel-video.html"
-                style="width:100%;height:100%;border:none;border-radius:16px;"
-                scrolling="no"
-              ></iframe>
-            </div>
-          </div>
-          <div class="video-card-url">↗</div>
-        </a>
-        <!-- Portfolio Video 2 -->
-        <a class="video-card-wrap" href="https://www.voyageurquest.com" target="_blank">
-          <div class="video-card">
-            <div class="video-card">
-              <iframe
-                src="media/quinn-vq-reel.html"
-                style="width:100%;height:100%;border:none;border-radius:16px;"
-                scrolling="no"
-              ></iframe>
-            </div>
-          </div>
-          <div class="video-card-url">www.voyageurquest.com ↗</div>
-        </a>
-        <!-- Portfolio Video 3 -->
-        <a class="video-card-wrap" href="https://www.therapybyniha.com" target="_blank">
-          <div class="video-card">
-            <div class="video-card">
-              <iframe
-                src="media/therapybyniha-reel.html"
-                style="width:100%;height:100%;border:none;border-radius:16px;"
-                scrolling="no"
-              ></iframe>
-            </div>
-          </div>
-          <div class="video-card-url">www.therapybyniha.com ↗</div>
-        </a>
+		<div class="video-card">
+		<div class="video-card">
+		  <iframe
+			src="media/opus-panel-video.html"
+			style="width:100%;height:100%;border:none;border-radius:16px;"
+			scrolling="no"
+		  ></iframe>
+		</div>
+		</div>
+		<!-- Portfolio Video 2 -->
+        <div class="video-card">
+		<div class="video-card">
+		  <iframe
+			src="media/quinn-vq-reel.html"
+			style="width:100%;height:100%;border:none;border-radius:16px;"
+			scrolling="no"
+		  ></iframe>
+		</div>
+		</div>        
+		<!-- Portfolio Video 3 -->
+        <div class="video-card">
+		<div class="video-card">
+		  <iframe
+			src="media/therapybyniha-reel.html"
+			style="width:100%;height:100%;border:none;border-radius:16px;"
+			scrolling="no"
+		  ></iframe>
+		</div>
+		</div>
         <!-- Portfolio Video 4 -->
-        <a class="video-card-wrap" href="https://www.voyageurquest.com" target="_blank">
-          <div class="video-card">
-            <div class="video-card" style="position:relative;">
-              <iframe
-                id="vm1"
-                src="https://player.vimeo.com/video/1214643039?badge=0&autopause=0&autoplay=1&muted=1&loop=1&background=1"
-                style="width:100%;height:100%;border:none;border-radius:16px;"
-                allow="autoplay; fullscreen; picture-in-picture"
-				tabindex="-1"
-              ></iframe>
-              <button onclick="toggleVimeo('vm1', this)" style="
-                position:absolute;
-                bottom:16px;
-                right:16px;
-                width:44px;
-                height:44px;
-                border-radius:50%;
-                border:none;
-                background:rgba(255,255,255,0.92);
-                cursor:pointer;
-                font-size:16px;
-                box-shadow:0 4px 12px rgba(0,0,0,0.2);
-                z-index:10;
-              ">🔊</button>
-            </div>
-          </div>
-          <div class="video-card-url">www.voyageurquest.com ↗</div>
-        </a>
-        <!-- Portfolio Video 5 -->
-        <a class="video-card-wrap" href="https://www.example.com" target="_blank">
-          <div class="video-card">
-            <div class="video-placeholder" style="background:linear-gradient(135deg,#fa709a,#fee140)">
-              <div class="play-button"></div>
-            </div>
-          </div>
-          <div class="video-card-url">www.example.com ↗</div>
-        </a>
-        <!-- Portfolio Video 6 -->
-        <a class="video-card-wrap" href="https://www.example.com" target="_blank">
-          <div class="video-card">
-            <div class="video-placeholder" style="background:linear-gradient(135deg,#a18cd1,#fbc2eb)">
-              <div class="play-button"></div>
-            </div>
-          </div>
-          <div class="video-card-url">www.example.com ↗</div>
-        </a>
+		<div class="video-card">
+		<div class="video-card" style="position:relative;">
+		  <iframe
+			id="vm1"
+			src="https://player.vimeo.com/video/1214643039?badge=0&autopause=0&autoplay=1&muted=1&loop=1&background=1"
+			style="width:100%;height:100%;border:none;border-radius:16px;"
+			allow="autoplay; fullscreen; picture-in-picture"
+		  ></iframe>
+
+		  <button onclick="toggleVimeo('vm1', this)" style="
+			position:absolute;
+			bottom:16px;
+			right:16px;
+			width:44px;
+			height:44px;
+			border-radius:50%;
+			border:none;
+			background:rgba(255,255,255,0.92);
+			cursor:pointer;
+			font-size:16px;
+			box-shadow:0 4px 12px rgba(0,0,0,0.2);
+			z-index:10;
+		  ">🔊</button>
+		</div>
+		</div>
+    <!--    <div class="video-card"><div class="video-placeholder" style="background:linear-gradient(135deg,#fa709a,#fee140)"><div class="play-button"></div></div></div> -->
+    <!--    <div class="video-card"><div class="video-placeholder" style="background:linear-gradient(135deg,#a18cd1,#fbc2eb)"><div class="play-button"></div></div></div> -->
       </div>
     </div>
     <div class="carousel-controls">
