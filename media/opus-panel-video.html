@@ -1,0 +1,491 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>OPUS — Animated Panel</title>
+<link href="https://fonts.googleapis.com/css2?family=Josefin+Sans:wght@300;400;600;700&family=DM+Serif+Display:ital@0;1&display=swap" rel="stylesheet">
+<style>
+  * { box-sizing: border-box; margin: 0; padding: 0; }
+  body {
+    background: #0f0f14;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    min-height: 100vh;
+    font-family: 'Josefin Sans', sans-serif;
+  }
+
+  /* ── OUTER VIDEO FRAME — Instagram Reel 9:16 ── */
+  .video-frame {
+    width: 390px;
+    height: 693px;  /* 390 × (16/9) ≈ 693 */
+    border-radius: 28px;
+    overflow: hidden;
+    position: relative;
+    box-shadow: 0 40px 100px rgba(0,0,0,0.7), 0 0 0 1px rgba(255,255,255,0.06);
+    background: #1A1612;
+  }
+
+  /* Subtle film grain overlay */
+  .video-frame::after {
+    content: '';
+    position: absolute;
+    inset: 0;
+    pointer-events: none;
+    z-index: 100;
+    background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 200 200' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.75' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)' opacity='0.03'/%3E%3C/svg%3E");
+    background-size: 200px;
+    opacity: 0.4;
+    mix-blend-mode: overlay;
+  }
+
+  /* ── WEBSITE PANEL — vertical portrait layout ── */
+  #website-panel {
+    width: 100%;
+    height: 100%;
+    background: #FAF8F5;
+    display: flex;
+    flex-direction: column;
+    position: relative;
+    overflow: hidden;
+  }
+
+  /* ── NAV ── */
+  #web-nav {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    padding: 18px 22px 14px;
+    border-bottom: 0.5px solid rgba(26,22,18,0.08);
+    background: #FAF8F5;
+    flex-shrink: 0;
+  }
+  #web-logo {
+    font-family: 'Josefin Sans', sans-serif;
+    font-size: 14px;
+    font-weight: 700;
+    letter-spacing: 0.22em;
+    color: #1A1612;
+  }
+  #web-nav-links {
+    display: flex;
+    gap: 16px;
+    font-size: 10px;
+    letter-spacing: 0.12em;
+    color: #9B958D;
+    text-transform: uppercase;
+  }
+
+  /* ── PRODUCT ROW ── */
+  #web-product {
+    display: flex;
+    align-items: center;
+    gap: 12px;
+    padding: 18px 22px 0;
+    flex-shrink: 0;
+  }
+  #web-product svg { width: 64px; flex-shrink: 0; }
+  #web-collection {
+    font-size: 10px;
+    letter-spacing: 0.12em;
+    color: #9B958D;
+    text-transform: uppercase;
+  }
+
+  /* ── MAIN CONTENT ── */
+  #web-main {
+    padding: 16px 22px 0;
+    flex-shrink: 0;
+  }
+  #web-season {
+    font-size: 10px;
+    letter-spacing: 0.1em;
+    color: #C9AA71;
+    text-transform: uppercase;
+    margin-bottom: 10px;
+  }
+  #web-headline {
+    font-family: 'DM Serif Display', serif;
+    font-size: 28px;
+    color: #1A1612;
+    line-height: 1.22;
+    margin-bottom: 12px;
+    min-height: 104px;
+  }
+  .cursor {
+    display: inline-block;
+    width: 2px;
+    height: 1em;
+    background: #1A1612;
+    margin-left: 1px;
+    vertical-align: middle;
+    animation: blink 0.75s step-end infinite;
+  }
+  .cursor.off { opacity: 0; animation: none; }
+  @keyframes blink { 0%,100%{opacity:1} 50%{opacity:0} }
+
+  #web-subtext {
+    font-size: 11px;
+    color: #9B958D;
+    line-height: 1.6;
+    margin-bottom: 16px;
+  }
+  #web-features {
+    display: flex;
+    flex-direction: column;
+    gap: 8px;
+    margin-bottom: 20px;
+  }
+  .feature {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    opacity: 0;
+    transform: translateX(-8px);
+    transition: opacity 0.4s, transform 0.4s;
+  }
+  .feature.visible { opacity: 1; transform: translateX(0); }
+  .feature-line { width: 16px; height: 0.5px; background: #C9AA71; flex-shrink: 0; }
+  .feature span { font-size: 11px; letter-spacing: 0.06em; color: #5A5248; }
+
+  /* ── STATS SECTION (bottom dark panel) ── */
+  #web-stats {
+    background: #1A1612;
+    flex: 1;
+    padding: 18px 22px 14px;
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+    margin-top: auto;
+  }
+  #stats-header {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+  }
+  #stats-label {
+    font-size: 8px;
+    font-weight: 700;
+    letter-spacing: 0.16em;
+    text-transform: uppercase;
+    color: #9B958D;
+  }
+  #stats-growth { font-size: 11px; font-weight: 700; color: #C9AA71; letter-spacing: 0.06em; }
+  #chart-wrap { flex: 1; position: relative; min-height: 80px; }
+  #chart-canvas { width: 100%; height: 100%; display: block; }
+  #stats-footer {
+    display: flex;
+    justify-content: space-between;
+    font-size: 8px;
+    color: #5A5248;
+    letter-spacing: 0.04em;
+  }
+
+  /* ── CTA ── */
+  #web-cta-row {
+    padding: 0 22px 6px;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    flex-shrink: 0;
+  }
+  #web-cta {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    cursor: pointer;
+  }
+  #web-cta span { font-size: 10px; font-weight: 700; letter-spacing: 0.14em; text-transform: uppercase; color: #1A1612; }
+  #cta-line { width: 20px; height: 0.5px; background: #1A1612; transition: width 0.3s; }
+  #web-note { font-size: 9px; color: #C9AA71; letter-spacing: 0.05em; }
+
+  /* ── SHIMMER ── */
+  #shimmer {
+    position: absolute;
+    inset: 0;
+    pointer-events: none;
+    background: linear-gradient(
+      105deg,
+      transparent 40%,
+      rgba(255,255,255,0.18) 50%,
+      transparent 60%
+    );
+    background-size: 200% 100%;
+    animation: shimmer-sweep 4s ease-in-out infinite;
+    z-index: 10;
+  }
+  @keyframes shimmer-sweep {
+    0%   { background-position: 200% 0; opacity: 0; }
+    10%  { opacity: 1; }
+    50%  { background-position: -200% 0; opacity: 1; }
+    60%  { opacity: 0; }
+    100% { background-position: -200% 0; opacity: 0; }
+  }
+
+  /* ── LOOP FADE OVERLAY ── */
+  #loop-fade {
+    position: absolute;
+    inset: 0;
+    background: #FAF8F5;
+    opacity: 0;
+    pointer-events: none;
+    z-index: 50;
+    transition: opacity 0.6s ease;
+  }
+  #loop-fade.fading { opacity: 1; }
+
+  /* ── PLAY INDICATOR (top-right corner) ── */
+  .play-dot {
+    position: absolute;
+    top: 12px;
+    right: 14px;
+    display: flex;
+    align-items: center;
+    gap: 5px;
+    z-index: 90;
+    font-size: 8px;
+    font-weight: 700;
+    letter-spacing: 0.1em;
+    color: rgba(255,255,255,0.55);
+  }
+  .play-dot::before {
+    content: '';
+    width: 6px; height: 6px;
+    border-radius: 50%;
+    background: #ef4444;
+    animation: rec-blink 1.2s step-end infinite;
+  }
+  @keyframes rec-blink { 0%,100%{opacity:1} 50%{opacity:0.2} }
+</style>
+</head>
+<body>
+
+<div class="video-frame">
+
+  <!-- REC indicator -->
+  <div class="play-dot">LIVE</div>
+
+  <div id="website-panel">
+    <!-- NAV -->
+    <div id="web-nav">
+      <span id="web-logo">OPUS</span>
+      <div id="web-nav-links">
+        <span>Frames</span><span>Lenses</span><span>About</span>
+      </div>
+    </div>
+
+    <!-- PRODUCT ROW -->
+    <div id="web-product">
+      <svg viewBox="-14 -4 110 32" xmlns="http://www.w3.org/2000/svg">
+        <rect x="0" y="0" width="36" height="24" rx="8" fill="none" stroke="#1A1612" stroke-width="1.5"/>
+        <rect x="44" y="0" width="36" height="24" rx="8" fill="none" stroke="#1A1612" stroke-width="1.5"/>
+        <line x1="36" y1="12" x2="44" y2="12" stroke="#1A1612" stroke-width="1.5"/>
+        <line x1="0" y1="9" x2="-12" y2="4" stroke="#1A1612" stroke-width="1.5" stroke-linecap="round"/>
+        <line x1="80" y1="9" x2="92" y2="4" stroke="#1A1612" stroke-width="1.5" stroke-linecap="round"/>
+      </svg>
+      <span id="web-collection">Titanium Collection</span>
+    </div>
+
+    <!-- MAIN CONTENT -->
+    <div id="web-main">
+      <div id="web-season">New Season · 2025</div>
+      <div id="web-headline">
+        <span id="web-hl-text"></span><span id="web-hl-cur" class="cursor off"></span>
+      </div>
+      <div id="web-subtext">Precision-engineered frames for those who see life differently.</div>
+      <div id="web-features">
+        <div class="feature"><div class="feature-line"></div><span>Handcrafted titanium frames</span></div>
+        <div class="feature"><div class="feature-line"></div><span>UV400 precision lenses</span></div>
+        <div class="feature"><div class="feature-line"></div><span>Spring-hinge mechanism</span></div>
+      </div>
+    </div>
+
+    <!-- CTA ROW -->
+    <div id="web-cta-row">
+      <div id="web-cta">
+        <span>Explore Collection</span>
+        <div id="cta-line"></div>
+        <span>→</span>
+      </div>
+      <div id="web-note">47 enquiries · Sulo AI</div>
+    </div>
+
+    <!-- STATS PANEL (bottom dark block) -->
+    <div id="web-stats">
+      <div id="stats-header">
+        <span id="stats-label">ENQUIRIES THIS WEEK</span>
+        <span id="stats-growth">↑ 3.2×</span>
+      </div>
+      <div id="chart-wrap">
+        <canvas id="chart-canvas"></canvas>
+      </div>
+      <div id="stats-footer">
+        <span>Mon</span><span>Tue</span><span>Wed</span><span>Thu</span><span>Fri</span><span>Sat</span><span>Today</span>
+      </div>
+    </div>
+
+    <div id="shimmer"></div>
+    <div id="loop-fade"></div>
+  </div>
+</div>
+
+<script>
+  // ── DATA ──────────────────────────────────────────────────────
+  const BAR_DATA = [12, 19, 14, 27, 22, 31, 47];
+  const HEADLINE = "Precision crafted\nfor those who\nsee differently.";
+
+  // ── CHART ─────────────────────────────────────────────────────
+  function drawChart(progress = 1) {
+    const canvas = document.getElementById('chart-canvas');
+    const wrap   = document.getElementById('chart-wrap');
+    canvas.width  = wrap.offsetWidth;
+    canvas.height = wrap.offsetHeight;
+    const ctx = canvas.getContext('2d');
+    ctx.clearRect(0, 0, canvas.width, canvas.height);
+
+    const max   = Math.max(...BAR_DATA);
+    const n     = BAR_DATA.length;
+    const gap   = 4;
+    const barW  = (canvas.width - gap * (n - 1)) / n;
+    const maxH  = canvas.height - 2;
+
+    BAR_DATA.forEach((val, i) => {
+      const x       = i * (barW + gap);
+      const fullH   = (val / max) * maxH;
+      const drawH   = fullH * progress;
+      const isToday = i === n - 1;
+
+      // Gradient
+      const grad = ctx.createLinearGradient(0, canvas.height - drawH, 0, canvas.height);
+      if (isToday) {
+        grad.addColorStop(0, '#C9AA71');
+        grad.addColorStop(1, 'rgba(201,170,113,0.4)');
+      } else {
+        grad.addColorStop(0, 'rgba(255,255,255,0.25)');
+        grad.addColorStop(1, 'rgba(255,255,255,0.06)');
+      }
+
+      ctx.fillStyle = grad;
+      ctx.beginPath();
+      ctx.roundRect(x, canvas.height - drawH, barW, drawH, [2, 2, 0, 0]);
+      ctx.fill();
+    });
+  }
+
+  // ── TYPEWRITER ────────────────────────────────────────────────
+  function typewrite(text, el, cursor, speed = 45) {
+    return new Promise(resolve => {
+      cursor.classList.remove('off');
+      let i = 0;
+      el.innerHTML = '';
+      const interval = setInterval(() => {
+        if (i >= text.length) {
+          clearInterval(interval);
+          setTimeout(() => { cursor.classList.add('off'); resolve(); }, 600);
+          return;
+        }
+        const ch = text[i];
+        if (ch === '\n') el.innerHTML += '<br>';
+        else el.innerHTML += ch;
+        i++;
+      }, speed);
+    });
+  }
+
+  // ── FEATURES ─────────────────────────────────────────────────
+  function showFeatures() {
+    return new Promise(resolve => {
+      const features = document.querySelectorAll('.feature');
+      features.forEach((f, i) => {
+        setTimeout(() => {
+          f.classList.add('visible');
+          if (i === features.length - 1) setTimeout(resolve, 400);
+        }, i * 200);
+      });
+    });
+  }
+
+  function hideFeatures() {
+    document.querySelectorAll('.feature').forEach(f => f.classList.remove('visible'));
+  }
+
+  // ── CHART ANIMATION ──────────────────────────────────────────
+  function animateChart(duration = 1200) {
+    return new Promise(resolve => {
+      const start = performance.now();
+      function frame(now) {
+        const t = Math.min((now - start) / duration, 1);
+        const ease = 1 - Math.pow(1 - t, 3);
+        drawChart(ease);
+        if (t < 1) requestAnimationFrame(frame);
+        else resolve();
+      }
+      requestAnimationFrame(frame);
+    });
+  }
+
+  // ── FADE TRANSITION ──────────────────────────────────────────
+  function delay(ms) { return new Promise(r => setTimeout(r, ms)); }
+
+  function fadeOut() {
+    const overlay = document.getElementById('loop-fade');
+    overlay.classList.add('fading');
+    return delay(700);
+  }
+
+  function fadeIn() {
+    const overlay = document.getElementById('loop-fade');
+    overlay.classList.remove('fading');
+    return delay(300);
+  }
+
+  // ── MAIN SEQUENCE ─────────────────────────────────────────────
+  async function runSequence() {
+    const hlText = document.getElementById('web-hl-text');
+    const hlCur  = document.getElementById('web-hl-cur');
+
+    // 1. Reset state
+    hlText.innerHTML = '';
+    hlCur.classList.add('off');
+    hideFeatures();
+    drawChart(0);
+
+    // 2. Fade in
+    await fadeIn();
+
+    // 3. Typewrite headline
+    await delay(600);
+    await typewrite(HEADLINE, hlText, hlCur, 42);
+
+    // 4. Features slide in
+    await delay(300);
+    await showFeatures();
+
+    // 5. Chart draws up
+    await delay(500);
+    await animateChart(1400);
+
+    // 6. Hold the final state
+    await delay(4000);
+
+    // 7. Fade out and loop
+    await fadeOut();
+    await delay(200);
+    runSequence();
+  }
+
+  // ── BOOT ─────────────────────────────────────────────────────
+  window.addEventListener('load', () => {
+    drawChart(0);
+    // Start with fade overlay visible (no fading class = white = visible via initial opacity 0)
+    // Actually: overlay starts at opacity 0 (transparent), fading class = opacity 1 (white)
+    // So we set it fading initially so it fades IN to reveal the panel
+    document.getElementById('loop-fade').classList.add('fading');
+    setTimeout(runSequence, 100);
+  });
+
+  window.addEventListener('resize', () => drawChart(1));
+</script>
+</body>
+</html>
