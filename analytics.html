@@ -201,11 +201,7 @@
   <!-- ---------- not signed in ---------- -->
   <section class="pane gate-c" id="gate">
     <h1>Admin sign-in</h1>
-    <p>These numbers are readable only by an approved account. Access is enforced by Firestore rules on Google&rsquo;s servers, not by this page.</p>
-
-    <button class="btn-k" id="google" type="button" style="width:100%">Continue with Google</button>
-
-    <div class="or">or</div>
+    <p>These numbers are readable only by an approved account. Access is enforced server-side, not by this screen.</p>
 
     <form class="stack" id="pwform">
       <input type="email" id="email" placeholder="Email" autocomplete="username" required>
@@ -303,7 +299,6 @@ let days = 30;
 
 /* ---------- unconfigured project: say so plainly ---------- */
 if (!firebaseConfig || String(firebaseConfig.projectId || "").startsWith("PASTE")) {
-  $("google").disabled = true;
   $("pwform").querySelector("button").disabled = true;
   const n = $("gate-setup");
   n.innerHTML = "<b>Not connected yet.</b> Paste your Firebase web config into " +
@@ -328,13 +323,6 @@ async function boot() {
   const app  = appMod.initializeApp(firebaseConfig);
   const auth = authMod.getAuth(app);
   const db   = fsMod.getFirestore(app);
-
-  $("google").addEventListener("click", async () => {
-    show($("gate-err"), false);
-    try {
-      await authMod.signInWithPopup(auth, new authMod.GoogleAuthProvider());
-    } catch (e) { fail($("gate-err"), e); }
-  });
 
   $("pwform").addEventListener("submit", async (ev) => {
     ev.preventDefault();
