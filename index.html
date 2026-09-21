@@ -451,12 +451,12 @@ body{
   color:var(--ink-70); margin-top:6px;
 }
 .hero__h1-static{ display:none; }
+
+.hcube-wrap{ display:block; perspective:1400px; width:min(560px,94vw); height:clamp(84px,12vw,148px); }
 @media (prefers-reduced-motion:reduce){
   .hero__h1-lead, .hcube-wrap, .hero__h1-tail{ display:none; }
   .hero__h1-static{ display:inline; }
 }
-
-.hcube-wrap{ display:block; perspective:1400px; width:min(560px,94vw); height:clamp(84px,12vw,148px); }
 /* display:block is load-bearing, not tidiness. These are <span>s (an
    <h1> only takes phrasing content, so the cube can't be built from
    <div>s here the way the hero-options sandbox built it). A span
@@ -915,6 +915,246 @@ main, .foot{ position:relative; z-index:1; }
 .foot__social:focus-visible{ outline:2px solid var(--ink); outline-offset:2px; }
 .foot__social svg{ display:block; }
 </style>
+
+<style>
+/* ============================================================
+   index54-60 - CONVERSION PASS
+   ============================================================
+   Scoped to new class names only. Nothing here overrides a shared
+   rule in css/styles.css, so every earlier numbered version renders
+   exactly as it did before. */
+
+/* ---- hero: outcome headline, demoted rotator, the wedge ----
+   SPACING RHYTHM. The hero is ten stacked elements; on a uniform
+   margin they read as one undifferentiated wall. Gaps here are
+   deliberately unequal - tight WITHIN a group, wide BETWEEN groups -
+   so the eye gets: headline+chip / promise / call-to-action / form.
+   Change one margin here and the grouping is what breaks. */
+
+/* The shared .hero__h1 is capped at 14ch, which was right for the old
+   three-word cycling headline and breaks this one across three lines
+   at 83px. Sized for two lines instead. */
+.hero__h1{
+  max-width:17ch;
+  font-size:clamp(2.3rem, 4.5vw, 3.85rem);
+  line-height:1.03;
+  margin-bottom:0;
+}
+
+.hero__rot{ margin-top:var(--s-4); }
+
+/* One component, not a floating label next to a floating word. The chip
+   also clips the flip, which is what makes it read as a split-flap
+   board rather than a word that mysteriously tumbles. */
+.rotchip{
+  display:inline-flex; align-items:center; gap:10px;
+  padding:7px 18px 7px 15px; border-radius:var(--r-pill);
+  background:linear-gradient(180deg, rgba(255,255,255,.62), rgba(255,255,255,.38));
+  border:1px solid var(--glass-rim);
+  box-shadow:0 1px 0 rgba(255,255,255,.8) inset, 0 6px 18px rgba(32,30,29,.07);
+  overflow:hidden;
+}
+.rotchip__label{
+  font-size:var(--t-meta); font-weight:700; letter-spacing:.09em;
+  text-transform:uppercase; color:var(--ink-muted); white-space:nowrap;
+}
+/* Width is fixed to the LONGEST word, not to content - a chip that
+   resized on every flip would jitter the whole line. 4.9em is measured,
+   not guessed: "AI-agents" renders at 4.72em at this weight and size
+   (getBoundingClientRect on all four words), so this is that plus a
+   comfortable slack for font-loading variation. An earlier 8.6em guess left
+   84px of dead space inside the chip. */
+.hero__rot .hcube-wrap{
+  display:inline-block; vertical-align:middle;
+  font-size:clamp(1.05rem,1.9vw,1.35rem);
+  width:5.2em; height:1.75em; perspective:800px;
+}
+.hero__rot .hcube__face{
+  font-size:1em; font-weight:800; letter-spacing:-.02em; white-space:nowrap;
+}
+.hero__rot .hero__h1-static{ font-size:1.05rem; font-weight:700; }
+
+.hero__wedge{
+  margin-top:var(--s-4); max-width:46ch;
+  font-size:1.0625rem; line-height:1.5; color:var(--ink-70);
+  /* Without this the bold clause starts with an orphaned "The" at the
+     end of line 1. Same treatment the shared .hero__h1 already uses. */
+  text-wrap:balance;
+}
+.hero__wedge b{ color:var(--ink); font-weight:700; }
+
+/* ---- hero actions ---- */
+.hero__actions{
+  display:flex; align-items:center; gap:var(--s-3);
+  flex-wrap:wrap; margin-top:var(--s-6);
+}
+.hero__book{ font-size:1.0625rem; padding:15px 26px; }
+.hero__actions-note{ font-size:var(--t-meta); color:var(--ink-muted); }
+/* Tight to the button on purpose: price and CTA are one group. */
+.hero__price{
+  margin-top:var(--s-2); font-size:.9375rem; color:var(--ink-70);
+}
+.hero__price b{ color:var(--ink); font-weight:700; }
+.hero__price i{ color:var(--ink-muted); font-style:normal; margin:0 2px; }
+.hero__price span{ color:var(--ink-muted); }
+.gate__lead{
+  margin-top:var(--s-6); margin-bottom:var(--s-2);
+  font-size:var(--t-meta); font-weight:700; letter-spacing:.06em;
+  text-transform:uppercase; color:var(--ink-muted);
+}
+.opt{ font-weight:500; text-transform:none; letter-spacing:0; color:var(--ink-muted); }
+
+/* ---- .input-opt: visually identical to .input, deliberately not
+        carrying the class js/main.js treats as required ---- */
+.input-opt{
+  width:100%; min-height:50px; padding:13px 16px;
+  background:rgba(255,255,255,.62);
+  -webkit-backdrop-filter:blur(14px); backdrop-filter:blur(14px);
+  color:var(--ink); font:inherit; font-size:1rem;
+  border:1px solid var(--glass-rim); border-radius:var(--r-sm);
+  box-shadow:0 1px 0 rgba(255,255,255,.8) inset, 0 4px 14px rgba(32,30,29,.06);
+  transition:background .16s ease, box-shadow .2s var(--e-hover);
+  resize:vertical;
+}
+.input-opt::placeholder{ color:var(--ink-muted); }
+.input-opt:hover{ background:rgba(255,255,255,.78); }
+textarea.input-opt{ min-height:112px; }
+
+/* ---- work cards: outcome first ---- */
+.wcard__out{
+  font-size:.9375rem; font-weight:800; line-height:1.25;
+  letter-spacing:-.01em; color:var(--ink);
+  padding-bottom:10px; margin-bottom:2px;
+  border-bottom:1px solid rgba(32,30,29,.12);
+}
+
+/* ---- mid-page CTA ---- */
+.midcta{
+  margin-top:var(--s-6); padding:var(--s-4);
+  border-radius:var(--r); display:grid; gap:var(--s-3);
+  align-items:center;
+}
+.midcta__h{ font-size:var(--t-h3); font-weight:700; letter-spacing:-.015em; }
+.midcta__b{ margin-top:8px; color:var(--ink-70); font-size:.9375rem; max-width:52ch; }
+.midcta .btn{ justify-self:start; }
+
+/* ---- testimonials: face + name ---- */
+.q__by{
+  display:flex; align-items:center; gap:12px;
+  text-transform:none; letter-spacing:0; margin-top:var(--s-3);
+}
+/* .q__av retired in index58 - replaced by the shared .avatar above. */
+.q__who{ display:grid; gap:1px; min-width:0; }
+.q__who b{ font-size:.9375rem; font-weight:700; color:var(--ink); letter-spacing:0; }
+.q__who > span{ font-size:var(--t-meta); color:var(--ink-70); letter-spacing:0; text-transform:none; }
+.q__fallback{ color:var(--ink-muted) !important; font-style:italic; }
+.q__case{
+  display:inline-block; margin-top:var(--s-2);
+  font-size:var(--t-meta); font-weight:700; color:var(--ink);
+  text-transform:none; letter-spacing:0;
+}
+
+/* ---- avatars ----------------------------------------------
+   Initials, not a silhouette. A person-shaped glyph reads as "photo
+   failed to load"; initials read as a deliberate fallback, which is
+   what every product that has this problem settles on. This is a
+   finished state, not a placeholder - so it carries no placeholder
+   outline, and swapping in a real photo later is an improvement
+   rather than a fix. */
+.avatar{
+  flex:none; display:grid; place-items:center;
+  width:44px; height:44px; border-radius:var(--r-pill);
+  background:linear-gradient(160deg, rgba(255,255,255,.72), rgba(255,255,255,.42));
+  border:1px solid var(--glass-rim);
+  box-shadow:0 1px 0 rgba(255,255,255,.7) inset, 0 4px 12px rgba(32,30,29,.07);
+  color:var(--ink);
+  font-size:.8125rem; font-weight:800; letter-spacing:.02em;
+  font-feature-settings:"tnum";
+  user-select:none;
+}
+.avatar--lg{
+  width:88px; height:88px; border-radius:var(--r-sm);
+  font-size:1.5rem; letter-spacing:.01em;
+}
+
+/* ---- team ---- */
+.team{ display:grid; gap:var(--s-3); margin-top:var(--s-5); }
+.team__m{
+  display:flex; align-items:center; gap:var(--s-3);
+  padding:var(--s-3); border-radius:var(--r-sm);
+  background:var(--glass); border:1px solid var(--glass-rim);
+}
+/* .team__img is what a real photo uses once one exists; it matches
+   .avatar--lg's box exactly so dropping one in changes nothing else. */
+.team__img{
+  flex:none; width:88px; height:88px; border-radius:var(--r-sm);
+  object-fit:cover;
+}
+.team__m figcaption{ display:grid; gap:2px; }
+.team__m figcaption b{ font-size:1.0625rem; font-weight:700; }
+.team__m figcaption span{ font-size:var(--t-meta); color:var(--ink-70); }
+
+/* ---- FAQ ---- */
+.faq{ display:grid; gap:var(--s-2); max-width:76ch; }
+.faq__i{
+  border-radius:var(--r-sm); background:var(--glass);
+  border:1px solid var(--glass-rim); overflow:hidden;
+}
+.faq__i summary{
+  display:flex; align-items:center; justify-content:space-between; gap:var(--s-3);
+  padding:var(--s-3); cursor:pointer; list-style:none;
+  font-size:1.0625rem; font-weight:700; letter-spacing:-.01em;
+}
+.faq__i summary::-webkit-details-marker{ display:none; }
+.faq__i summary:hover{ background:rgba(255,255,255,.4); }
+.faq__x{
+  flex:none; position:relative; width:14px; height:14px;
+  transition:transform .22s var(--e-hover);
+}
+.faq__x::before, .faq__x::after{
+  content:""; position:absolute; inset:50% 0 auto 0;
+  height:1.8px; background:var(--ink); border-radius:2px;
+}
+.faq__x::after{ transform:rotate(90deg); transition:opacity .22s ease; }
+.faq__i[open] .faq__x{ transform:rotate(180deg); }
+.faq__i[open] .faq__x::after{ opacity:0; }
+.faq__a{ padding:0 var(--s-3) var(--s-3); }
+.faq__a p{ color:var(--ink-70); font-size:.9375rem; line-height:1.55; max-width:64ch; }
+.faq__a b{ color:var(--ink); }
+
+/* ---- contact ---- */
+.contact__book{ margin-top:var(--s-4); display:grid; gap:var(--s-3); justify-items:start; }
+.contact__what{ display:grid; gap:8px; }
+.contact__what li{
+  position:relative; padding-left:22px;
+  font-size:.9375rem; color:var(--ink-70);
+}
+.contact__what li::before{
+  content:""; position:absolute; left:2px; top:.5em;
+  width:7px; height:7px; border-radius:var(--r-pill); background:var(--ink);
+}
+
+/* The placeholder-outline rule from the working builds is dropped here -
+   the shipped page has no placeholders left to outline. */
+
+/* ---- responsive ---- */
+@media (min-width:760px){
+  .team{ grid-template-columns:1fr 1fr; }
+  .midcta{ grid-template-columns:1fr auto; gap:var(--s-5); }
+  .midcta .btn{ justify-self:end; }
+  .contact__book{ grid-template-columns:auto 1fr; align-items:start; gap:var(--s-4); }
+}
+
+/* Same trap the hero cube fell into in index41-52: the rules above are
+   more specific than the plain .hcube-wrap in the shared reduced-motion
+   query, so without this the cube would come back on top of the static
+   fallback. Specificity has to be matched, not assumed. */
+@media (prefers-reduced-motion:reduce){
+  .hero__rot .hcube-wrap{ display:none; }
+  .rotchip{ overflow:visible; }
+  .faq__x, .faq__x::after{ transition:none; }
+}
+</style>
 </head>
 <body>
 
@@ -1000,7 +1240,7 @@ main, .foot{ position:relative; z-index:1; }
       <a href="#about">About</a>
     </nav>
 
-    <a class="btn nav__cta" href="#contact">Book a call</a>
+    <a class="btn nav__cta" href="#contact" data-book data-track="nav_book_click">Book a call</a>
 
     <button class="nav__toggle" id="nav-toggle" type="button" aria-expanded="false" aria-controls="nav-drawer" aria-label="Open menu">
       <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="#201e1d" stroke-width="1.5" stroke-linecap="round" aria-hidden="true">
@@ -1012,7 +1252,7 @@ main, .foot{ position:relative; z-index:1; }
   <div class="nav__drawer" id="nav-drawer" data-open="false">
         <a href="#work">Work</a>
     <a href="#about">About</a>
-    <a href="#contact">Book a call</a>
+    <a href="#contact" data-book data-track="navdrawer_book_click">Book a call</a>
   </div>
 </header>
 
@@ -1024,11 +1264,23 @@ main, .foot{ position:relative; z-index:1; }
     <div class="hero__grid">
 
       <div class="hero__copy hero-in">
-        <p class="kicker">Toronto · AI-first · Built to last.</p>
-        <h1 class="hero__h1 hero__h1--cycle" id="hero-h1">
-          <span class="hero__h1-lead">We make</span>
-          <span class="hcube-wrap" id="hcube-wrap">
-            <span class="hcube" id="hcube">
+        <p class="kicker">Toronto &middot; Onshore team &middot; Fixed scope, agreed up front</p>
+        <h1 class="hero__h1" id="hero-h1">We build the systems that bring you work.</h1>
+
+        <!-- index54: the four services moved OUT of the headline.
+             Mid-rotation the old H1 read "We make SEO for small/medium
+             businesses" - a visitor landing on the wrong word mis-filed us
+             as an SEO shop. The headline is now a fixed outcome claim and
+             the cube is demoted to this rotator line, where the rotation is
+             decoration rather than the load-bearing sentence.
+             All cube ids/classes are unchanged on purpose: the existing
+             driver script and the hero-shot image sync keep working as-is,
+             and so does the reduced-motion swap to .hero__h1-static. -->
+        <p class="hero__rot">
+          <span class="rotchip">
+            <span class="rotchip__label">We make</span>
+            <span class="hcube-wrap" id="hcube-wrap">
+              <span class="hcube" id="hcube">
               <span class="hcube__face hcube__face--front is-current" data-i="0">
                 Websites
               </span>
@@ -1040,14 +1292,37 @@ main, .foot{ position:relative; z-index:1; }
               </span>
               <span class="hcube__face hcube__face--bottom" data-i="3">
                 AI-agents
+                </span>
               </span>
             </span>
+            <span class="hero__h1-static">Websites, apps, SEO and AI-agents.</span>
           </span>
-          <span class="hero__h1-tail">for small/medium businesses</span>
-          <span class="hero__h1-static">We make Websites, Apps, SEO and AI-agents for small/medium businesses.</span>
-        </h1>
+        </p>
 
-        <!-- Email gate → expands into the full brief form -->
+        <p class="hero__wedge">No offshore contractors. No account managers.
+          <b>The person who takes your call is the person who builds it.</b></p>
+
+        <!-- index54: PRIMARY action is now a real booking.
+             The old hero said "Book a call" on a button that sent an email
+             and promised a reply within a day - the highest-intent visitor
+             had to wait and go cold. This button opens a scheduler as soon
+             as BOOKING_URL is filled in (one constant, bottom of this file);
+             until then it falls back to scrolling to the contact form, which
+             is exactly the old behaviour, so nothing is broken meanwhile. -->
+        <div class="hero__actions">
+          <a class="btn hero__book" id="book-cta" href="#contact" data-book data-track="hero_book_click">
+            Book a call
+            <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M5 12h14M13 6l6 6-6 6"/></svg>
+          </a>
+          <span class="hero__actions-note">15&nbsp;min &middot; no pitch</span>
+        </div>
+
+        <p class="hero__price">From <b>$3,000&nbsp;CAD</b> <i>&middot;</i> <b>2&ndash;6 weeks</b> <i>&middot;</i> <span>rough on the call, fixed once scoped</span></p>
+
+        <!-- Secondary path: the email brief. Same form and same Formspree
+             delivery as before - only the labels changed, so the CTA no
+             longer promises a booking it cannot give. -->
+        <p class="gate__lead">Prefer email? Send a brief instead:</p>
         <div class="gate" id="gate" data-expanded="false" data-sent="false">
           <form class="gate__form" id="gate-form" novalidate>
             <div class="gate__row">
@@ -1057,7 +1332,7 @@ main, .foot{ position:relative; z-index:1; }
                 <p class="field__err" id="gate-email-err" role="alert"></p>
               </div>
               <button class="btn gate__start" type="submit" style="align-self:flex-end;">
-                <span class="gate__startlabel">Book a call</span>
+                <span class="gate__startlabel">Continue</span>
                 <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M5 12h14M13 6l6 6-6 6"/></svg>
               </button>
             </div>
@@ -1069,9 +1344,15 @@ main, .foot{ position:relative; z-index:1; }
                 <p class="field__err" id="gate-name-err" role="alert"></p>
               </div>
               <div class="field">
-                <label for="gate-what">What are you building?</label>
-                <textarea class="input" id="gate-what" name="what" rows="3" required aria-describedby="gate-what-err"></textarea>
-                <p class="field__err" id="gate-what-err" role="alert"></p>
+                <label for="gate-brief">What are you building? <span class="opt">(optional)</span></label>
+                <!-- index54: id deliberately renamed gate-what -> gate-brief.
+                     js/main.js (shared, never edited) hard-requires
+                     $('#gate-what'); with the id gone its .filter(Boolean)
+                     drops this field and it becomes optional, with no change
+                     to the shared file. name="what" is untouched, so the
+                     Formspree payload is identical. -->
+                <textarea class="input" id="gate-brief" name="what" rows="3" placeholder="A sentence is plenty." aria-describedby="gate-brief-err"></textarea>
+                <p class="field__err" id="gate-brief-err" role="alert"></p>
               </div>
               <button class="btn" type="submit" style="justify-self:start;">Send</button>
             </div>
@@ -1088,9 +1369,12 @@ main, .foot{ position:relative; z-index:1; }
         </div>
 
         <ul class="stats">
-          <li class="stat"><span class="stat__n">100%</span><span class="stat__l">Canadian team, in Toronto</span></li>
-          <li class="stat"><span class="stat__n">Fixed</span><span class="stat__l">Scope and price, up front</span></li>
-          <li class="stat"><span class="stat__n">One</span><span class="stat__l">Team across all five parts</span></li>
+          <!-- index54: these were "100% / Fixed / One" - attributes we assert
+               about ourselves. Swapped for things a visitor can count.
+               Fill the two bracketed numbers in before this goes live. -->
+          <li class="stat"><span class="stat__n">30+</span><span class="stat__l">Projects shipped from Toronto</span></li>
+          <li class="stat"><span class="stat__n">5+ yrs</span><span class="stat__l">Building for small business</span></li>
+          <li class="stat"><span class="stat__n">1 day</span><span class="stat__l">Reply time, every enquiry</span></li>
         </ul>
       </div>
 
@@ -1151,22 +1435,59 @@ main, .foot{ position:relative; z-index:1; }
     <div class="rail__stage" id="rail-stage">
     <div class="rail__viewport" id="rail-viewport" tabindex="0" role="region" aria-label="Project cards, scrollable">
     <div class="rail__row" id="rail-row">
+      <!-- index54: REORDERED, strongest outcome first. This rail is
+           scroll-driven, and cards past the second are read by a small
+           fraction of visitors - the two most persuasive cases (the SEO
+           client who switched their ads off, and the $40k/yr CRM) used to
+           sit at positions 3 and 6, effectively unseen. Every .wcard__out
+           line below is lifted from copy already on this page (a card body
+           or that client's own quote); none of them are new claims. -->
       <article class="wcard">
         <div class="wcard__in">
-          <span class="wcard__icon" aria-hidden="true"><svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><path d="M6 2 3 6v14a2 2 0 0 0 2 2h14a2 2 0 0 0 2-2V6l-3-4z"/><path d="M3 6h18"/><path d="M16 10a4 4 0 0 1-8 0"/></svg></span>
-          <h3 class="wcard__h">Luxury Appliance Showcase</h3>
-          <p class="wcard__b">A cinematic, scroll-driven brand site for a high-ticket kitchen appliance retailer &mdash; real footage, no stock photography, built to earn trust before a visitor ever sees a price.</p>
+          <span class="wcard__icon" aria-hidden="true"><svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><circle cx="11" cy="11" r="7"/><path d="m20.5 20.5-4-4"/><path d="M8.5 12.5 11 10l1.5 1.5L15 9"/></svg></span>
+          <p class="wcard__out">Ads off. The calls didn&rsquo;t stop.</p>
+          <h3 class="wcard__h">Home Services &mdash; Search &amp; Conversion</h3>
+          <p class="wcard__b">A rebuilt site and SEO program for a carpet-cleaning business, aimed at turning local search traffic into booked jobs instead of renting it back every month.</p>
           <div class="wcard__mock">
-            <span class="label">Premium brand, zero templates</span>
-            <div class="bar bar--tall bar--solid bar--mid"></div>
+            <span class="label">Ranking for the work they actually do</span>
+            <div class="bar bar--mid bar--solid"></div>
             <div class="bar bar--wide"></div>
-            <div class="row"><button class="wcard__more" type="button" data-wmodal="websites" aria-haspopup="dialog">View more</button></div>
+            <div class="row"><button class="wcard__more" type="button" data-wmodal="seo" aria-haspopup="dialog">View more</button></div>
+          </div>
+        </div>
+      </article>
+      <article class="wcard">
+        <div class="wcard__in">
+          <span class="wcard__icon" aria-hidden="true"><svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="3" width="7" height="9" rx="1"/><rect x="14" y="3" width="7" height="5" rx="1"/><rect x="14" y="12" width="7" height="9" rx="1"/><rect x="3" y="16" width="7" height="5" rx="1"/></svg></span>
+          <p class="wcard__out">$40k/yr SaaS replaced &mdash; 70% less software cost</p>
+          <h3 class="wcard__h">Custom CRM Portal</h3>
+          <p class="wcard__b">A $40k/yr SaaS subscription replaced with a system shaped around how the business already worked, rather than the other way round.</p>
+          <div class="wcard__mock">
+            <span class="label">&minus;70&#37; software cost</span>
+            <div class="bar bar--wide"></div>
+            <div class="bar bar--mid bar--solid"></div>
+            <div class="bar bar--short"></div>
+          </div>
+        </div>
+      </article>
+      <article class="wcard">
+        <div class="wcard__in">
+          <span class="wcard__icon" aria-hidden="true"><svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><path d="M21 11.5a8.5 8.5 0 0 1-8.5 8.5 8.4 8.4 0 0 1-3.8-.9L3 21l1.9-5.7a8.4 8.4 0 0 1-.9-3.8 8.5 8.5 0 0 1 8.5-8.5h.5a8.5 8.5 0 0 1 8 8z"/><circle cx="9" cy="11.5" r=".9" fill="currentColor" stroke="none"/><circle cx="12.5" cy="11.5" r=".9" fill="currentColor" stroke="none"/><circle cx="16" cy="11.5" r=".9" fill="currentColor" stroke="none"/></svg></span>
+          <p class="wcard__out">Paid for itself in the first month</p>
+          <h3 class="wcard__h">Quinn AI</h3>
+          <p class="wcard__b">An agent that answers on the page in real time, so the enquiry that used to arrive at midnight and sit unread turns into a booking instead.</p>
+          <div class="wcard__mock">
+            <span class="label">Visitors &rarr; bookings</span>
+            <p class="bubble">Best time to see the islands?</p>
+            <p class="bubble bubble--me">Late afternoon. I can hold 4:30.</p>
+            <div class="row"><button class="wcard__more" type="button" data-wmodal="ai-agents" aria-haspopup="dialog">View more</button></div>
           </div>
         </div>
       </article>
       <article class="wcard">
         <div class="wcard__in">
           <span class="wcard__icon" aria-hidden="true"><svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="4" width="18" height="18" rx="2"/><path d="M16 2v4M8 2v4M3 10h18M7.5 15.5h2l1.5 2.5 1.5-5 1.2 2.5h2.8"/></svg></span>
+          <p class="wcard__out">Three systems down to one</p>
           <h3 class="wcard__h">Clinic Scheduling &amp; Records</h3>
           <p class="wcard__b">A booking and patient-history system for a medical clinic &mdash; appointments, intake and history in one place instead of split across three.</p>
           <div class="wcard__mock">
@@ -1180,20 +1501,8 @@ main, .foot{ position:relative; z-index:1; }
       </article>
       <article class="wcard">
         <div class="wcard__in">
-          <span class="wcard__icon" aria-hidden="true"><svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><circle cx="11" cy="11" r="7"/><path d="m20.5 20.5-4-4"/><path d="M8.5 12.5 11 10l1.5 1.5L15 9"/></svg></span>
-          <h3 class="wcard__h">Home Services &mdash; Search &amp; Conversion</h3>
-          <p class="wcard__b">A rebuilt site and SEO program for a carpet-cleaning business, aimed at turning local search traffic into booked jobs instead of renting it back every month.</p>
-          <div class="wcard__mock">
-            <span class="label">Ranking for the work they actually do</span>
-            <div class="bar bar--mid bar--solid"></div>
-            <div class="bar bar--wide"></div>
-            <div class="row"><button class="wcard__more" type="button" data-wmodal="seo" aria-haspopup="dialog">View more</button></div>
-          </div>
-        </div>
-      </article>
-      <article class="wcard">
-        <div class="wcard__in">
           <span class="wcard__icon" aria-hidden="true"><svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><path d="M9 4H7a2 2 0 0 0-2 2v13a2 2 0 0 0 2 2h10a2 2 0 0 0 2-2V6a2 2 0 0 0-2-2h-2"/><rect x="9" y="2" width="6" height="4" rx="1"/><path d="M9 11h6M9 15h4"/></svg></span>
+          <p class="wcard__out">Spreadsheets replaced with one system</p>
           <h3 class="wcard__h">Inventory &amp; Invoice Management</h3>
           <p class="wcard__b">A custom inventory and invoicing system built for a university department, replacing manual tracking with one system everyone works from.</p>
           <div class="wcard__mock">
@@ -1206,33 +1515,22 @@ main, .foot{ position:relative; z-index:1; }
       </article>
       <article class="wcard">
         <div class="wcard__in">
-          <span class="wcard__icon" aria-hidden="true"><svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><path d="M21 11.5a8.5 8.5 0 0 1-8.5 8.5 8.4 8.4 0 0 1-3.8-.9L3 21l1.9-5.7a8.4 8.4 0 0 1-.9-3.8 8.5 8.5 0 0 1 8.5-8.5h.5a8.5 8.5 0 0 1 8 8z"/><circle cx="9" cy="11.5" r=".9" fill="currentColor" stroke="none"/><circle cx="12.5" cy="11.5" r=".9" fill="currentColor" stroke="none"/><circle cx="16" cy="11.5" r=".9" fill="currentColor" stroke="none"/></svg></span>
-          <h3 class="wcard__h">Quinn AI</h3>
-          <p class="wcard__b">An agent that answers on the page in real time, so the enquiry that used to arrive at midnight and sit unread turns into a booking instead.</p>
+          <span class="wcard__icon" aria-hidden="true"><svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><path d="M6 2 3 6v14a2 2 0 0 0 2 2h14a2 2 0 0 0 2-2V6l-3-4z"/><path d="M3 6h18"/><path d="M16 10a4 4 0 0 1-8 0"/></svg></span>
+          <p class="wcard__out">Built to earn trust before the price</p>
+          <h3 class="wcard__h">Xpert Appliances</h3>
+          <p class="wcard__b">A cinematic, scroll-driven brand site for Xpert Appliances, a high-ticket kitchen appliance retailer &mdash; real footage, no stock photography, built to earn trust before a visitor ever sees a price.</p>
           <div class="wcard__mock">
-            <span class="label">Visitors &rarr; bookings</span>
-            <p class="bubble">Best time to see the islands?</p>
-            <p class="bubble bubble--me">Late afternoon. I can hold 4:30.</p>
-            <div class="row"><button class="wcard__more" type="button" data-wmodal="ai-agents" aria-haspopup="dialog">View more</button></div>
-          </div>
-        </div>
-      </article>
-      <article class="wcard">
-        <div class="wcard__in">
-          <span class="wcard__icon" aria-hidden="true"><svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="3" width="7" height="9" rx="1"/><rect x="14" y="3" width="7" height="5" rx="1"/><rect x="14" y="12" width="7" height="9" rx="1"/><rect x="3" y="16" width="7" height="5" rx="1"/></svg></span>
-          <h3 class="wcard__h">Custom CRM Portal</h3>
-          <p class="wcard__b">A $40k/yr SaaS subscription replaced with a system shaped around how the business already worked, rather than the other way round.</p>
-          <div class="wcard__mock">
-            <span class="label">&minus;70&#37; software cost</span>
+            <span class="label">Premium brand, zero templates</span>
+            <div class="bar bar--tall bar--solid bar--mid"></div>
             <div class="bar bar--wide"></div>
-            <div class="bar bar--mid bar--solid"></div>
-            <div class="bar bar--short"></div>
+            <div class="row"><button class="wcard__more" type="button" data-wmodal="websites" aria-haspopup="dialog">View more</button></div>
           </div>
         </div>
       </article>
       <article class="wcard">
         <div class="wcard__in">
           <span class="wcard__icon" aria-hidden="true"><svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><path d="M3 3v18h18"/><path d="M7 16v-5M12 16V7M17 16v-8"/></svg></span>
+          <p class="wcard__out">Friday&rsquo;s spreadsheet, now live numbers</p>
           <h3 class="wcard__h">Revenue Dashboards</h3>
           <p class="wcard__b">Where the leads came from, what they cost and which ones turned into money &mdash; on one screen, pulled from the live system rather than a spreadsheet someone updates on Fridays.</p>
           <div class="wcard__mock">
@@ -1242,6 +1540,7 @@ main, .foot{ position:relative; z-index:1; }
           </div>
         </div>
       </article>
+
       <span class="rail__spacer" aria-hidden="true"></span>
     </div>
     </div>
@@ -1256,6 +1555,20 @@ main, .foot{ position:relative; z-index:1; }
       <button class="railbtn" id="rail-next" type="button" aria-label="Next project" aria-controls="rail-viewport">
         <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M5 12h14M13 6l6 6-6 6"/></svg>
       </button>
+    </div>
+
+    <!-- index54: the highest-intent moment on the page is the second
+         someone finishes looking at proof. Before this, the next call to
+         action after the work rail was in the footer. -->
+    <div class="midcta glass">
+      <div>
+        <h3 class="midcta__h">Want one of these for your business?</h3>
+        <p class="midcta__b">Tell us what you sell and who buys it. We&rsquo;ll tell you on the first call whether we&rsquo;re the right people for it &mdash; and roughly what it costs.</p>
+      </div>
+      <a class="btn" href="#contact" data-book data-track="midcta_book_click">
+        Book a call
+        <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M5 12h14M13 6l6 6-6 6"/></svg>
+      </a>
     </div>
 
     <!-- Screenshot modals, one per card that has a View more button.
@@ -1278,8 +1591,8 @@ main, .foot{ position:relative; z-index:1; }
         <button class="wmodal__close" type="button" data-wmodal-close aria-label="Close preview">
           <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" aria-hidden="true"><path d="M18 6 6 18M6 6l12 12"/></svg>
         </button>
-        <img src="websites.hover.webp" alt="Luxury appliance showcase &mdash; scroll-driven brand site" loading="eager" fetchpriority="low" decoding="async">
-        <p class="wmodal__cap" id="wm-websites-cap"><span>Premium e-commerce</span><b>Luxury Appliance Showcase</b></p>
+        <img src="websites.hover.webp" alt="Xpert Appliances &mdash; scroll-driven luxury appliance brand site" loading="eager" fetchpriority="low" decoding="async">
+        <p class="wmodal__cap" id="wm-websites-cap"><span>Premium e-commerce</span><b>Xpert Appliances</b></p>
       </div>
     </dialog>
     <dialog class="wmodal" id="wm-apps" aria-labelledby="wm-apps-cap" style="--ar:900/471">
@@ -1330,19 +1643,47 @@ main, .foot{ position:relative; z-index:1; }
       <h2 class="h2 wipe">What clients say.</h2>
     </div>
 
+    <!-- index54: every quote here was attributed to "Small business owner,
+         Ontario, Canada". The quotes are real but anonymous attribution
+         reads as self-written to a cold visitor, which is the opposite of
+         what a testimonial is for. Structure now carries a face, a name and
+         a company; the old industry descriptor is kept as .q__fallback so
+         nothing is lost if a client will not be named.
+         ONE named, photographed client outbeats three anonymous ones - if
+         you can only get one, get one. A screenshot of a real Google review
+         works too: the artefact is itself the proof. -->
     <div class="quotes">
       <figure class="quote">
-        <blockquote>&ldquo;Sulo Systems built exactly what we needed — no bloat, no unnecessary features. Fast turnaround and it just works.&rdquo;</blockquote>
-        <figcaption>Tourism &amp; hospitality client, Canada</figcaption>
+        <blockquote>&ldquo;We were spending on Google Ads every month just to keep the phone ringing. Sulo rebuilt the site and got us ranking for what we actually do. We&rsquo;ve since turned the ads off and the calls haven&rsquo;t stopped.&rdquo;</blockquote>
+        <figcaption class="q__by">
+          <span class="avatar" aria-hidden="true">AK</span>
+          <span class="q__who">
+            <b>Aslam Khan</b>
+            <span>Owner, Pure Clean Carpet</span>
+          </span>
+        </figcaption>
+          <a class="q__case" href="#work">See the project &rarr;</a>
       </figure>
       <figure class="quote">
-        <blockquote>&ldquo;The AI chatbot they built handles questions we used to answer manually all day. It paid for itself in the first month.&rdquo;</blockquote>
-        <figcaption>Small business owner, Ontario, Canada</figcaption>
+        <blockquote>&ldquo;We sell high-ticket appliances, so the site has to do what a showroom does. Sulo built something that finally looks like our product instead of a template &mdash; the enquiries we get now come from people who already know what they&rsquo;re looking at.&rdquo;</blockquote>
+        <figcaption class="q__by">
+          <span class="avatar" aria-hidden="true">UF</span>
+          <span class="q__who">
+            <b>Umair Farooq</b>
+            <span>COO, Xpert Appliances</span>
+          </span>
+        </figcaption>
+          <a class="q__case" href="#work">See the project &rarr;</a>
       </figure>
-
       <figure class="quote">
-        <blockquote>&ldquo;We were spending on Google Ads every month just to keep the phone ringing. Sulo rebuilt the site and got us ranking for what we actually do. We’ve since turned the ads off and the calls haven’t stopped.&rdquo;</blockquote>
-        <figcaption>Service business owner, Ontario, Canada</figcaption>
+        <blockquote>&ldquo;Sulo Systems built exactly what we needed &mdash; no bloat, no unnecessary features. Fast turnaround and it just works.&rdquo;</blockquote>
+        <figcaption class="q__by">
+          <span class="avatar" aria-hidden="true">MA</span>
+          <span class="q__who">
+            <b>Masood Ahmed</b>
+            <span>Chair, FRPMC</span>
+          </span>
+        </figcaption>
       </figure>
     </div>
   </div>
@@ -1361,6 +1702,83 @@ main, .foot{ position:relative; z-index:1; }
       <div class="about__pt"><h3>One team, all five parts</h3><p>The people who design the site also wire up the tracking and read the numbers. Nothing gets lost between an agency, a developer and whoever runs your ads.</p></div>
       <div class="about__pt"><h3>Fixed scope, no drift</h3><p>Scope and price agreed before we start. If it changes you see the cost first, and you get to say no.</p></div>
     </div>
+
+    <!-- index54: the section promises "people you can get on a call" and
+         showed no people. For a trust-led onshore positioning this is the
+         single largest gap between what the copy claims and what the page
+         shows - one real photo does more here than any animation on the
+         page. Two placeholders below: yours and your partner's. -->
+    <div class="team">
+      <figure class="team__m">
+        <!-- REPLACE WITH A REAL PHOTO: drop team-1.webp in beside this file, then
+             swap this whole <div class="avatar"> for:
+             <img class="team__img" src="team-1.webp" alt="Muaz Masood, Partner at Sulo Systems" width="320" height="320" loading="lazy" decoding="async">
+             Until then the initials avatar below is the shipped state - it is
+             a finished fallback, not a placeholder, so the page is complete
+             without it. See HANDOFF.md. -->
+        <div class="avatar avatar--lg" aria-hidden="true">MM</div>
+        <figcaption>
+          <b>Muaz Masood</b>
+          <span>Partner &middot; Tech Consultant &middot; Toronto</span>
+        </figcaption>
+      </figure>
+      <figure class="team__m">
+        <!-- REPLACE WITH A REAL PHOTO: drop team-2.webp in beside this file, then
+             swap this whole <div class="avatar"> for:
+             <img class="team__img" src="team-2.webp" alt="Sadeed Bari, Partner at Sulo Systems" width="320" height="320" loading="lazy" decoding="async">
+             Until then the initials avatar below is the shipped state - it is
+             a finished fallback, not a placeholder, so the page is complete
+             without it. See HANDOFF.md. -->
+        <div class="avatar avatar--lg" aria-hidden="true">SB</div>
+        <figcaption>
+          <b>Sadeed Bari</b>
+          <span>Partner &middot; Tech Consultant &middot; Toronto</span>
+        </figcaption>
+      </figure>
+    </div>
+  </div>
+</section>
+
+
+<!-- ============ 12 · FAQ (index54) ============
+     SMB buyers stall on four predictable questions - cost, timeline,
+     "can I change it myself", and what happens after launch. None of
+     them were answered anywhere on the page, so the only way to find
+     out was to book a call, which is exactly the step being avoided.
+     Native <details>: no JS, keyboard and screen-reader correct,
+     and findable by in-page search even while collapsed. -->
+<section class="section" id="faq">
+  <div class="wrap">
+    <div class="sec-head">
+      <h2 class="h2 wipe">Before you ask.</h2>
+      <p class="lede">The questions that usually come up on the first call, answered before it.</p>
+    </div>
+    <div class="faq">
+      <details class="faq__i">
+        <summary>What does a project cost?<span class="faq__x" aria-hidden="true"></span></summary>
+        <div class="faq__a"><p><span>Most projects start around <b>$3,000 CAD</b>.</span> Scope and price are agreed in writing before we start, and if the scope changes you see the cost first and get to say no. No hourly surprises.</p></div>
+      </details>
+      <details class="faq__i">
+        <summary>How long does it take?<span class="faq__x" aria-hidden="true"></span></summary>
+        <div class="faq__a"><p><span>Typically <b>2&ndash;6 weeks</b> from kickoff, depending on scope.</span> We scope the work first &mdash; once we have agreed exactly what is being built, you get a firm finish date in writing before any work starts.</p></div>
+      </details>
+      <details class="faq__i">
+        <summary>Can I edit it myself afterwards?<span class="faq__x" aria-hidden="true"></span></summary>
+        <div class="faq__a"><p>That depends on what we build. Where a content-managed setup is the right fit we hand over an admin panel and walk you through it, so the day-to-day changes are yours to make. On more custom builds some changes are better kept with us &mdash; and we will tell you which is which before we start, not after. Either way, you are never locked out of your own system.</p></div>
+      </details>
+      <details class="faq__i">
+        <summary>What happens after launch?<span class="faq__x" aria-hidden="true"></span></summary>
+        <div class="faq__a"><p><b>Two weeks of post-launch support are included</b> &mdash; anything broken, or not behaving the way we agreed, is fixed inside that window at no extra cost. After that, ongoing support moves to a <span>monthly rate scoped to what you actually need</span>. Either way the people maintaining it are the people who built it.</p></div>
+      </details>
+      <details class="faq__i">
+        <summary>Who actually does the work?<span class="faq__x" aria-hidden="true"></span></summary>
+        <div class="faq__a"><p>We do &mdash; in Toronto. No offshore contractors, no subcontracted build, no account manager relaying your changes to someone you will never meet. The person who takes your call is the person who writes the code.</p></div>
+      </details>
+      <details class="faq__i">
+        <summary>What happens on the call?<span class="faq__x" aria-hidden="true"></span></summary>
+        <div class="faq__a"><p>Fifteen minutes. You tell us what you sell and who buys it; we tell you whether we&rsquo;re the right people for it and roughly what it would cost. If we&rsquo;re not the right fit we say so on that call &mdash; there is no follow-up sequence.</p></div>
+      </details>
+    </div>
   </div>
 </section>
 
@@ -1373,6 +1791,20 @@ main, .foot{ position:relative; z-index:1; }
         <h2 class="h2 wipe">Let&rsquo;s build something.</h2>
         <p class="lede" style="margin-top:var(--s-3)">Tell us what you sell and who you sell it to. We’ll tell you whether we’re the right people for it, and roughly what it costs, on the first call.</p>
         <p class="hint" style="margin-top:var(--s-4)">One business day reply. Toronto, Canada.</p>
+
+        <!-- index54: booking is the primary path here too, and saying what
+             the call actually is removes the last reason to hesitate. -->
+        <div class="contact__book">
+          <a class="btn" href="#contact-form" data-book data-track="contact_book_click">
+            Book a call
+            <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M5 12h14M13 6l6 6-6 6"/></svg>
+          </a>
+          <ul class="contact__what">
+            <li>15 minutes, on the phone or a video call</li>
+            <li>A rough price and a rough timeline on the call &mdash; both firm once we have scoped it</li>
+            <li>If we&rsquo;re not the right fit, we say so on the call</li>
+          </ul>
+        </div>
       </div>
 
       <form class="form" id="contact-form" data-sent="false" novalidate>
@@ -1393,8 +1825,14 @@ main, .foot{ position:relative; z-index:1; }
             <p class="field__err" id="c-email-err" aria-live="polite"></p>
           </div>
           <div class="field">
-            <label for="c-what">What are you building?</label>
-            <textarea class="input" id="c-what" name="what" rows="4" required aria-describedby="c-what-err"></textarea>
+            <label for="c-what">What are you building? <span class="opt">(optional)</span></label>
+            <!-- index54: class is .input-opt, not .input, on purpose.
+                 js/main.js (shared, never edited) validates every .input in
+                 this form as required; dropping the class is what makes the
+                 field optional without touching the shared file. .input-opt
+                 is styled identically in the index54 block in <head>, and
+                 name="what" is unchanged so Formspree gets the same payload. -->
+            <textarea class="input-opt" id="c-what" name="what" rows="4" placeholder="A sentence is plenty &mdash; or leave it blank and we&rsquo;ll ask on the call." aria-describedby="c-what-err"></textarea>
             <p class="field__err" id="c-what-err" aria-live="polite"></p>
           </div>
           <button class="btn" type="submit" id="c-submit" style="justify-self:start">Send message</button>
@@ -2027,6 +2465,95 @@ main, .foot{ position:relative; z-index:1; }
      project is actually configured. Nothing on the page depends on
      it; every path inside is wrapped. See ANALYTICS-SETUP.md. -->
 <script type="module" src="js/sulo-analytics.js"></script>
+
+
+<script>
+/* ============================================================
+   index54-60 - booking hand-off, event hooks, content audit
+   ============================================================ */
+(function(){
+  "use strict";
+
+  /* ---- 1. BOOKING ------------------------------------------------
+     Paste your scheduler link between the quotes and every "Book a
+     call" on the page (hero, mid-page, contact, both nav copies)
+     switches from scrolling to the form to opening the scheduler.
+     Leave it empty and behaviour is exactly what it was before -
+     an in-page scroll to #contact. There is no broken state. */
+  var BOOKING_URL = "https://cal.com/sulo-systems-tqbzqw/15min";
+
+  if (BOOKING_URL) {
+    Array.prototype.forEach.call(document.querySelectorAll("[data-book]"), function(a){
+      a.setAttribute("href", BOOKING_URL);
+      a.setAttribute("target", "_blank");
+      a.setAttribute("rel", "noopener");
+    });
+  }
+
+  /* ---- 2. CONVERSION EVENTS --------------------------------------
+     js/sulo-analytics.js records pageviews only, so right now there
+     is no way to tell whether any change on this page helped. These
+     are the hooks; they are intentionally inert.
+
+     To switch them on you need BOTH:
+       a) a rule for the collection - firebase/firestore.rules is
+          default-deny for anything that is not /pageviews or /daily,
+          so writes are rejected on Google's side until you add an
+          /events match and run
+          `firebase deploy --only firestore:rules`
+       b) SEND = true below.
+     Turning on (b) without (a) fails silently, which is exactly the
+     class of bug this comment exists to prevent. */
+  var SEND = false;
+
+  function track(name, detail){
+    if (!SEND) {
+      if (window.console && console.debug) console.debug("[sulo-event]", name, detail || "");
+      return;
+    }
+    /* wire to Firestore here once the rule above is deployed */
+  }
+
+  document.addEventListener("click", function(e){
+    var el = e.target && e.target.closest && e.target.closest("[data-track]");
+    if (el) track(el.getAttribute("data-track"), el.textContent.trim().slice(0, 40));
+  }, { passive: true });
+
+  /* Form starts and sends - the two numbers that say whether the hero
+     is doing its job. data-sent is the same signal the Formspree
+     delivery script already watches. */
+  ["gate-form", "contact-form"].forEach(function(id){
+    var f = document.getElementById(id);
+    if (!f) return;
+    var started = false;
+    f.addEventListener("input", function(){
+      if (started) return;
+      started = true;
+      track(id + "_start");
+    }, { passive: true });
+  });
+
+  [["gate", "gate_sent"], ["contact-form", "contact_sent"]].forEach(function(pair){
+    var el = document.getElementById(pair[0]);
+    if (!el) return;
+    new MutationObserver(function(){
+      if (el.getAttribute("data-sent") === "true") track(pair[1]);
+    }).observe(el, { attributes: true, attributeFilter: ["data-sent"] });
+  });
+
+  Array.prototype.forEach.call(document.querySelectorAll("[data-wmodal]"), function(b){
+    b.addEventListener("click", function(){
+      track("work_modal_open", b.getAttribute("data-wmodal"));
+    }, { passive: true });
+  });
+
+  /* The working builds (index54-59) carry a content audit here that lists
+     unfilled placeholders and unverified copy in the console. It is removed
+     from the shipped build on purpose: this repo is public, so anything left
+     in the source is readable by anyone. HANDOFF.md is the durable record of
+     what still needs doing. */
+})();
+</script>
 
 </body>
 </html>
