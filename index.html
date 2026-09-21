@@ -389,9 +389,22 @@
   font-size:clamp(1.3rem,2.6vw,1.9rem); letter-spacing:-.01em; line-height:1.2;
   color:var(--ink-70); margin-bottom:6px;
 }
+/* Same treatment as .hero__h1-lead, mirrored below the cube instead
+   of above it (index48: "We make" / [cube] / "for small/medium
+   businesses"). Kept as its own rule rather than reusing
+   .hero__h1-lead on a second span so the two can carry independent
+   spacing — this one needs margin-TOP to clear the cube, not
+   margin-bottom, and .hero__h1-lead's existing margin-bottom would
+   have landed in the wrong place (pushing the gate form down) if
+   reused here as-is. */
+.hero__h1-tail{
+  display:block; font-family:'Archivo',sans-serif; font-weight:600;
+  font-size:clamp(1.3rem,2.6vw,1.9rem); letter-spacing:-.01em; line-height:1.2;
+  color:var(--ink-70); margin-top:6px;
+}
 .hero__h1-static{ display:none; }
 @media (prefers-reduced-motion:reduce){
-  .hero__h1-lead, .hcube-wrap{ display:none; }
+  .hero__h1-lead, .hcube-wrap, .hero__h1-tail{ display:none; }
   .hero__h1-static{ display:inline; }
 }
 
@@ -477,9 +490,32 @@
    again. The scroll LOGIC was not touched between index42 and
    index44 — the spring integrator is byte-identical, verified by
    diff — so the cause had to be in what the rail now has to move,
-   and a rule-by-rule diff of every .rail*/.wcard* declaration
-   between the two versions found exactly one difference: these
-   seven cards had gained a live backdrop-filter.
+   and a rule-by-rule diff of every .rail- and .wcard-prefixed
+   declaration between the two versions found exactly one
+   difference: these seven cards had gained a live backdrop-filter.
+
+   FOUND WHILE VERIFYING INDEX49: that "rail- and wcard-prefixed"
+   phrase used to be written with wildcard notation instead of
+   words — .rail-star-slash-.wcard-star, i.e. containing the literal
+   two characters that close a CSS comment. That's the exact same
+   category of mistake documented in the JS delivery-script comment
+   further down this file, except here it silently broke CSS
+   instead of throwing a JS error — the comment-close landed here,
+   mid-paragraph, and stayed unclosed until the genuine "than
+   assumed. " at the very end of this note, so the browser spent
+   this whole comment's remaining text trying to parse it as actual
+   CSS. CSS parse errors are silent by spec, so nothing logged, and
+   the recovery point — where the browser gives up and resumes
+   normal parsing — depends on the exact bytes in between, which is
+   why lengthening the DotField paragraph during the index49 edit
+   (comment-neutral in isolation) was what actually pushed the
+   swallowed span far enough to eat .hero-shot__body img along with
+   it, breaking the screenshot preview beside the heading. Confirmed
+   via document.styleSheets: that rule and .artframe__glass.hero-shot
+   were entirely absent from the parsed CSSOM, not merely
+   overridden. Present since index44; likely silently costing
+   something in every version between here and there too, just
+   never on a rule anyone happened to be looking at when it mattered.
 
    That combination is specifically bad, for a reason that is easy to
    miss because the property looks as cheap as a background:
@@ -491,10 +527,12 @@
      frame. Seven cards at 420x415 with a 24px blur is a large amount
      of per-frame filtering, and each one is additionally promoted to
      its own compositing layer inside the very subtree being
-     translated. The backdrop is not even static: the DotField canvas
-     animates continuously behind <main>, and .work-bg holds four
-     images carrying their own filter, so the source pixels change
-     too.
+     translated. At the time this was written the backdrop wasn't
+     even static: a fixed DotField canvas animated continuously
+     behind <main> (removed since, in index49 — "remove the dots
+     background completely"), and .work-bg still holds four images
+     carrying their own filter, so the source pixels still change
+     under a moving card even with the canvas gone.
 
    The honest note on evidence: this could not be reproduced by
    measurement locally. Headless Chrome paces requestAnimationFrame
@@ -503,9 +541,11 @@
    noisier run-to-run (388ms vs 445ms for the same condition) than
    the difference between conditions. The reasoning above is
    elimination plus a well-understood mechanism, not a local
-   benchmark — so if the scroll still feels wrong, say so and the
-   next thing to try is pausing the DotField while the rail is
-   pinned.
+   benchmark — so if the scroll still feels wrong, say so. The
+   original next-thing-to-try here was pausing the DotField canvas
+   while the rail is pinned; that's moot now that the canvas is
+   gone (index49), so the next lever left is .work-bg's own filter
+   on its four images.
 
    What is lost visually: very little, and that is the point. Glass
    only reads as glass when there is tonal variation behind it to
@@ -742,18 +782,22 @@
 
 
 <style>
-/* ---------- dot field layer ---------- */
-.dotfield{ position:fixed; inset:0; z-index:0; pointer-events:none; }
-.dotfield canvas{
-  position:absolute; inset:0; width:100%; height:100%; display:block;
-}
-/* content above the field; the nav keeps its own higher z-index */
+/* Dot field background layer REMOVED (index49) — "remove the dots
+   background completely. plain white background is fine." Deleted
+   here: this CSS block, the #dotfield/#dotfield-canvas markup right
+   after <body>, and the vanilla-port JS driver near the end of the
+   file (search index48.html for "DOT FIELD" if any of it is ever
+   wanted back).
+
+   main, .foot{ position:relative; z-index:1 } is kept even though
+   its only original purpose was layering content above the canvas
+   (z-index:0) — removing it too was untested and unrelated to what
+   was asked, and a positioned ancestor with no z-index:0 sibling
+   left to clear is harmless. Body's own fixed luminance gradient
+   (see css/styles.css) is what's left providing the page's
+   background now — flat, no motion, no canvas, nothing to pause on
+   scroll or tab-hide any more. */
 main, .foot{ position:relative; z-index:1; }
-@media (max-width:820px){
-  /* no pointer to track, and a full-viewport rAF canvas is the last
-     thing a phone needs — the body gradient carries the ground alone */
-  .dotfield{ display:none; }
-}
 </style>
 
 <style>
@@ -800,36 +844,6 @@ main, .foot{ position:relative; z-index:1; }
 </style>
 </head>
 <body>
-
-<!-- ============ DOT FIELD — fixed background layer ============
-     Vanilla port of the React Bits <DotField /> component. Three
-     deliberate changes for this stack, not a literal transcription:
-
-       1. FIXED, NOT IN-FLOW. The React version measures its parent and
-          converts the pointer with `e.pageX - offsetX`, which is right
-          for a component inside a scrolling container. This layer is
-          position:fixed over the viewport, so it uses clientX/clientY
-          directly — with the pageX math the field would slide out from
-          under the cursor the moment you scrolled.
-       2. BLACK, NOT PURPLE. The component defaults to purple dots
-          (rgba(168,85,247,.35)). This design system is explicit that
-          there is no chroma accent (accent === ink), so dots are
-          black at low alpha instead. The component's cursor glow
-          (an SVG radial gradient tracking the pointer) was removed
-          entirely, along with the <svg> element and glow-driving JS
-          it needed — dots only.
-       3. REDUCED MOTION draws one static frame rather than bailing out
-          — a canvas that was never drawn is just a blank rectangle, so
-          the texture stays and only the motion stops. It also pauses
-          on tab-hide, like the hero cycle.
-
-     Sits behind everything (z-index:0, pointer-events:none) and above
-     <body>'s own fixed luminance gradient, so the glass panels have
-     real texture to refract instead of flat colour. -->
-<div class="dotfield" id="dotfield" aria-hidden="true">
-  <canvas id="dotfield-canvas"></canvas>
-</div>
-
 
 <!-- ============================================================
      LIQUID GLASS — the WebGL effect from liquid-glass.ybouane.com,
@@ -939,7 +953,7 @@ main, .foot{ position:relative; z-index:1; }
       <div class="hero__copy hero-in">
         <p class="kicker">Toronto · AI-first · Built to last.</p>
         <h1 class="hero__h1 hero__h1--cycle" id="hero-h1">
-          <span class="hero__h1-lead">We increase your revenue through</span>
+          <span class="hero__h1-lead">We make</span>
           <span class="hcube-wrap" id="hcube-wrap">
             <span class="hcube" id="hcube">
               <span class="hcube__face hcube__face--front is-current" data-i="0">
@@ -956,7 +970,8 @@ main, .foot{ position:relative; z-index:1; }
               </span>
             </span>
           </span>
-          <span class="hero__h1-static">We increase your revenue through Websites, Apps, SEO and AI-agents.</span>
+          <span class="hero__h1-tail">for small/medium businesses</span>
+          <span class="hero__h1-static">We make Websites, Apps, SEO and AI-agents for small/medium businesses.</span>
         </h1>
 
         <!-- Email gate → expands into the full brief form -->
@@ -969,7 +984,7 @@ main, .foot{ position:relative; z-index:1; }
                 <p class="field__err" id="gate-email-err" role="alert"></p>
               </div>
               <button class="btn gate__start" type="submit" style="align-self:flex-end;">
-                <span class="gate__startlabel">Start</span>
+                <span class="gate__startlabel">Book a call</span>
                 <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M5 12h14M13 6l6 6-6 6"/></svg>
               </button>
             </div>
@@ -1240,7 +1255,6 @@ main, .foot{ position:relative; z-index:1; }
   <div class="wrap">
     <div class="sec-head">
       <h2 class="h2 wipe">What clients say.</h2>
-      <p class="lede">Attributed by industry. We don’t publish client names or logos without written permission, and we haven’t asked for it.</p>
     </div>
 
     <div class="quotes">
@@ -1760,176 +1774,6 @@ main, .foot{ position:relative; z-index:1; }
   });
 
   start();
-})();
-</script>
-
-
-<script>
-/* ============================================================
-   DOT FIELD — vanilla port (see the markup comment in <body>)
-   ============================================================ */
-(function(){
-  "use strict";
-  var TWO_PI = Math.PI * 2;
-  var OPTS = {
-    dotRadius: 2.4,          /* was 1.5 — bigger dots, more obvious as a texture */
-    dotSpacing: 14,
-    cursorRadius: 500,
-    bulgeStrength: 67,
-    gradientFrom: 'rgba(0,0,0,0.55)',   /* was 0.30 — darker, still black not ink */
-    gradientTo:   'rgba(0,0,0,0.30)'    /* was 0.12 */
-  };
-
-  var wrap   = document.getElementById('dotfield');
-  var canvas = document.getElementById('dotfield-canvas');
-  if (!wrap || !canvas) return;
-
-  var ctx = canvas.getContext('2d', { alpha: true });
-  var dpr = Math.min(window.devicePixelRatio || 1, 2);
-  var reduce = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
-
-  var dots = [], size = { w:0, h:0 };
-  var mouse = { x:-9999, y:-9999, prevX:-9999, prevY:-9999, speed:0 };
-  var engagement = 0, raf = null, speedTimer = null;   /* still drives the dot bulge below */
-  var grad = null;               /* cached; see the comment in resize() */
-  var idleFrames = 0;
-  var IDLE_LIMIT = 90;           /* ~1.5s of nothing moving before pausing rAF */
-  var MAX_DOTS = 9000;           /* see the comment in buildDots() */
-
-  /* MAX_DOTS caps the grid on large/high-DPI screens: at the stock 14px
-     spacing, a 1440p viewport is already ~15,000 dots redrawn every
-     frame forever, and 4K is ~34,000 — both continuous, unconditional
-     costs regardless of whether the visitor's mouse ever moves. Rather
-     than shrink dotSpacing (which changes the look) this only widens
-     the EFFECTIVE spacing once the natural grid would exceed the
-     budget, so a normal laptop screen renders at the authored density
-     and only very large viewports get a coarser, still-correct grid. */
-  function buildDots(w, h){
-    var step = OPTS.dotRadius + OPTS.dotSpacing;
-    var cols = Math.floor(w / step), rows = Math.floor(h / step);
-    if (cols * rows > MAX_DOTS){
-      var scale = Math.sqrt((cols * rows) / MAX_DOTS);
-      step *= scale;
-      cols = Math.floor(w / step); rows = Math.floor(h / step);
-    }
-    var padX = (w % step) / 2, padY = (h % step) / 2;
-    var out = new Array(rows * cols), i = 0;
-    for (var r = 0; r < rows; r++){
-      for (var c = 0; c < cols; c++){
-        var ax = padX + c * step + step / 2, ay = padY + r * step + step / 2;
-        out[i++] = { ax:ax, ay:ay, sx:ax, sy:ay };
-      }
-    }
-    dots = out;
-  }
-
-  function resize(){
-    var w = window.innerWidth, h = window.innerHeight;
-    size.w = w; size.h = h;
-    canvas.width = Math.round(w * dpr); canvas.height = Math.round(h * dpr);
-    canvas.style.width = w + 'px'; canvas.style.height = h + 'px';
-    ctx.setTransform(dpr, 0, 0, dpr, 0, 0);
-    buildDots(w, h);
-    /* Built once here, not every frame in draw(): a gradient only
-       depends on viewport size, which doesn't change mid-scroll or
-       mid-cursor-move — recreating it 60x/sec was pure allocation
-       churn for a value that was already correct. */
-    grad = ctx.createLinearGradient(0, 0, w, h);
-    grad.addColorStop(0, OPTS.gradientFrom);
-    grad.addColorStop(1, OPTS.gradientTo);
-  }
-
-  /* fixed layer => viewport coords, never page coords (see markup note) */
-  function onMove(e){
-    mouse.x = e.clientX; mouse.y = e.clientY;
-    idleFrames = 0;
-    start();               /* re-arm if a prior idle timeout paused it */
-  }
-
-  function updateSpeed(){
-    var dx = mouse.prevX - mouse.x, dy = mouse.prevY - mouse.y;
-    var dist = Math.sqrt(dx*dx + dy*dy);
-    mouse.speed += (dist - mouse.speed) * 0.5;
-    if (mouse.speed < 0.001) mouse.speed = 0;
-    mouse.prevX = mouse.x; mouse.prevY = mouse.y;
-  }
-
-  function draw(){
-    var w = size.w, h = size.h, len = dots.length;
-    ctx.clearRect(0, 0, w, h);
-    ctx.fillStyle = grad;
-    var cr = OPTS.cursorRadius, crSq = cr * cr, rad = OPTS.dotRadius / 2;
-    ctx.beginPath();
-    for (var i = 0; i < len; i++){
-      var d = dots[i];
-      var dx = mouse.x - d.ax, dy = mouse.y - d.ay, distSq = dx*dx + dy*dy;
-      if (distSq < crSq && engagement > 0.01){
-        var dist = Math.sqrt(distSq);
-        var t = 1 - dist / cr;
-        var push = t * t * OPTS.bulgeStrength * engagement;
-        var ang = Math.atan2(dy, dx);
-        d.sx += (d.ax - Math.cos(ang) * push - d.sx) * 0.15;
-        d.sy += (d.ay - Math.sin(ang) * push - d.sy) * 0.15;
-      } else {
-        d.sx += (d.ax - d.sx) * 0.1;
-        d.sy += (d.ay - d.sy) * 0.1;
-      }
-      ctx.moveTo(d.sx + rad, d.sy);
-      ctx.arc(d.sx, d.sy, rad, 0, TWO_PI);
-    }
-    ctx.fill();
-  }
-
-  function tick(){
-    var target = Math.min(mouse.speed / 5, 1);
-    engagement += (target - engagement) * 0.06;
-    if (engagement < 0.001) engagement = 0;
-    draw();
-
-    /* Idle pause: once every dot has settled back to rest and the
-       cursor hasn't moved for ~1.5s, stop redrawing entirely instead
-       of running a full-viewport canvas loop 60x/sec for a frame that
-       is pixel-identical to the last one. onMove() re-arms it on the
-       very next mousemove — see there. This is the single biggest
-       win available here: for most of a visit the mouse ISN'T moving
-       (reading, or scrolling by trackpad/keyboard with the mouse
-       still), and the previous version paid full price regardless. */
-    if (engagement === 0 && mouse.speed === 0){
-      idleFrames++;
-      if (idleFrames > IDLE_LIMIT){ stop(); return; }
-    } else {
-      idleFrames = 0;
-    }
-    raf = requestAnimationFrame(tick);
-  }
-
-  function start(){
-    if (raf || reduce) return;
-    idleFrames = 0;
-    speedTimer = setInterval(updateSpeed, 20);
-    raf = requestAnimationFrame(tick);
-  }
-  function stop(){
-    if (raf) cancelAnimationFrame(raf);
-    clearInterval(speedTimer);
-    raf = null; speedTimer = null;
-  }
-
-  var rt;
-  window.addEventListener('resize', function(){
-    clearTimeout(rt);
-    rt = setTimeout(function(){ resize(); if (reduce) draw(); }, 100);
-  }, { passive:true });
-
-  resize();
-  draw();                      /* reduced motion keeps this static frame */
-  if (!reduce){
-    window.addEventListener('mousemove', onMove, { passive:true });
-    document.addEventListener('visibilitychange', function(){
-      if (document.hidden) stop(); else start();
-    });
-    start();
-  }
 })();
 </script>
 
