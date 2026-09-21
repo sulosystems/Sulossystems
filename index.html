@@ -1,1111 +1,2108 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Sulo Systems — Enterprise-grade software. Built to last.</title>
-  <link rel="preconnect" href="https://fonts.googleapis.com">
-  <link href="https://fonts.googleapis.com/css2?family=Josefin+Sans:wght@300;400;600;700&family=DM+Sans:wght@300;400;500&display=swap" rel="stylesheet">
-  <style>
-    /*
-      COLOR SYSTEM (Color Theory Applied)
-      ─────────────────────────────────────────────────
-      Primary:   #1E1B4B  deep indigo      — trust, authority, technology
-      Violet:    #7C3AED  electric violet  — energy, innovation (analogous to indigo)
-      Amber:     #F59E0B  warm amber       — optimism, urgency (split-complementary)
-      Emerald:   #10B981  emerald green    — growth, success (triadic with violet+amber)
-      Surface:   #FAFAFA  warm white
-      Hero bg:   #F3F0FF  violet tint
-      Stats bg:  #FFFBEB  amber tint
-      Work bg:   #ECFDF5  emerald tint
-      Dark:      #0F0A2E  near-black indigo
-    */
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Sulo Systems — Websites worth staying on.</title>
+<meta name="description" content="Sulo Systems designs websites people actually stay on, gets them found, catches every lead across every channel, and shows you what it earned. Toronto. Fixed scope, priced before we start.">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<!-- Archivo ships as a single variable woff2 covering 400-800, so this one file is
+     every weight on the page. Google rotates these URLs on font revisions; if the
+     preload ever 404s or warns "preloaded but not used", re-read the URL out of the
+     css2 response above and update it here. -->
+<link rel="preload" as="font" type="font/woff2" crossorigin
+      href="https://fonts.gstatic.com/s/archivo/v25/k3kPo8UDI-1M0wlSV9XAw6lQkqWY8Q82sLydOxKsv4Rn.woff2">
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Archivo:wght@100;200;400;500;600;700;800&display=swap">
+<link rel="stylesheet" href="css/styles.css">
+<style>
+/* ============================================================
+   index3.html — REGRESSION FIX
 
-    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
-    html { scroll-behavior: smooth; }
-    body {
-      font-family: 'Josefin Sans', sans-serif;
-      background: #FAFAFA;
-      color: #1E1B4B;
-      min-height: 100vh;
-    }
+   The liquid-glass nav rewrite replaced everything between the NAV and HERO
+   markers in css/styles.css and took the .nav__drawer block with it. With no
+   rules left, the mobile menu renders as plain inline links under the header
+   at every viewport — the stray "The loop What we build Work About Book a call".
 
-    /* ── Navigation ───────────────────────── */
-    nav {
-      display: flex;
-      align-items: center;
-      justify-content: space-between;
-      padding: 1.4rem 3rem;
-      background: #FAFAFA;
-      border-bottom: 1px solid rgba(124,58,237,0.1);
-      position: sticky;
-      top: 0;
-      z-index: 100;
-    }
-    .nav-logo {
-      font-size: 0.9rem;
-      font-weight: 700;
-      letter-spacing: 0.2em;
-      text-transform: uppercase;
-      color: #1E1B4B;
-    }
-    .nav-logo span { color: #7C3AED; }
-    .nav-links { display: flex; gap: 2.5rem; list-style: none; align-items: center; }
-    .nav-links a {
-      font-size: 0.75rem;
-      letter-spacing: 0.12em;
-      text-transform: uppercase;
-      color: #6B7280;
-      text-decoration: none;
-      font-weight: 600;
-      transition: color 0.2s;
-    }
-    .nav-links a:hover { color: #7C3AED; }
-    .nav-cta {
-      background: #7C3AED !important;
-      color: #fff !important;
-      padding: 0.5rem 1.2rem;
-      border-radius: 4px;
-    }
-    .nav-cta:hover { background: #6D28D9 !important; color: #fff !important; }
+   Restored here inline so css/styles.css stays untouched and index.html /
+   index2.html are not modified. The same block dropped into styles.css would
+   fix all three at once.
+   ============================================================ */
+.nav__drawer{
+  margin:10px auto 0;
+  width:calc(100% - var(--gutter)*2);
+  max-width:var(--maxw);
+  padding:10px 14px;
+  background:var(--glass);
+  -webkit-backdrop-filter:var(--blur); backdrop-filter:var(--blur);
+  border:1px solid var(--glass-rim);
+  border-radius:var(--r);
+  box-shadow:var(--glass-shadow);
+  /* closed state — clipped away, not just transparent, so it cannot be
+     hovered, clicked or reached by Tab while hidden */
+  opacity:0;
+  clip-path:inset(0 0 100%);
+  pointer-events:none;
+  visibility:hidden;
+  transition:opacity .42s, clip-path .62s var(--e-reveal), visibility 0s linear .62s;
+}
+.nav__drawer[data-open="true"]{
+  opacity:1;
+  clip-path:inset(0);
+  pointer-events:auto;
+  visibility:visible;
+  transition:opacity .42s, clip-path .62s var(--e-reveal), visibility 0s;
+}
+.nav__drawer a{
+  display:block;
+  padding:14px 8px;
+  font-size:1.15rem; font-weight:700; letter-spacing:-.02em;
+  color:var(--ink);
+  opacity:0; transform:translateY(18px);
+  transition:opacity .42s, transform .52s var(--e-reveal);
+}
+.nav__drawer[data-open="true"] a{ opacity:1; transform:translateY(0); }
+.nav__drawer[data-open="true"] a:nth-child(1){transition-delay:.10s}
+.nav__drawer[data-open="true"] a:nth-child(2){transition-delay:.16s}
+.nav__drawer[data-open="true"] a:nth-child(3){transition-delay:.22s}
+.nav__drawer[data-open="true"] a:nth-child(4){transition-delay:.28s}
+.nav__drawer[data-open="true"] a:nth-child(5){transition-delay:.34s}
+/* The drawer is a small-screen affordance only; the inline nav takes over. */
+@media (min-width:1024px){ .nav__drawer{ display:none !important; } }
+@supports not ((backdrop-filter:blur(1px)) or (-webkit-backdrop-filter:blur(1px))){
+  .nav__drawer{ background:rgba(255,255,255,.96); }
+}
+@media (prefers-reduced-motion:reduce){
+  .nav__drawer,.nav__drawer a{ transition-duration:.01ms !important; }
+}
+</style>
 
-    /* ── Hero ─────────────────────────────── */
-    .hero {
-      background: linear-gradient(135deg, #F3F0FF 0%, #EDE9FE 60%, #F3F0FF 100%);
-      padding: 7rem 3rem 5rem;
-      position: relative;
-      overflow: hidden;
-    }
-    .hero::before {
-      content: '';
-      position: absolute;
-      top: -140px; right: -140px;
-      width: 520px; height: 520px;
-      background: radial-gradient(circle, rgba(124,58,237,0.13) 0%, transparent 70%);
-      border-radius: 50%;
-      pointer-events: none;
-    }
-    .hero::after {
-      content: '';
-      position: absolute;
-      bottom: -100px; left: -100px;
-      width: 380px; height: 380px;
-      background: radial-gradient(circle, rgba(245,158,11,0.09) 0%, transparent 70%);
-      border-radius: 50%;
-      pointer-events: none;
-    }
-    .hero-content {
-      max-width: 1200px;
-      margin: 0 auto;
-      position: relative;
-      z-index: 1;
-    }
-    .hero-eyebrow {
-      display: inline-flex;
-      align-items: center;
-      gap: 0.5rem;
-      font-size: 0.7rem;
-      font-weight: 700;
-      letter-spacing: 0.2em;
-      text-transform: uppercase;
-      color: #7C3AED;
-      background: rgba(124,58,237,0.1);
-      padding: 0.4rem 1rem;
-      border-radius: 20px;
-      margin-bottom: 2rem;
-      border: 1px solid rgba(124,58,237,0.2);
-    }
-    .hero-eyebrow::before {
-      content: '';
-      width: 6px; height: 6px;
-      border-radius: 50%;
-      background: #7C3AED;
-      animation: pulse 2s infinite;
-    }
-    @keyframes pulse {
-      0%, 100% { opacity: 1; transform: scale(1); }
-      50% { opacity: 0.4; transform: scale(0.8); }
-    }
-    .hero-headline {
-      font-size: 3rem;
-      font-weight: 700;
-      line-height: 1.12;
-      color: #1E1B4B;
-      margin-bottom: 1.5rem;
-      letter-spacing: 0.01em;
-      max-width: 680px;
-    }
-    .hero-headline em {
-      font-style: normal;
-      color: #7C3AED;
-      position: relative;
-    }
-    .hero-sub {
-      font-size: 1rem;
-      color: #6B7280;
-      font-weight: 400;
-      line-height: 1.7;
-      margin-bottom: 3rem;
-      max-width: 500px;
-      letter-spacing: 0.01em;
-    }
 
-    /* Narrative Cards */
-    .narrative-grid {
-      display: grid;
-      grid-template-columns: repeat(3, 1fr);
-      gap: 1.5rem;
-      margin-bottom: 3.5rem;
-    }
-    .narrative-card {
-      background: #fff;
-      border-radius: 14px;
-      padding: 2rem 1.8rem;
-      border: 1px solid rgba(124,58,237,0.08);
-      position: relative;
-      transition: transform 0.25s, box-shadow 0.25s;
-      overflow: hidden;
-    }
-    .narrative-card:hover {
-      transform: translateY(-6px);
-      box-shadow: 0 16px 48px rgba(30,27,75,0.1);
-    }
-    .narrative-card::before {
-      content: '';
-      position: absolute;
-      top: 0; left: 0; right: 0;
-      height: 4px;
-      border-radius: 14px 14px 0 0;
-    }
-    .card-1::before { background: linear-gradient(90deg, #7C3AED, #A78BFA); }
-    .card-2::before { background: linear-gradient(90deg, #F59E0B, #FCD34D); }
-    .card-3::before { background: linear-gradient(90deg, #10B981, #34D399); }
+<style>
+/* ============================================================
+   index2.html ONLY — liquid-glass nav override.
+   Everything here is scoped to .nav and lives inline so that
+   css/styles.css (shared with index.html) is not modified.
+   ============================================================ */
+.lg-defs{position:absolute;width:0;height:0;overflow:hidden;pointer-events:none}
 
-    .card-step {
-      width: 36px; height: 36px;
-      border-radius: 50%;
-      display: flex; align-items: center; justify-content: center;
-      font-size: 0.75rem;
-      font-weight: 700;
-      margin-bottom: 1.2rem;
-    }
-    .card-1 .card-step { background: rgba(124,58,237,0.1); color: #7C3AED; }
-    .card-2 .card-step { background: rgba(245,158,11,0.1); color: #B45309; }
-    .card-3 .card-step { background: rgba(16,185,129,0.1); color: #059669; }
+.nav__inner{
+  position:relative;
+  isolation:isolate;
+  border:0 !important;
+  /* Almost no tint. The refraction is what should be visible, not a white
+     wash — an opaque-looking bar is the sign the tint is doing the work. */
+  background:rgba(255,255,255,.06) !important;
 
-    .card-title {
-      font-size: 1rem;
-      font-weight: 700;
-      color: #1E1B4B;
-      margin-bottom: 0.8rem;
-      line-height: 1.4;
-      letter-spacing: 0.01em;
-    }
-    .card-body {
-      font-size: 0.87rem;
-      color: #6B7280;
-      font-weight: 400;
-      line-height: 1.7;
-    }
+  /* Fallback first: browsers without url() support keep this one. */
+  -webkit-backdrop-filter:blur(14px) saturate(180%);
+  backdrop-filter:blur(14px) saturate(180%);
 
-    /* Hero CTAs */
-    .hero-ctas { display: flex; gap: 1rem; flex-wrap: wrap; }
-    .btn-primary {
-      background: #7C3AED;
-      color: #fff;
-      padding: 0.9rem 2rem;
-      border: none;
-      border-radius: 6px;
-      font-family: 'Josefin Sans', sans-serif;
-      font-size: 0.75rem;
-      font-weight: 700;
-      letter-spacing: 0.12em;
-      text-transform: uppercase;
-      cursor: pointer;
-      transition: background 0.2s, transform 0.2s;
-    }
-    .btn-primary:hover { background: #6D28D9; transform: translateY(-2px); }
-    .btn-secondary {
-      background: transparent;
-      color: #1E1B4B;
-      padding: 0.9rem 2rem;
-      border: 2px solid #1E1B4B;
-      border-radius: 6px;
-      font-family: 'Josefin Sans', sans-serif;
-      font-size: 0.75rem;
-      font-weight: 700;
-      letter-spacing: 0.12em;
-      text-transform: uppercase;
-      text-decoration: none;
-      display: inline-block;
-      transition: all 0.2s;
-    }
-    .btn-secondary:hover { background: #1E1B4B; color: #fff; transform: translateY(-2px); }
+  box-shadow:
+    0 10px 30px rgba(32,30,29,.13),
+    0 2px 6px rgba(32,30,29,.06) !important;
+}
 
-    /* ── Stats Banner ─────────────────────── */
-    .stats {
-      background: #FFFBEB;
-      border-top: 1px solid rgba(245,158,11,0.25);
-      border-bottom: 1px solid rgba(245,158,11,0.25);
-      padding: 2.8rem 3rem;
-    }
-    .stats-grid {
-      display: grid;
-      grid-template-columns: repeat(3, 1fr);
-      gap: 2rem;
-      max-width: 900px;
-      margin: 0 auto;
-      text-align: center;
-    }
-    .stat-value {
-      font-size: 2.2rem;
-      font-weight: 700;
-      color: #D97706;
-      margin-bottom: 0.3rem;
-    }
-    .stat-label {
-      font-size: 0.72rem;
-      font-weight: 700;
-      letter-spacing: 0.14em;
-      text-transform: uppercase;
-      color: #92400E;
-    }
+/* Chromium: replace the plain blur with real refraction. */
+@supports (backdrop-filter:url(#lg-nav)) or (-webkit-backdrop-filter:url(#lg-nav)){
+  .nav__inner{
+    -webkit-backdrop-filter:url(#lg-nav) blur(1.5px) saturate(150%) brightness(1.03);
+    backdrop-filter:url(#lg-nav) blur(1.5px) saturate(150%) brightness(1.03);
+  }
+}
 
-    /* ── Portfolio Videos ─────────────────── */
-    .portfolio-videos {
-      padding: 5rem 3rem;
-      background: #FAFAFA;
-    }
-    .section-eyebrow {
-      font-size: 0.7rem;
-      font-weight: 700;
-      letter-spacing: 0.2em;
-      text-transform: uppercase;
-      margin-bottom: 0.6rem;
-    }
-    .section-title {
-      font-size: 2.1rem;
-      font-weight: 700;
-      color: #1E1B4B;
-      margin-bottom: 0.5rem;
-      letter-spacing: 0.01em;
-    }
-    .section-sub {
-      font-size: 0.9rem;
-      color: #6B7280;
-      font-weight: 400;
-      margin-bottom: 3rem;
-    }
+/* Rim: a masked gradient ring so the light has a direction, plus an inner
+   bevel line. This is the library's edgeHighlight + fresnel, faked. */
+.nav__inner::before{
+  content:'';position:absolute;inset:0;border-radius:inherit;padding:1px;
+  background:linear-gradient(135deg,
+    rgba(255,255,255,.95) 0%,
+    rgba(255,255,255,.35) 20%,
+    rgba(255,255,255,.05) 44%,
+    rgba(255,255,255,.08) 60%,
+    rgba(255,255,255,.55) 88%,
+    rgba(255,255,255,.90) 100%);
+  -webkit-mask:linear-gradient(#000 0 0) content-box, linear-gradient(#000 0 0);
+          mask:linear-gradient(#000 0 0) content-box, linear-gradient(#000 0 0);
+  -webkit-mask-composite:xor; mask-composite:exclude;
+  pointer-events:none;z-index:2;
+}
 
-    .carousel-wrap { position: relative; max-width: 1400px; margin: 0 auto; }
-    .carousel-container { overflow: hidden; }
-    .carousel-track {
-      display: flex;
-      gap: 1.5rem;
-      transition: transform 0.5s cubic-bezier(0.4, 0, 0.2, 1);
-    }
-    .video-card {
-      flex: 0 0 calc(33.333% - 1rem);
-      aspect-ratio: 9 / 16;
-      border-radius: 16px;
-      overflow: hidden;
-      cursor: pointer;
-      position: relative;
-      transition: transform 0.25s, box-shadow 0.25s;
-    }
-    .video-card:hover { transform: translateY(-6px); box-shadow: 0 20px 48px rgba(30,27,75,0.15); }
-    .video-placeholder { width: 100%; height: 100%; position: relative; }
-    .play-button {
-      position: absolute;
-      top: 50%; left: 50%;
-      transform: translate(-50%, -50%);
-      width: 56px; height: 56px;
-      background: rgba(255,255,255,0.92);
-      border-radius: 50%;
-      display: flex; align-items: center; justify-content: center;
-      opacity: 0; transition: opacity 0.2s;
-    }
-    .play-button::after {
-      content: '';
-      width: 0; height: 0;
-      border-left: 14px solid #7C3AED;
-      border-top: 9px solid transparent;
-      border-bottom: 9px solid transparent;
-      margin-left: 3px;
-    }
-    .video-card:hover .play-button { opacity: 1; }
+/* Specular: a highlight that tracks the pointer, standing in for the shader's
+   Blinn-Phong term. Sits under the content, above the refracted backdrop. */
+.nav__inner::after{
+  content:'';position:absolute;inset:0;border-radius:inherit;
+  pointer-events:none;z-index:1;
+  opacity:var(--lg-spec,0);
+  transition:opacity .35s cubic-bezier(.4,0,.2,1);
+  background:
+    radial-gradient(120px 60px at var(--lg-x,50%) var(--lg-y,50%),
+      rgba(255,255,255,.55), rgba(255,255,255,0) 70%),
+    linear-gradient(180deg, rgba(255,255,255,.30), rgba(255,255,255,0) 42%),
+    linear-gradient(0deg, rgba(255,255,255,.14), rgba(255,255,255,0) 30%);
+}
+.nav__inner > *{position:relative;z-index:3}
 
-    .carousel-controls {
-      display: flex; align-items: center; justify-content: center;
-      gap: 2rem; margin-top: 2.5rem;
-    }
-    .carousel-btn {
-      width: 44px; height: 44px;
-      border: 2px solid rgba(124,58,237,0.3);
-      background: #fff; border-radius: 50%;
-      display: flex; align-items: center; justify-content: center;
-      cursor: pointer; font-size: 1rem; color: #7C3AED;
-      transition: all 0.2s;
-    }
-    .carousel-btn:hover { background: #7C3AED; color: #fff; border-color: #7C3AED; }
-    .carousel-dots { display: flex; gap: 0.6rem; }
-    .dot {
-      width: 8px; height: 8px; border-radius: 50%;
-      background: rgba(124,58,237,0.2); cursor: pointer;
-      transition: background 0.2s, transform 0.2s;
-    }
-    .dot.active { background: #7C3AED; transform: scale(1.3); }
+/* Slightly more tint once content is behind it, same as iOS. */
+.nav[data-scrolled="true"] .nav__inner{
+  background:rgba(255,255,255,.11) !important;
+  box-shadow:
+    0 14px 40px rgba(32,30,29,.17),
+    0 3px 9px rgba(32,30,29,.07) !important;
+}
 
-    /* ── Recent Work ──────────────────────── */
-    .work {
-      padding: 5rem 3rem;
-      background: #ECFDF5;
-      border-top: 1px solid rgba(16,185,129,0.2);
-    }
-    .work-grid {
-      display: grid;
-      grid-template-columns: repeat(3, 1fr);
-      gap: 1.5rem;
-      max-width: 1200px;
-      margin: 0 auto;
-    }
-    .work-item {
-      background: #fff;
-      padding: 2rem;
-      border-radius: 12px;
-      border: 1px solid rgba(16,185,129,0.15);
-      transition: transform 0.25s, box-shadow 0.25s;
-      position: relative;
-      overflow: hidden;
-    }
-    .work-item::after {
-      content: '';
-      position: absolute;
-      bottom: 0; left: 0; right: 0;
-      height: 3px;
-      background: linear-gradient(90deg, #10B981, #7C3AED);
-      transform: scaleX(0);
-      transition: transform 0.3s;
-      transform-origin: left;
-    }
-    .work-item:hover { transform: translateY(-4px); box-shadow: 0 12px 32px rgba(16,185,129,0.15); }
-    .work-item:hover::after { transform: scaleX(1); }
-    .work-category {
-      font-size: 0.65rem; font-weight: 700;
-      letter-spacing: 0.16em; text-transform: uppercase;
-      color: #10B981; margin-bottom: 0.8rem;
-    }
-    .work-title {
-      font-size: 1.2rem; font-weight: 700;
-      color: #1E1B4B; margin-bottom: 0.7rem;
-    }
-    .work-desc {
-      font-size: 0.85rem; color: #6B7280;
-      line-height: 1.65; font-weight: 400; margin-bottom: 1.5rem;
-    }
-    .work-link {
-      font-size: 0.72rem; font-weight: 700;
-      letter-spacing: 0.12em; text-transform: uppercase;
-      color: #7C3AED; text-decoration: none; transition: color 0.2s;
-    }
-    .work-link:hover { color: #1E1B4B; }
+/* ------------------------------------------------------------
+   CONTROL CAPSULES — the reason the bar can stay this clear.
 
-    /* ── Services Grid ────────────────────── */
-    .services-grid-section {
-      padding: 5rem 3rem;
-      background: #FAFAFA;
-    }
-    .services-grid {
-      display: grid;
-      grid-template-columns: repeat(2, 1fr);
-      gap: 1.5rem;
-      max-width: 1100px;
-      margin: 0 auto;
-    }
-    .service-card {
-      background: #fff;
-      padding: 2.2rem;
-      border-radius: 12px;
-      border: 1px solid rgba(124,58,237,0.1);
-      transition: transform 0.25s, box-shadow 0.25s;
-      display: flex;
-      gap: 1.4rem;
-      align-items: flex-start;
-    }
-    .service-card:hover { transform: translateY(-4px); box-shadow: 0 12px 32px rgba(124,58,237,0.1); }
-    .service-icon {
-      width: 48px; height: 48px;
-      border-radius: 10px;
-      display: flex; align-items: center; justify-content: center;
-      font-size: 1.4rem; flex-shrink: 0;
-    }
-    .service-card:nth-child(1) .service-icon { background: rgba(124,58,237,0.1); }
-    .service-card:nth-child(2) .service-icon { background: rgba(245,158,11,0.1); }
-    .service-card:nth-child(3) .service-icon { background: rgba(16,185,129,0.1); }
-    .service-card:nth-child(4) .service-icon { background: rgba(239,68,68,0.08); }
-    .service-card-title {
-      font-size: 1rem; font-weight: 700;
-      color: #1E1B4B; margin-bottom: 0.5rem;
-    }
-    .service-card-desc {
-      font-size: 0.87rem; color: #6B7280;
-      line-height: 1.65; font-weight: 400;
-    }
+   A bar this transparent has no contrast margin of its own: measured
+   1.07:1 where the dark hero frame scrolls underneath it. Raising the
+   tint enough to fix that (~.50) is what made the previous version look
+   white and opaque, and flipping the whole bar dark fails in the other
+   direction whenever only part of its width is over dark content.
 
-    /* ── Testimonials ─────────────────────── */
-    .testimonials {
-      padding: 5rem 3rem;
-      background: #1E1B4B;
-    }
-    .testimonials-grid {
-      display: grid;
-      grid-template-columns: repeat(2, 1fr);
-      gap: 1.5rem;
-      max-width: 1000px;
-      margin: 0 auto;
-    }
-    .testimonial {
-      background: rgba(255,255,255,0.05);
-      border: 1px solid rgba(255,255,255,0.1);
-      padding: 2.5rem;
-      border-radius: 12px;
-      position: relative;
-    }
-    .testimonial::before {
-      content: '"';
-      position: absolute;
-      top: 1.2rem; left: 1.8rem;
-      font-size: 4rem;
-      color: #7C3AED;
-      line-height: 1;
-      font-family: Georgia, serif;
-      opacity: 0.5;
-    }
-    .testimonial-text {
-      font-size: 0.93rem;
-      color: rgba(255,255,255,0.82);
-      line-height: 1.75; margin-bottom: 1.5rem;
-      font-weight: 300; padding-top: 1.5rem;
-    }
-    .testimonial-author {
-      font-weight: 700; color: #fff;
-      font-size: 0.88rem; letter-spacing: 0.04em;
-    }
-    .testimonial-role { font-size: 0.78rem; color: #A78BFA; font-weight: 400; }
+   iOS 26 solves this by keeping the bar clear and giving each control its
+   own glass capsule. The capsule is small, so it never reads as an opaque
+   bar, and it guarantees a known surface under the text no matter what is
+   behind. Worst case with a .62 capsule over the darkest backdrop: 7.4:1.
+   ------------------------------------------------------------ */
+.nav__inner .lockup,
+.nav__inner .nav__links a{
+  background:rgba(255,255,255,.62);
+  -webkit-backdrop-filter:blur(10px) saturate(160%);
+  backdrop-filter:blur(10px) saturate(160%);
+  border-radius:var(--r-pill);
+  box-shadow:
+    inset 0 1px 0 rgba(255,255,255,.90),
+    inset 0 0 0 1px rgba(255,255,255,.42),
+    0 2px 8px rgba(32,30,29,.10);
+}
+.nav__inner .lockup{ padding:7px 15px 7px 11px; }
+/* ink-muted (.65) measured 3.42:1 on the capsule over the darkest backdrop.
+   The subtitle is small caps, so it needs the full text threshold, not the
+   large-text one. */
+.nav__inner .lockup__txt span{ color:rgba(32,30,29,.82) !important; }
+.nav__inner .nav__links{ gap:6px; }
+.nav__inner .nav__links a{
+  padding:9px 15px;
+  transition:background .16s ease, box-shadow .16s ease, transform .2s cubic-bezier(.4,0,.2,1);
+}
+.nav__inner .nav__links a:hover{
+  background:rgba(255,255,255,.82);
+  transform:translateY(-1px);
+}
+.nav__inner .nav__links a[aria-current="true"]{
+  background:rgba(255,255,255,.88);
+  box-shadow:
+    inset 0 1px 0 rgba(255,255,255,.95),
+    inset 0 0 0 1px rgba(255,255,255,.55),
+    0 3px 10px rgba(32,30,29,.14);
+}
+@supports not ((backdrop-filter:blur(1px)) or (-webkit-backdrop-filter:blur(1px))){
+  .nav__inner .lockup,
+  .nav__inner .nav__links a{ background:rgba(255,255,255,.95); }
+}
 
-    /* ── About ────────────────────────────── */
-    .about { padding: 5rem 3rem; background: #FAFAFA; }
-    .about-content { max-width: 800px; margin: 0 auto; text-align: center; }
-    .about-text {
-      font-size: 1rem; color: #6B7280;
-      line-height: 1.8; font-weight: 400; margin-bottom: 3rem;
-    }
-    .about-pillars {
-      display: grid;
-      grid-template-columns: repeat(3, 1fr);
-      gap: 1.5rem; text-align: left;
-    }
-    .pillar {
-      background: #fff;
-      padding: 1.5rem;
-      border-radius: 10px;
-      border: 1px solid rgba(124,58,237,0.1);
-    }
-    .pillar-icon { font-size: 1.5rem; margin-bottom: 0.8rem; }
-    .pillar-title {
-      font-size: 0.85rem; font-weight: 700;
-      color: #1E1B4B; margin-bottom: 0.4rem;
-    }
-    .pillar-text { font-size: 0.8rem; color: #6B7280; font-weight: 400; line-height: 1.6; }
+/* The capsules are always light, so the type stays ink. Neutralise the
+   dark-variant text flip inherited from css/styles.css — light text on a
+   light capsule would fail exactly as badly in the other direction. */
+.nav[data-over="dark"] .nav__inner{ background:rgba(255,255,255,.06) !important; }
+.nav[data-scrolled="true"][data-over="dark"] .nav__inner{ background:rgba(255,255,255,.11) !important; }
+.nav[data-over="dark"] .lockup__txt,
+.nav[data-over="dark"] .nav__links a{ color:var(--ink) !important; }
+.nav[data-over="dark"] .lockup__txt span{ color:var(--ink-muted) !important; }
+.nav[data-over="dark"] .lockup svg path{ stroke:var(--ink) !important; }
+.nav[data-over="dark"] .nav__links a:hover{ background:rgba(255,255,255,.82) !important; box-shadow:inset 0 1px 0 rgba(255,255,255,.9); }
+.nav[data-over="dark"] .nav__links a[aria-current="true"]{ background:rgba(255,255,255,.88) !important; }
+.nav[data-over="dark"] .nav__toggle svg path{ stroke:var(--ink) !important; }
+.nav[data-over="dark"] .btn{ background:var(--ink) !important; color:var(--ground) !important; }
+.nav[data-over="dark"] .nav__inner::before{
+  background:linear-gradient(135deg,
+    rgba(255,255,255,.95) 0%, rgba(255,255,255,.35) 20%,
+    rgba(255,255,255,.05) 44%, rgba(255,255,255,.08) 60%,
+    rgba(255,255,255,.55) 88%, rgba(255,255,255,.90) 100%);
+}
 
-    /* ── Contact ──────────────────────────── */
-    .contact {
-      padding: 5rem 3rem;
-      background: linear-gradient(135deg, #7C3AED 0%, #4C1D95 100%);
-      text-align: center;
-    }
-    .contact .section-title { color: #fff; }
-    .contact-content { max-width: 560px; margin: 0 auto; }
-    .contact-form { display: flex; flex-direction: column; gap: 1rem; }
-    .form-group { display: flex; flex-direction: column; text-align: left; }
-    .form-group label {
-      font-size: 0.7rem; font-weight: 700;
-      letter-spacing: 0.1em; text-transform: uppercase;
-      margin-bottom: 0.4rem; color: rgba(255,255,255,0.65);
-    }
-    .form-group input,
-    .form-group textarea {
-      padding: 0.85rem 1rem;
-      border: 1px solid rgba(255,255,255,0.2);
-      border-radius: 6px;
-      font-family: 'Josefin Sans', sans-serif;
-      font-size: 0.9rem;
-      background: rgba(255,255,255,0.1);
-      color: #fff;
-      transition: border-color 0.2s, background 0.2s;
-    }
-    .form-group input::placeholder,
-    .form-group textarea::placeholder { color: rgba(255,255,255,0.35); }
-    .form-group input:focus,
-    .form-group textarea:focus {
-      outline: none;
-      border-color: rgba(255,255,255,0.6);
-      background: rgba(255,255,255,0.15);
-    }
-    .form-group textarea { resize: vertical; min-height: 130px; }
-    .form-submit {
-      background: #F59E0B;
-      color: #1E1B4B;
-      padding: 0.9rem 2rem;
-      border: none; border-radius: 6px;
-      font-family: 'Josefin Sans', sans-serif;
-      font-size: 0.75rem; font-weight: 700;
-      letter-spacing: 0.12em; text-transform: uppercase;
-      cursor: pointer; transition: background 0.2s, transform 0.2s;
-    }
-    .form-submit:hover { background: #D97706; transform: translateY(-2px); }
+@supports not ((backdrop-filter:blur(1px)) or (-webkit-backdrop-filter:blur(1px))){
+  .nav__inner{background:rgba(255,255,255,.95) !important}
+  .nav[data-over="dark"] .nav__inner{background:rgba(23,22,21,.95) !important}
+}
 
-    /* ── Footer ───────────────────────────── */
-    footer {
-      background: #0F0A2E;
-      color: rgba(255,255,255,0.35);
-      padding: 2rem 3rem;
-      text-align: center;
-      font-size: 0.78rem;
-      font-weight: 400;
-      letter-spacing: 0.06em;
-    }
+@media (prefers-reduced-motion:reduce){
+  .nav__inner::after{transition:none}
+}
+</style>
 
-    /* ── Mobile Nav ───────────────────────── */
-    .nav-hamburger {
-      display: none;
-      flex-direction: column;
-      gap: 5px;
-      cursor: pointer;
-      padding: 4px;
-      background: none;
-      border: none;
-    }
-    .nav-hamburger span {
-      display: block;
-      width: 22px;
-      height: 2px;
-      background: #1E1B4B;
-      border-radius: 2px;
-      transition: all 0.3s ease;
-    }
-    .nav-mobile-menu {
-      display: none;
-      position: fixed;
-      inset: 0;
-      background: #FAFAFA;
-      z-index: 200;
-      flex-direction: column;
-      align-items: center;
-      justify-content: center;
-      gap: 2rem;
-    }
-    .nav-mobile-menu.open { display: flex; }
-    .nav-mobile-menu a {
-      font-size: 1.4rem;
-      font-weight: 700;
-      letter-spacing: 0.08em;
-      text-transform: uppercase;
-      color: #1E1B4B;
-      text-decoration: none;
-    }
-    .nav-mobile-menu a:hover { color: #7C3AED; }
-    .nav-mobile-close {
-      position: absolute;
-      top: 1.5rem;
-      right: 1.5rem;
-      font-size: 1.8rem;
-      background: none;
-      border: none;
-      cursor: pointer;
-      color: #1E1B4B;
-      line-height: 1;
-    }
-    .nav-mobile-cta {
-      background: #7C3AED !important;
-      color: #fff !important;
-      padding: 0.8rem 2rem;
-      border-radius: 6px;
-      font-size: 1rem !important;
-    }
 
-    /* ── Responsive ───────────────────────── */
-    @media (max-width: 900px) {
-      /* Nav */
-      nav { padding: 1rem 1.5rem; }
-      .nav-links { display: none; }
-      .nav-hamburger { display: flex; }
+<style>
+/* ============================================================
+   MOTION VOCABULARY — transcribed from vanlent.dev
 
-      /* Hero */
-      .hero { padding: 3.5rem 1.5rem 2.5rem; }
-      .hero-headline { font-size: 2rem; }
-      .hero-eyebrow { font-size: 0.62rem; }
-      .hero-sub { font-size: 0.9rem; max-width: 100%; }
-      .narrative-grid { grid-template-columns: 1fr; gap: 0.9rem; margin-bottom: 2rem; }
-      .narrative-card { padding: 1.5rem; }
-      .card-title { font-size: 0.9rem; }
-      .card-body { font-size: 0.82rem; }
-      .hero-ctas { flex-direction: column; gap: 0.8rem; }
-      .btn-primary, .btn-secondary { width: 100%; text-align: center; display: block; }
+   Their stack is GSAP + ScrollTrigger + Lenis on Next. The vocabulary
+   itself is mostly CSS, so it ports without GSAP:
 
-      /* Stats */
-      .stats { padding: 2rem 1.5rem; }
-      .stats-grid { grid-template-columns: repeat(3, 1fr); gap: 0.5rem; }
-      .stat-value { font-size: 1.4rem; }
-      .stat-label { font-size: 0.62rem; }
+     · corner brackets that draw outward into a full frame
+       (--corner-length 24px -> 9999px, four one-corner clip-paths)
+     · directional clip-path wipes for headings
+     · activate-box: a two-stage pop, scaleX before scaleY
+     · a hairline word loader that pulses, then wipes away
+     · a cursor spotlight over a grid
+     · slow 20s rotation on a marker
+     · pinned sections on a container with overflow-x: clip
 
-      /* Portfolio — vertical stack */
-      .portfolio-videos { padding: 3rem 1.5rem; }
-      .carousel-container { overflow: visible; }
-      .carousel-track {
-        flex-direction: column;
-        gap: 2rem;
-        transform: none !important;
-        transition: none;
-      }
-      .video-card-wrap {
-        flex: unset;
-        width: 100%;
-        max-width: 360px;
-        margin: 0 auto;
-      }
-      .video-card {
-        flex: unset;
-        width: 100%;
-        max-height: none;
-      }
-      .carousel-controls { display: none; }
+   No library is used. Lenis was tried and removed — see the scroll
+   ownership note in the runtime block below.
+   ============================================================ */
 
-      /* Work */
-      .work { padding: 3rem 1.5rem; }
-      .work-grid { grid-template-columns: 1fr; gap: 1rem; }
-      .work-title { font-size: 1.1rem; }
+/* the loader deliberately does NOT lock scroll — a visitor who
+   arrives scrolling should keep scrolling straight through it */
 
-      /* Services */
-      .services-grid-section { padding: 3rem 1.5rem; }
-      .services-grid { grid-template-columns: 1fr; gap: 1rem; }
-      .service-card { padding: 1.5rem; }
+/* ---------- corner brackets ----------
+   Kept as a static decorative frame — only the hover-triggered expansion
+   on .wcard remains (an intentional, single interactive touch, not a
+   scroll animation). The scroll-triggered [data-reveal].is-in expansion
+   was removed along with the rest of the generic reveal system below. */
 
-      /* Testimonials */
-      .testimonials { padding: 3rem 1.5rem; }
-      .testimonials-grid { grid-template-columns: 1fr; gap: 1rem; }
-      .testimonial { padding: 1.8rem 1.5rem; }
+/* ---------- heading wipe — REMOVED ----------
+   frontend-design anti-pattern: "motion that exists only because
+   animation was easy to add" — this fired an identical clip-path wipe
+   on all 15 section headings with no narrative reason. Resting state
+   is now the ONLY state: fully visible, no transition. (Its hidden
+   resting state — clip-path:inset(0 100% 0 0) — used to be undone by
+   an IntersectionObserver; that observer script is removed below, so
+   the resting state had to become the visible one or every heading on
+   the page would go invisible again, same bug as index13.) */
+.wipe{clip-path:inset(0)}
 
-      /* About */
-      .about { padding: 3rem 1.5rem; }
-      .about-pillars { grid-template-columns: 1fr; gap: 1rem; }
-      .about-text { font-size: 0.9rem; }
+/* ---------- cursor spotlight ---------- */
+/* ---------- slow spin marker ---------- */
+@keyframes spinSlow{0%{transform:rotate(0)}to{transform:rotate(360deg)}}
+.spinmark{
+  position:absolute;right:0;top:-14px;width:78px;height:78px;
+  animation:spinSlow 20s linear infinite;pointer-events:none;opacity:.5;
+}
+.spinmark text{font-size:9.4px;font-weight:700;letter-spacing:.22em;fill:var(--ink);text-transform:uppercase}
+@media(max-width:820px){.spinmark{display:none}}
 
-      /* Contact */
-      .contact { padding: 3rem 1.5rem; }
-      .section-title { font-size: 1.7rem; }
-    }
+@media (prefers-reduced-motion:reduce){
+  html[data-booting="true"]{overflow:auto}
+  .spark__line{stroke-dashoffset:0;transition:none}
+  .spark__area,.spark__dot{opacity:1;transition:none}
+  .ch__track i,.fn__bar{width:var(--w,50%);transition:none}
+  .spinmark{animation:none}
+}
+</style>
 
-    @media (max-width: 480px) {
-      .hero-headline { font-size: 1.7rem; }
-      .stats-grid { grid-template-columns: 1fr; gap: 1rem; }
-      .section-title { font-size: 1.5rem; }
-      .hero { padding: 2.5rem 1.2rem 2rem; }
-      .narrative-card { padding: 1.2rem; }
-      .video-card-wrap { max-width: 100%; }
-    }
-  </style>
+
+
+<style>
+/* ============================================================
+   WORK RAIL — vertical scroll drives the cards sideways (index25)
+   ============================================================
+   New markup + classes only (rail__*), so the shared .rail/.railbtn
+   rules in css/styles.css are left completely alone — index23/24
+   still render the plain manually-scrolled strip exactly as before.
+
+   Desktop: .rail__track is a tall spacer, .rail__stage pins under the
+   nav, and .rail__row is translated sideways by JS in exact lockstep
+   with scroll (see the script block near </body>). Distance is
+   derived from the row's real scrollWidth, never hardcoded, so it
+   stays correct at 7 cards or 70.
+
+   Mobile and reduced-motion get a real native scroller instead of a
+   pinned one — a scroll-jacked rail fights a touch swipe rather than
+   using it, and reduced motion should never end up mid-way through an
+   animation with no way to finish it. Same viewport element, just
+   overflow-x:auto with scroll-snap instead of a JS transform; the
+   prev/next buttons (hidden on desktop, since scrolling the page now
+   does their job) come back here as the touch/keyboard equivalent. */
+.railwrap{ position:relative; }
+.rail__stage{
+  position:sticky; top:calc(var(--nav-h) + 24px);
+  display:flex; align-items:center;
+}
+/* clip:visible on x/y, not overflow:hidden — hidden would also crop each
+   card's own hover lift (translateY(-4px)) and box-shadow bleed at the
+   viewport's top/bottom edge, which reads as a rendering glitch rather
+   than an intentional window. Only the sideways travel needs hiding. */
+.rail__viewport{ width:100%; overflow-x:clip; overflow-y:visible; }
+.rail__row{
+  display:flex; gap:var(--s-3); padding:4px 4px var(--s-3);
+  will-change:transform;
+}
+.rail__row .wcard{ flex:0 0 min(420px,84vw); }
+.rail__spacer{ flex:0 0 1px; }
+
+.railnav{ display:none; }
+
+@media (max-width:820px), (prefers-reduced-motion:reduce){
+  .rail__track{ height:auto!important; }
+  .rail__stage{ position:static; overflow:visible; }
+  .rail__viewport{
+    overflow-x:auto; scroll-snap-type:x mandatory; scrollbar-width:thin;
+  }
+  .rail__viewport::-webkit-scrollbar{ height:3px; }
+  .rail__viewport::-webkit-scrollbar-track{ background:rgba(32,30,29,.08); border-radius:var(--r-pill); }
+  .rail__viewport::-webkit-scrollbar-thumb{ background:rgba(32,30,29,.4); border-radius:var(--r-pill); }
+  .rail__row{ transform:none!important; }
+  .rail__row .wcard{ scroll-snap-align:start; }
+  .railnav{ display:flex; gap:var(--s-1); margin-top:var(--s-2); }
+}
+</style>
+
+<style>
+/* ============================================================
+   HERO — "We increase your revenue through ___" (index26)
+   ============================================================
+   Ports the box-flip mechanic proven in the hero-options*.html
+   sandbox (options 1-4) into the real hero, with two deliberate
+   changes for a production hero specifically rather than a straight
+   copy-paste:
+
+   1. TIME-DRIVEN, NOT SCROLL-DRIVEN. The sandbox pinned a 400vh track
+      per variant because that page's whole point was comparing
+      mechanisms against real scroll. A real hero sits at the very top
+      of the page, before the visitor has scrolled at all — gating the
+      word-cycle behind hundreds of vh of scroll would mean most
+      visitors never see "Apps"/"SEO"/"AI-agents" at all before moving
+      on, which defeats the point of the headline. This version
+      advances on a plain interval instead (see the script near
+      </body>), and pauses on hover/focus so a visitor reading one word
+      isn't fighting a timer.
+   2. REDUCED-MOTION SHOWS EVERYTHING, NOT THE LAST STEP. Every other
+      pinned demo on this page (and in the sandbox) falls back to its
+      FINAL state under reduced motion, because that's genuinely the
+      most complete state for something like the Work rail. Here the
+      four words are actually four different, equally-important
+      claims — freezing on "AI-agents" alone would hide 3 of them from
+      every reduced-motion visitor. The fallback below is the full
+      sentence, spelled out, instead.
+
+   Sizing is otherwise the same recipe as the sandbox's Variant 1:
+   --halfh is measured off the box's own rendered height (never
+   hardcoded) so the four faces close at true right-angle corners
+   at any width, and only the currently front-facing face gets
+   pointer-events (backface-visibility:hidden hides a rotated-away
+   face visually but doesn't reliably block hover in every browser). */
+.hero__h1--cycle{ max-width:none; }
+.hero__h1-lead{
+  display:block; font-family:'Archivo',sans-serif; font-weight:600;
+  font-size:clamp(1.3rem,2.6vw,1.9rem); letter-spacing:-.01em; line-height:1.2;
+  color:var(--ink-70); margin-bottom:6px;
+}
+.hero__h1-static{ display:none; }
+@media (prefers-reduced-motion:reduce){
+  .hero__h1-lead, .hcube-wrap{ display:none; }
+  .hero__h1-static{ display:inline; }
+}
+
+.hcube-wrap{ display:block; perspective:1400px; width:min(560px,94vw); height:clamp(84px,12vw,148px); }
+/* display:block is load-bearing, not tidiness. These are <span>s (an
+   <h1> only takes phrasing content, so the cube can't be built from
+   <div>s here the way the hero-options sandbox built it). A span
+   defaults to display:inline, and width/height are ignored on inline
+   boxes — so this collapsed to 0x0, which in turn made every
+   absolutely-positioned .hcube__face 0x0 as well. Two visible bugs
+   came out of that one omission: the 83px word was centred on a
+   zero-height line and bled upwards into .hero__h1-lead (the headline
+   overlapping itself), and the 3D box had no geometry to rotate, so
+   advancing a step swapped the preview image but never actually
+   brought the next face to camera. Measured before/after with
+   getBoundingClientRect — 0x0 vs 560x148. */
+.hcube{
+  display:block;
+  position:relative; width:100%; height:100%; transform-style:preserve-3d;
+  transition:transform .32s cubic-bezier(.34,1.56,.64,1);
+}
+.hcube__face{
+  position:absolute; inset:0; display:flex; align-items:center;
+  backface-visibility:hidden; pointer-events:none;
+  font-size:var(--t-h1); font-weight:800; letter-spacing:-.035em; line-height:1;
+}
+.hcube__face.is-current{ pointer-events:auto; }
+.hcube__face--front { transform:rotateX(0deg)   translateZ(var(--halfh,60px)); }
+.hcube__face--top   { transform:rotateX(90deg)  translateZ(var(--halfh,60px)); }
+.hcube__face--back  { transform:rotateX(180deg) translateZ(var(--halfh,60px)); }
+.hcube__face--bottom{ transform:rotateX(-90deg) translateZ(var(--halfh,60px)); }
+
+/* Hero word hover-preview REMOVED (index41) — redundant. The hero art
+   panel on the right already swaps to the matching screenshot and
+   label every time the cube advances (see the HERO WORD-CYCLE script
+   near </body>), so a second preview popping out of the word itself
+   showed the same image twice for no reason. */
+
+/* ---------- 09a - WORK CARDS AS .cell (index43) ----------
+   Brief: "the styling of the cards present on our work section should
+   be exactly like the outlined card in [the] screenshot ... there is
+   one exception though, the get a quote button should be called View
+   more." The outlined card in that screenshot is the old What We
+   Build cell: light frosted glass, a 44px icon chip, bold ink
+   heading, grey body, and a lighter inner panel at the bottom holding
+   a tracked uppercase label, two bars and a black pill button.
+
+   Every value below is LIFTED from the real rules that produced that
+   screenshot (css/styles.css: .cell 505-538, .bar 431-435,
+   .chip-btn 438-442) rather than matched by eye, so the two card
+   types are genuinely the same object rather than a lookalike. It
+   lives here as an override instead of in the shared stylesheet
+   because index23-index42 all still render .wcard from that file and
+   expect the dark card.
+
+   This is a full tonal inversion: shared .wcard is a dark
+   #262423 -> --dark gradient with --on-dark text, a translucent pill
+   and a big metric number. Three of those shared rules actively
+   fight the light version and are switched back explicitly below -
+   .wcard{color:--on-dark}, .wcard .bar and .wcard .bar--solid (which
+   exist only to flip .bar to its on-dark variant), and .bubble.
+   Miss any one and you get grey-on-grey inside an otherwise correct
+   card.
+
+   Worth noting this actually suits the section better than the dark
+   card did: backdrop-filter needs tonal variation behind it or glass
+   flattens into a grey rectangle, and this is the one section on the
+   page with a real backdrop - the four-screenshot .work-bg collage
+   under an 80-92% ground scrim. The glass finally has something to
+   refract. */
+/* NO backdrop-filter here, deliberately — see the note below. */
+.rail__row .wcard, .rail .wcard{
+  min-height:330px;                    /* .cell's floor, not .wcard's 410 */
+  color:var(--ink);
+  background:var(--glass);
+  border:1px solid var(--glass-rim);
+  box-shadow:var(--glass-shadow);
+}
+
+/* ---------- why these cards are not real glass (index44) ----------
+   index43 gave the work cards the full .cell treatment including
+   backdrop-filter:var(--blur), and the horizontal scroll went bad
+   again. The scroll LOGIC was not touched between index42 and
+   index44 — the spring integrator is byte-identical, verified by
+   diff — so the cause had to be in what the rail now has to move,
+   and a rule-by-rule diff of every .rail*/.wcard* declaration
+   between the two versions found exactly one difference: these
+   seven cards had gained a live backdrop-filter.
+
+   That combination is specifically bad, for a reason that is easy to
+   miss because the property looks as cheap as a background:
+
+     A backdrop-filter element has to READ the pixels behind it and
+     blur them. As long as it sits still, the result can be cached.
+     The moment it MOVES, the region behind it is different on every
+     frame, so the blur is recomputed from scratch — per card, per
+     frame. Seven cards at 420x415 with a 24px blur is a large amount
+     of per-frame filtering, and each one is additionally promoted to
+     its own compositing layer inside the very subtree being
+     translated. The backdrop is not even static: the DotField canvas
+     animates continuously behind <main>, and .work-bg holds four
+     images carrying their own filter, so the source pixels change
+     too.
+
+   The honest note on evidence: this could not be reproduced by
+   measurement locally. Headless Chrome paces requestAnimationFrame
+   to a flat 16.7ms regardless of paint cost, so frame intervals
+   cannot see compositor work at all, and renderer-CPU sampling was
+   noisier run-to-run (388ms vs 445ms for the same condition) than
+   the difference between conditions. The reasoning above is
+   elimination plus a well-understood mechanism, not a local
+   benchmark — so if the scroll still feels wrong, say so and the
+   next thing to try is pausing the DotField while the rail is
+   pinned.
+
+   What is lost visually: very little, and that is the point. Glass
+   only reads as glass when there is tonal variation behind it to
+   refract. Behind these cards sits .work-bg::after, a
+   rgba(238,236,234,.80-.92) scrim over already-blurred images — a
+   near-flat, near-opaque light field. A 24px blur of a surface that
+   is already smooth returns almost the same surface, and blurring
+   never changes mean brightness, only detail. So the cards keep the
+   identical --glass fill, --glass-rim border and --glass-shadow, and
+   the only thing that goes is per-frame work nobody could see. This
+   was checked by pixel-diffing the section against index43 rather
+   than assumed. */
+.rail__row .wcard:hover, .rail .wcard:hover{
+  transform:translateY(-4px);
+  box-shadow:var(--glass-shadow-lg);
+}
+/* .cell__icon, exactly */
+.wcard__icon{
+  width:44px; height:44px; flex:none; border-radius:var(--r-xs);
+  display:inline-flex; align-items:center; justify-content:center;
+  background:rgba(255,255,255,.62); border:1px solid var(--glass-rim);
+  box-shadow:0 1px 0 rgba(255,255,255,.8) inset, 0 4px 12px rgba(32,30,29,.07);
+}
+.rail__row .wcard .wcard__h{ line-height:1.2; }
+.rail__row .wcard .wcard__b{ color:var(--ink-70); }
+/* .cell__preview, exactly. margin-top:auto is what pins it to the
+   bottom of the card regardless of how long the body copy runs, so a
+   row of cards lines its panels up even when the headings wrap
+   differently - visible in the screenshot, where all three panels
+   share a baseline. */
+.rail__row .wcard .wcard__mock{
+  margin-top:auto; padding:var(--s-2); display:grid; gap:8px;
+  border-radius:var(--r-sm);
+  background:rgba(255,255,255,.42);
+  border:1px solid var(--glass-rim-2);
+  box-shadow:0 1px 0 rgba(255,255,255,.7) inset;
+  -webkit-backdrop-filter:none; backdrop-filter:none;
+}
+/* undo the two .wcard rules whose only job was to flip .bar to its
+   on-dark variant - back to the shared light defaults */
+.rail__row .wcard .bar{ background:rgba(32,30,29,.14); }
+.rail__row .wcard .bar--solid{ background:rgba(32,30,29,.52); }
+.rail__row .wcard .label{
+  font-size:10px; font-weight:700; letter-spacing:.14em;
+  text-transform:uppercase; color:var(--ink-70);
+}
+.rail__row .wcard .bubble{
+  background:rgba(255,255,255,.72); color:var(--ink);
+  border:1px solid var(--glass-rim-2);
+}
+.rail__row .wcard .bubble--me{ background:var(--ink); color:var(--ground); border-color:var(--ink); }
+.rail__row .wcard .mini-input{ background:rgba(255,255,255,.75); border:1px solid rgba(32,30,29,.12); }
+
+/* "View more" - the .chip-btn from the screenshot's GET A QUOTE,
+   same 7px/14px pill, same 10px/.1em uppercase, sitting in the same
+   .row inside the preview panel. A real <button> rather than the
+   <span> the static mock used, so it needs the font-family/border
+   resets a span never did. */
+.wcard__more{
+  display:inline-block; padding:7px 14px; border-radius:var(--r-pill);
+  background:var(--ink); color:var(--ground); border:1px solid var(--ink);
+  font-family:inherit; font-size:10px; font-weight:700;
+  letter-spacing:.1em; text-transform:uppercase; cursor:pointer;
+  transition:transform .18s var(--e-hover), opacity .18s ease;
+}
+.wcard__more:hover{ transform:translateY(-1px); opacity:.86; }
+.wcard__more:focus-visible{ outline:2px solid var(--ink); outline-offset:3px; }
+
+/* ---------- 09b - WORK SCREENSHOT MODAL (index43) ----------
+   Was a hover overlay in index41-42. The brief: "When I click this
+   View more button, the hover overlay of the card should display.
+   once done you can remove the displaying of overlay on hover as we
+   would be able to view this screenshot by clicking on view more."
+   So the :has() hover triggers are GONE, not merely supplemented -
+   leaving both would mean the panel opens itself while you are
+   reaching for the button.
+
+   Click-driven improves three things beyond the trigger itself:
+
+   1. It is a real <dialog> opened with showModal(), so Esc-to-close,
+      the focus trap, making the rest of the page inert, and returning
+      focus to the button that opened it all come from the browser
+      rather than from hand-written key handlers that usually get one
+      of those four wrong.
+   2. pointer-events can be live now. The hover version had to stay
+      pointer-events:none PERMANENTLY: a centred panel that accepts
+      the cursor steals :hover from the card underneath, the card's
+      :hover ends, the panel hides, the cursor is over the card
+      again... a flicker loop. A click has no such feedback path, so
+      the panel can carry a real close button.
+   3. It works on touch. The hover overlay was display:none below
+      820px and under (hover:none) because there is no hover to key
+      off - so on a phone the screenshots were simply unreachable.
+      A button is a button at every width, so those two media queries
+      are deleted rather than reinstated.
+
+   Note a modal <dialog> paints in the browser's TOP LAYER, which
+   ancestor transforms do not affect. The containing-block trap
+   documented at length in index41 (.rail__row's will-change:transform
+   capturing position:fixed descendants) simply does not apply to this
+   version. They are still left outside the rail subtree because there
+   is no reason to go and re-test that.
+
+   Body scroll is deliberately NOT locked. The standing rule here is
+   no overflow lock on html/body - overflow-x:clip on <body> becomes
+   overflow-y:auto and breaks the rail's position:sticky. The panel is
+   in the top layer and stays put if the page moves behind it, so
+   there is nothing to fix. */
+.wmodal{
+  width:100%; height:100%; max-width:none; max-height:none;
+  inset:0; padding:0; border:0; margin:0;
+  background:transparent; overflow:visible;
+}
+.wmodal::backdrop{
+  background:rgba(10,9,8,0);
+  transition:background .34s var(--e-hover);
+}
+.wmodal.is-open::backdrop{ background:rgba(10,9,8,.74); }
+.wmodal__panel{
+  position:absolute; top:50%; left:50%;
+  transform:translate(-50%,-50%) scale(.94); opacity:0;
+  /* the panel takes its aspect ratio from the IMAGE, passed in as
+     --ar. These five screenshots are not one shape - measured, they
+     run 1.599 (SEO, AI-agents) through 1.833 and 1.911 up to 2.088
+     for the inventory system, a wide desktop table view. A single
+     hardcoded 16/10 with object-fit:cover cut 14-17% off the sides
+     of the widest two and would have cut 23% off the inventory shot,
+     where the cropped columns are the part worth showing. Box matched
+     to image means cover and contain agree and nothing is lost. */
+  width:min(880px,86vw); aspect-ratio:var(--ar,16/10);
+  border-radius:var(--r); overflow:hidden;
+  box-shadow:0 50px 120px rgba(0,0,0,.55);
+  transition:transform .34s var(--e-hover), opacity .26s var(--e-hover);
+}
+.wmodal.is-open .wmodal__panel{ transform:translate(-50%,-50%) scale(1); opacity:1; }
+.wmodal__panel img{
+  position:absolute; inset:0; width:100%; height:100%;
+  object-fit:cover; display:block;
+}
+/* The caption's <b> is the card's own <h3> verbatim, so it is set
+   like a heading rather than like a tracked-out label - at 13px
+   uppercase with .1em tracking, a title the length of "Home Services
+   - Search & Conversion" read as a legal footer instead of the name
+   of the work you are looking at. */
+.wmodal__cap{
+  position:absolute; bottom:0; left:0; right:0; padding:24px 30px;
+  background:linear-gradient(180deg, transparent, rgba(10,9,8,.88) 78%);
+  color:var(--on-dark);
+}
+.wmodal__cap span{
+  display:block; margin-bottom:6px;
+  font-size:10px; font-weight:700; letter-spacing:.14em;
+  text-transform:uppercase; color:var(--on-dark-60);
+}
+.wmodal__cap b{
+  display:block; font-weight:700; letter-spacing:-.005em;
+  font-size:clamp(15px,1.5vw,19px); line-height:1.25;
+}
+.wmodal__close{
+  position:absolute; top:14px; right:14px; z-index:2;
+  width:40px; height:40px; border-radius:50%; cursor:pointer;
+  display:inline-flex; align-items:center; justify-content:center;
+  background:rgba(10,9,8,.55); color:var(--on-dark);
+  border:1px solid rgba(255,255,255,.26);
+  -webkit-backdrop-filter:blur(8px); backdrop-filter:blur(8px);
+  transition:background .18s ease, transform .18s var(--e-hover);
+}
+.wmodal__close:hover{ background:rgba(10,9,8,.82); transform:scale(1.06); }
+.wmodal__close:focus-visible{ outline:2px solid var(--on-dark); outline-offset:2px; }
+@media (max-height:780px){
+  /* short laptop viewports: the tallest ratio (1.599) at the full
+     880px would be 550px of an ~700px-tall window */
+  .wmodal__panel{ width:min(660px,86vw); }
+}
+@media (max-width:560px){
+  .wmodal__panel{ width:92vw; }
+  .wmodal__cap{ padding:16px 18px; }
+}
+@media (prefers-reduced-motion:reduce){
+  .wmodal::backdrop, .wmodal__panel, .wcard__more, .wmodal__close{ transition:none; }
+}
+
+@media (max-width:640px){
+  .hcube-wrap{ width:100%; }
+  .hcube__face{ font-size:clamp(2rem,10vw,3rem); }
+}
+
+/* ---------- right side: same glass frame, now a live preview image ---------- */
+.artframe__glass.hero-shot{ bottom:13%; display:flex; flex-direction:column; }
+.hero-shot__body{ position:relative; flex:1; min-height:120px; }
+.hero-shot__body img{
+  position:absolute; inset:0; width:100%; height:100%; object-fit:cover; display:block;
+  opacity:0; transition:opacity .34s ease;
+}
+.hero-shot__body img.is-on{ opacity:1; }
+
+/* ---------- Work section: faint collage of the four hover shots ----------
+   Low opacity + a near-opaque scrim on top, specifically so the work
+   cards and heading (which sit directly on this background, not on
+   their own opaque surface for the section text) keep full contrast —
+   the images are texture here, not content in their own right. */
+/* overflow:CLIP, not hidden — load-bearing. This section contains the
+   pinned card rail (.rail__stage, position:sticky). overflow:hidden
+   turns this element into a scroll container, which silently kills
+   sticky on every descendant: the stage stops pinning, scrolls away
+   with the page, and leaves the remaining ~1700px of derived track
+   height as a completely blank void mid-page. overflow:clip clips the
+   collage the same way WITHOUT creating a scroll container, so sticky
+   survives. (Same trap the shared stylesheet already documents on
+   <body> for the same reason.) Verified by screenshot at +900px into
+   the section: void before, cards pinned after. */
+.work--bg{ position:relative; overflow:clip; }
+.work-bg{ position:absolute; inset:0; z-index:0; }
+/* opacity .42 + a soft scrim, not .14 behind an opaque one — at .14
+   under a 94%-opaque scrim these were invisible, which is not a
+   background treatment, just four wasted image requests. */
+.work-bg img{
+  position:absolute; width:38%; aspect-ratio:16/10; object-fit:cover;
+  border-radius:var(--r); opacity:.42; filter:saturate(80%) blur(1.5px);
+}
+.work-bg img:nth-child(1){ top:1%;  left:-7%;  transform:rotate(-4deg); }
+.work-bg img:nth-child(2){ top:27%; right:-8%; transform:rotate(3deg); }
+.work-bg img:nth-child(3){ top:54%; left:-5%;  transform:rotate(2deg); }
+.work-bg img:nth-child(4){ top:79%; right:-6%; transform:rotate(-3deg); }
+.work-bg::after{
+  content:''; position:absolute; inset:0;
+  background:linear-gradient(180deg, rgba(238,236,234,.90) 0%, rgba(238,236,234,.80) 45%, rgba(238,236,234,.92) 100%);
+}
+.work--bg .wrap{ position:relative; z-index:1; }
+@media (max-width:700px){
+  .work-bg img{ width:62%; opacity:.3; }
+}
+</style>
+
+
+<style>
+/* ---------- dot field layer ---------- */
+.dotfield{ position:fixed; inset:0; z-index:0; pointer-events:none; }
+.dotfield canvas{
+  position:absolute; inset:0; width:100%; height:100%; display:block;
+}
+/* content above the field; the nav keeps its own higher z-index */
+main, .foot{ position:relative; z-index:1; }
+@media (max-width:820px){
+  /* no pointer to track, and a full-viewport rAF canvas is the last
+     thing a phone needs — the body gradient carries the ground alone */
+  .dotfield{ display:none; }
+}
+</style>
+
+<style>
+/* ============================================================
+   CTA EMPHASIS — nav "Book a call" + hero "Start" (index39)
+   ============================================================
+   Scoped to .nav__cta and .gate__start specifically, not the shared
+   .btn class in css/styles.css — that base rule is also the Contact
+   form's "Send message" button, which wasn't asked to change.
+
+   The design system is explicit that there's no chroma accent
+   (accent === ink) — everything on this page is black/white/grey by
+   rule, so "more obvious" can't be reached by making the button a
+   different color the way it would on a typical site. The two levers
+   left inside that constraint: size/weight (bigger target, heavier
+   type) and motion (something that draws the eye even while nothing
+   else on the page is moving). ctaPulse is a sonar-ping ring —
+   box-shadow spreading outward and fading, in the same ink tone the
+   button already uses — rather than a color change or a scale bounce,
+   which would read as a layout jitter next to text. */
+.nav__cta{
+  min-height:50px; padding:14px 28px;
+  font-weight:700; letter-spacing:.14em; font-size:.8125rem;
+  animation:ctaPulse 2.6s ease-in-out infinite;
+}
+.gate__start{
+  min-height:56px; padding:16px 32px;
+  font-weight:700; letter-spacing:.14em;
+  animation:ctaPulse 2.6s ease-in-out infinite;
+  animation-delay:.6s;   /* offset from the nav CTA so the two don't pulse in lockstep */
+}
+.gate__start .gate__startlabel{ font-size:.875rem; }
+@keyframes ctaPulse{
+  0%,100%{ box-shadow:0 8px 22px rgba(32,30,29,.22), 0 0 0 0 rgba(32,30,29,.20); }
+  50%{ box-shadow:0 8px 22px rgba(32,30,29,.22), 0 0 0 9px rgba(32,30,29,0); }
+}
+/* hover already lifts the button via the shared .btn:hover rule — pause
+   the pulse under a real pointer interaction so the two motions don't
+   fight each other */
+.nav__cta:hover, .gate__start:hover{ animation-play-state:paused; }
+@media (prefers-reduced-motion:reduce){
+  .nav__cta, .gate__start{ animation:none; box-shadow:0 8px 22px rgba(32,30,29,.22); }
+}
+</style>
 </head>
 <body>
 
-<!-- Navigation -->
-<nav>
-  <div class="nav-logo">SULO <span>SYSTEMS</span></div>
-  <ul class="nav-links">
-    <li><a href="#services-detail">Services</a></li>
-    <li><a href="#portfolio-videos">Portfolio</a></li>
-    <li><a href="#about">About</a></li>
-    <li><a href="#contact" class="nav-cta">Get started</a></li>
-  </ul>
-  <button class="nav-hamburger" onclick="document.getElementById('mobileMenu').classList.add('open')" aria-label="Open menu">
-    <span></span><span></span><span></span>
-  </button>
-</nav>
+<!-- ============ DOT FIELD — fixed background layer ============
+     Vanilla port of the React Bits <DotField /> component. Three
+     deliberate changes for this stack, not a literal transcription:
 
-<!-- Mobile Menu Overlay -->
-<div class="nav-mobile-menu" id="mobileMenu">
-  <button class="nav-mobile-close" onclick="document.getElementById('mobileMenu').classList.remove('open')">✕</button>
-  <a href="#services-detail" onclick="document.getElementById('mobileMenu').classList.remove('open')">Services</a>
-  <a href="#portfolio-videos" onclick="document.getElementById('mobileMenu').classList.remove('open')">Portfolio</a>
-  <a href="#about" onclick="document.getElementById('mobileMenu').classList.remove('open')">About</a>
-  <a href="#contact" class="nav-mobile-cta" onclick="document.getElementById('mobileMenu').classList.remove('open')">Get started</a>
+       1. FIXED, NOT IN-FLOW. The React version measures its parent and
+          converts the pointer with `e.pageX - offsetX`, which is right
+          for a component inside a scrolling container. This layer is
+          position:fixed over the viewport, so it uses clientX/clientY
+          directly — with the pageX math the field would slide out from
+          under the cursor the moment you scrolled.
+       2. BLACK, NOT PURPLE. The component defaults to purple dots
+          (rgba(168,85,247,.35)). This design system is explicit that
+          there is no chroma accent (accent === ink), so dots are
+          black at low alpha instead. The component's cursor glow
+          (an SVG radial gradient tracking the pointer) was removed
+          entirely, along with the <svg> element and glow-driving JS
+          it needed — dots only.
+       3. REDUCED MOTION draws one static frame rather than bailing out
+          — a canvas that was never drawn is just a blank rectangle, so
+          the texture stays and only the motion stops. It also pauses
+          on tab-hide, like the hero cycle.
+
+     Sits behind everything (z-index:0, pointer-events:none) and above
+     <body>'s own fixed luminance gradient, so the glass panels have
+     real texture to refract instead of flat colour. -->
+<div class="dotfield" id="dotfield" aria-hidden="true">
+  <canvas id="dotfield-canvas"></canvas>
 </div>
 
-<!-- Hero -->
-<section class="hero" id="hero">
-  <div class="hero-content">
-    <div class="hero-eyebrow">Toronto · AI-first · Built to last</div>
-    <h1 class="hero-headline">The advantage<br>you've been <em>missing</em></h1>
-    <p class="hero-sub">The right tools turn good businesses into great ones. See clearly. Move faster. Win.</p>
 
-    <div class="narrative-grid">
-      <div class="narrative-card card-1">
-        <div class="card-step">1</div>
-        <div class="card-title">YOUR COMPETITORS HAVE BETTER DATA THAN YOU</div>
-        <div class="card-body">The businesses winning right now aren't smarter — they're better equipped. Real-time insights, automated workflows, and technology that tells them exactly where to move next.</div>
-      </div>
-      <div class="narrative-card card-2">
-        <div class="card-step">2</div>
-        <div class="card-title">WE LEVEL THE PLAYING FIELD</div>
-        <div class="card-body">We bring enterprise-grade technology directly to you. Built in Toronto. AI-first from day one. Fixed scope, transparent timelines, zero surprises. Just clean software that ships.</div>
-      </div>
-      <div class="narrative-card card-3">
-        <div class="card-step">3</div>
-        <div class="card-title">WITH TOOLS BUILT FOR BUSINESSES THAT MEAN BUSINESS</div>
-        <div class="card-body">Custom Web Apps & CRM · AI Agents & Chatbots · Salesforce Integrations · High-converting Landing Pages</div>
-      </div>
-    </div>
+<!-- ============================================================
+     LIQUID GLASS — the WebGL effect from liquid-glass.ybouane.com,
+     recreated as an SVG filter driven by backdrop-filter.
 
-    <div class="hero-ctas">
-      <button class="btn-primary" onclick="document.getElementById('contact').scrollIntoView({behavior:'smooth'})">Request a demo</button>
-      <a href="#portfolio-videos" class="btn-secondary">See our work →</a>
+     The library copies the DOM behind the element into a WebGL texture and
+     refracts it in a fragment shader. The same idea works without WebGL:
+     backdrop-filter can take url(#filter), and feDisplacementMap bends the
+     live backdrop by sampling it through a displacement map. Three passes at
+     slightly different strengths, recombined per channel, give the chromatic
+     aberration the shader produces at the rim.
+
+     Chromium honours url() in backdrop-filter. Safari and Firefox do not, and
+     fall back to the blur+saturate declaration above it.
+     ============================================================ -->
+<svg class="lg-defs" width="0" height="0" aria-hidden="true" focusable="false">
+  <defs>
+    <filter id="lg-nav" x="-15%" y="-60%" width="130%" height="220%"
+            color-interpolation-filters="sRGB" filterUnits="objectBoundingBox"
+            primitiveUnits="userSpaceOnUse">
+      <feImage href="data:image/svg+xml;utf8,%3Csvg%20xmlns%3D%22http%3A%2F%2Fwww.w3.org%2F2000%2Fsvg%22%20width%3D%221200%22%20height%3D%2280%22%20viewBox%3D%220%200%201200%2080%22%3E%3Cdefs%3E%3ClinearGradient%20id%3D%22g%22%20x1%3D%220%22%20y1%3D%220%22%20x2%3D%221%22%20y2%3D%220%22%3E%3Cstop%20offset%3D%220%22%20stop-color%3D%22rgb%28255%2C128%2C128%29%22%2F%3E%3Cstop%20offset%3D%220.045%22%20stop-color%3D%22rgb%28128%2C128%2C128%29%22%2F%3E%3Cstop%20offset%3D%220.955%22%20stop-color%3D%22rgb%28128%2C128%2C128%29%22%2F%3E%3Cstop%20offset%3D%221%22%20stop-color%3D%22rgb%280%2C128%2C128%29%22%2F%3E%3C%2FlinearGradient%3E%3C%2Fdefs%3E%3Crect%20width%3D%221200%22%20height%3D%2280%22%20fill%3D%22url%28%23g%29%22%2F%3E%3C%2Fsvg%3E" result="mapx" preserveAspectRatio="none"
+               x="0" y="0" width="100%" height="100%"/>
+      <feImage href="data:image/svg+xml;utf8,%3Csvg%20xmlns%3D%22http%3A%2F%2Fwww.w3.org%2F2000%2Fsvg%22%20width%3D%221200%22%20height%3D%2280%22%20viewBox%3D%220%200%201200%2080%22%3E%3Cdefs%3E%3ClinearGradient%20id%3D%22g%22%20x1%3D%220%22%20y1%3D%220%22%20x2%3D%220%22%20y2%3D%221%22%3E%3Cstop%20offset%3D%220%22%20stop-color%3D%22rgb%28128%2C255%2C128%29%22%2F%3E%3Cstop%20offset%3D%220.34%22%20stop-color%3D%22rgb%28128%2C128%2C128%29%22%2F%3E%3Cstop%20offset%3D%220.66%22%20stop-color%3D%22rgb%28128%2C128%2C128%29%22%2F%3E%3Cstop%20offset%3D%221%22%20stop-color%3D%22rgb%28128%2C0%2C128%29%22%2F%3E%3C%2FlinearGradient%3E%3C%2Fdefs%3E%3Crect%20width%3D%221200%22%20height%3D%2280%22%20fill%3D%22url%28%23g%29%22%2F%3E%3C%2Fsvg%3E" result="mapy" preserveAspectRatio="none"
+               x="0" y="0" width="100%" height="100%"/>
+
+      <feDisplacementMap in="SourceGraphic" in2="mapx" scale="46"
+                         xChannelSelector="R" yChannelSelector="G" result="prx"/>
+      <feDisplacementMap in="prx" in2="mapy" scale="22"
+                         xChannelSelector="R" yChannelSelector="G" result="pr"/>
+
+      <feDisplacementMap in="SourceGraphic" in2="mapx" scale="40"
+                         xChannelSelector="R" yChannelSelector="G" result="pgx"/>
+      <feDisplacementMap in="pgx" in2="mapy" scale="19"
+                         xChannelSelector="R" yChannelSelector="G" result="pg"/>
+
+      <feDisplacementMap in="SourceGraphic" in2="mapx" scale="34"
+                         xChannelSelector="R" yChannelSelector="G" result="pbx"/>
+      <feDisplacementMap in="pbx" in2="mapy" scale="16"
+                         xChannelSelector="R" yChannelSelector="G" result="pb"/>
+      <!-- keep R from the strongest pass, G from the middle, B from the
+           weakest: that offset between channels IS chromatic aberration -->
+      <feColorMatrix in="pr" type="matrix" result="cr"
+        values="1 0 0 0 0  0 0 0 0 0  0 0 0 0 0  0 0 0 1 0"/>
+      <feColorMatrix in="pg" type="matrix" result="cg"
+        values="0 0 0 0 0  0 1 0 0 0  0 0 0 0 0  0 0 0 1 0"/>
+      <feColorMatrix in="pb" type="matrix" result="cb"
+        values="0 0 0 0 0  0 0 0 0 0  0 0 1 0 0  0 0 0 1 0"/>
+      <feBlend in="cr" in2="cg" mode="screen" result="crg"/>
+      <feBlend in="crg" in2="cb" mode="screen" result="rgb"/>
+      <feGaussianBlur in="rgb" stdDeviation="0.4" result="soft"/>
+      <feComponentTransfer in="soft">
+        <feFuncR type="linear" slope="1.04" intercept="0.005"/>
+        <feFuncG type="linear" slope="1.04" intercept="0.005"/>
+        <feFuncB type="linear" slope="1.05" intercept="0.006"/>
+      </feComponentTransfer>
+    </filter>
+  </defs>
+</svg>
+
+<!-- ============ INTRO LOADER ============
+     vanlent.dev's opener: the wordmark's letters spread edge to edge in a
+     hairline weight, fade in one at a time, pulse together, then the whole
+     panel wipes away. Kept short — 1.5s total — because a loader on a static
+     page is theatre, and long theatre is just a delay.
+     ================================================== -->
+<a class="skip-link" href="#main">Skip to content</a>
+
+<!-- ============ 01 · NAV ============ -->
+<header class="nav">
+  <div class="nav__inner">
+    <a class="lockup" href="#top" aria-label="Sulo Systems, home">
+      <svg class="lockup__mark" width="28" height="32" viewBox="0 0 28 32" fill="none" aria-hidden="true">
+        <path d="M14 1 27 8.5v15L14 31 1 23.5v-15L14 1Z" stroke="#201e1d" stroke-width="1.5" stroke-linejoin="round"/>
+        <path d="M14 1v15m0 0 13-7.5M14 16 1 8.5M14 16v15" stroke="#201e1d" stroke-width="1.5" stroke-linejoin="round"/>
+      </svg>
+      <span class="lockup__txt">Sulo<span>Systems</span></span>
+    </a>
+
+    <nav class="nav__links" aria-label="Primary">
+            <a href="#work">Work</a>
+      <a href="#about">About</a>
+    </nav>
+
+    <a class="btn nav__cta" href="#contact">Book a call</a>
+
+    <button class="nav__toggle" id="nav-toggle" type="button" aria-expanded="false" aria-controls="nav-drawer" aria-label="Open menu">
+      <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="#201e1d" stroke-width="1.5" stroke-linecap="round" aria-hidden="true">
+        <path d="M3 6h18M3 12h18M3 18h18"/>
+      </svg>
+    </button>
+  </div>
+
+  <div class="nav__drawer" id="nav-drawer" data-open="false">
+        <a href="#work">Work</a>
+    <a href="#about">About</a>
+    <a href="#contact">Book a call</a>
+  </div>
+</header>
+
+<main id="main">
+
+<!-- ============ 02 · HERO ============ -->
+<section class="hero" id="top">
+  <div class="wrap">
+    <div class="hero__grid">
+
+      <div class="hero__copy hero-in">
+        <p class="kicker">Toronto · AI-first · Built to last.</p>
+        <h1 class="hero__h1 hero__h1--cycle" id="hero-h1">
+          <span class="hero__h1-lead">We increase your revenue through</span>
+          <span class="hcube-wrap" id="hcube-wrap">
+            <span class="hcube" id="hcube">
+              <span class="hcube__face hcube__face--front is-current" data-i="0">
+                Websites
+              </span>
+              <span class="hcube__face hcube__face--top" data-i="1">
+                Apps
+              </span>
+              <span class="hcube__face hcube__face--back" data-i="2">
+                SEO
+              </span>
+              <span class="hcube__face hcube__face--bottom" data-i="3">
+                AI-agents
+              </span>
+            </span>
+          </span>
+          <span class="hero__h1-static">We increase your revenue through Websites, Apps, SEO and AI-agents.</span>
+        </h1>
+
+        <!-- Email gate → expands into the full brief form -->
+        <div class="gate" id="gate" data-expanded="false" data-sent="false">
+          <form class="gate__form" id="gate-form" novalidate>
+            <div class="gate__row">
+              <div class="field">
+                <label for="gate-email">Your email</label>
+                <input class="input" type="email" id="gate-email" name="email" autocomplete="email" inputmode="email" placeholder="you@company.com" required aria-describedby="gate-email-err">
+                <p class="field__err" id="gate-email-err" role="alert"></p>
+              </div>
+              <button class="btn gate__start" type="submit" style="align-self:flex-end;">
+                <span class="gate__startlabel">Start</span>
+                <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M5 12h14M13 6l6 6-6 6"/></svg>
+              </button>
+            </div>
+
+            <div class="gate__more" id="gate-more">
+              <div class="field">
+                <label for="gate-name">Your name</label>
+                <input class="input" type="text" id="gate-name" name="name" autocomplete="name" required aria-describedby="gate-name-err">
+                <p class="field__err" id="gate-name-err" role="alert"></p>
+              </div>
+              <div class="field">
+                <label for="gate-what">What are you building?</label>
+                <textarea class="input" id="gate-what" name="what" rows="3" required aria-describedby="gate-what-err"></textarea>
+                <p class="field__err" id="gate-what-err" role="alert"></p>
+              </div>
+              <button class="btn" type="submit" style="justify-self:start;">Send</button>
+            </div>
+          </form>
+
+          <div class="gate__ok glass glass--sm" role="status">
+            <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="#201e1d" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true" style="flex:none;margin-top:2px"><path d="M20 6 9 17l-5-5"/></svg>
+            <div>
+              <strong>Got it.</strong>
+              <span style="color:var(--ink-70)">We reply within one business day, from Toronto.</span>
+            </div>
+          </div>
+          <p class="hint">No newsletter. No sequence. One reply from a person.</p>
+        </div>
+
+        <ul class="stats">
+          <li class="stat"><span class="stat__n">100%</span><span class="stat__l">Canadian team, in Toronto</span></li>
+          <li class="stat"><span class="stat__n">Fixed</span><span class="stat__l">Scope and price, up front</span></li>
+          <li class="stat"><span class="stat__n">One</span><span class="stat__l">Team across all five parts</span></li>
+        </ul>
+      </div>
+
+      <!-- Glass browser over a B&W render: glass has a real backing -->
+      <div class="hero__art">
+        <div class="artframe">
+          <!-- .orb canvas removed: it never had a JS driver in any
+               version of this file (checked back to index23) — an empty
+               canvas element, not a live rotating sphere. -->
+          <div class="artframe__glass glass browser hero-shot">
+            <div class="browser__bar">
+              <span class="browser__dots" aria-hidden="true"><i></i><i></i><i></i></span>
+              <span class="browser__url" id="hero-shot-label">Websites</span>
+            </div>
+            <div class="hero-shot__body">
+              <!-- All four are in the DOM and preloaded (no loading="lazy": these are
+                   above the fold, and swapping a single src mid-cycle showed an empty
+                   panel on the first pass through each word on a cold cache). Only the
+                   opacity changes per step, so nothing fetches mid-animation. -->
+              <img class="hero-shot__img is-on" data-i="0" src="websites.hover.webp" alt="" aria-hidden="true" decoding="async">
+              <img class="hero-shot__img" data-i="1" src="apps.hover.webp" alt="" aria-hidden="true" decoding="async">
+              <img class="hero-shot__img" data-i="2" src="SEO.hover.webp" alt="" aria-hidden="true" decoding="async">
+              <img class="hero-shot__img" data-i="3" src="AI-agents.hover.webp" alt="" aria-hidden="true" decoding="async">
+            </div>
+          </div>
+
+          <!-- The floating "Still reading / Past the fold. Past the price."
+               badge was removed here: it sat over the bottom-right of the
+               preview panel and covered real content in the screenshots
+               (the call controls in the AI-agents shot). Its CSS lives in
+               the shared stylesheet and is left untouched, so earlier
+               index* files still render it. -->
+        </div>
+      </div>
+
     </div>
   </div>
 </section>
 
-<!-- Stats: Amber -->
-<section class="stats">
-  <div class="stats-grid">
-    <div class="stat-item">
-      <div class="stat-value">100%</div>
-      <div class="stat-label">Canadian talent</div>
-    </div>
-    <div class="stat-item">
-      <div class="stat-value">AI-first</div>
-      <div class="stat-label">Every engagement</div>
-    </div>
-    <div class="stat-item">
-      <div class="stat-value">4×</div>
-      <div class="stat-label">Faster than agencies</div>
-    </div>
+
+
+<!-- ============ 09 · WORK ============ -->
+<section class="section work--bg" id="work">
+  <div class="work-bg" aria-hidden="true">
+    <img src="websites.hover.webp" alt="" loading="lazy" decoding="async">
+    <img src="apps.hover.webp" alt="" loading="lazy" decoding="async">
+    <img src="SEO.hover.webp" alt="" loading="lazy" decoding="async">
+    <img src="AI-agents.hover.webp" alt="" loading="lazy" decoding="async">
   </div>
-</section>
+  <div class="wrap">
+    <div class="sec-head">
+      <h2 class="h2 wipe">What we've shipped</h2>
+      <p class="lede">A sample of what we’ve built — sites, systems and software.</p>
+    </div>
 
-<!-- Portfolio Videos -->
-<section class="portfolio-videos" id="portfolio-videos">
-  <div class="section-eyebrow" style="color:#7C3AED;">Our work</div>
-  <h2 class="section-title">Portfolio</h2>
-  <p class="section-sub">Latest projects and case studies</p>
-  <div class="carousel-wrap">
-    <div class="carousel-container">
-      <div class="carousel-track" id="carouselTrack">
-        <!-- Portfolio Video 1 -->
-		<div class="video-card">
-		<div class="video-card">
-		  <iframe
-			src="media/opus-panel-video.html"
-			style="width:100%;height:100%;border:none;border-radius:16px;"
-			scrolling="no"
-		  ></iframe>
-		</div>
-		</div>
-		<!-- Portfolio Video 2 -->
-        <div class="video-card">
-		<div class="video-card">
-		  <iframe
-			src="media/quinn-vq-reel.html"
-			style="width:100%;height:100%;border:none;border-radius:16px;"
-			scrolling="no"
-		  ></iframe>
-		</div>
-		</div>        
-		<!-- Portfolio Video 3 -->
-        <div class="video-card">
-		<div class="video-card">
-		  <iframe
-			src="media/therapybyniha-reel.html"
-			style="width:100%;height:100%;border:none;border-radius:16px;"
-			scrolling="no"
-		  ></iframe>
-		</div>
-		</div>
-        <!-- Portfolio Video 4 -->
-		<div class="video-card">
-		<div class="video-card" style="position:relative;">
-		  <iframe
-			id="vm1"
-			src="https://player.vimeo.com/video/1214643039?badge=0&autopause=0&autoplay=1&muted=1&loop=1&background=1"
-			style="width:100%;height:100%;border:none;border-radius:16px;"
-			allow="autoplay; fullscreen; picture-in-picture"
-		  ></iframe>
+    <div class="railwrap">
+    <div class="rail__track" id="rail-track">
+    <div class="rail__stage" id="rail-stage">
+    <div class="rail__viewport" id="rail-viewport" tabindex="0" role="region" aria-label="Project cards, scrollable">
+    <div class="rail__row" id="rail-row">
+      <article class="wcard">
+        <div class="wcard__in">
+          <span class="wcard__icon" aria-hidden="true"><svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><path d="M6 2 3 6v14a2 2 0 0 0 2 2h14a2 2 0 0 0 2-2V6l-3-4z"/><path d="M3 6h18"/><path d="M16 10a4 4 0 0 1-8 0"/></svg></span>
+          <h3 class="wcard__h">Luxury Appliance Showcase</h3>
+          <p class="wcard__b">A cinematic, scroll-driven brand site for a high-ticket kitchen appliance retailer &mdash; real footage, no stock photography, built to earn trust before a visitor ever sees a price.</p>
+          <div class="wcard__mock">
+            <span class="label">Premium brand, zero templates</span>
+            <div class="bar bar--tall bar--solid bar--mid"></div>
+            <div class="bar bar--wide"></div>
+            <div class="row"><button class="wcard__more" type="button" data-wmodal="websites" aria-haspopup="dialog">View more</button></div>
+          </div>
+        </div>
+      </article>
+      <article class="wcard">
+        <div class="wcard__in">
+          <span class="wcard__icon" aria-hidden="true"><svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="4" width="18" height="18" rx="2"/><path d="M16 2v4M8 2v4M3 10h18M7.5 15.5h2l1.5 2.5 1.5-5 1.2 2.5h2.8"/></svg></span>
+          <h3 class="wcard__h">Clinic Scheduling &amp; Records</h3>
+          <p class="wcard__b">A booking and patient-history system for a medical clinic &mdash; appointments, intake and history in one place instead of split across three.</p>
+          <div class="wcard__mock">
+            <span class="label">Built for daily clinical use</span>
+            <div class="bar bar--wide"></div>
+            <div class="bar bar--mid bar--solid"></div>
+            <div class="bar bar--short"></div>
+            <div class="row"><button class="wcard__more" type="button" data-wmodal="apps" aria-haspopup="dialog">View more</button></div>
+          </div>
+        </div>
+      </article>
+      <article class="wcard">
+        <div class="wcard__in">
+          <span class="wcard__icon" aria-hidden="true"><svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><circle cx="11" cy="11" r="7"/><path d="m20.5 20.5-4-4"/><path d="M8.5 12.5 11 10l1.5 1.5L15 9"/></svg></span>
+          <h3 class="wcard__h">Home Services &mdash; Search &amp; Conversion</h3>
+          <p class="wcard__b">A rebuilt site and SEO program for a carpet-cleaning business, aimed at turning local search traffic into booked jobs instead of renting it back every month.</p>
+          <div class="wcard__mock">
+            <span class="label">Ranking for the work they actually do</span>
+            <div class="bar bar--mid bar--solid"></div>
+            <div class="bar bar--wide"></div>
+            <div class="row"><button class="wcard__more" type="button" data-wmodal="seo" aria-haspopup="dialog">View more</button></div>
+          </div>
+        </div>
+      </article>
+      <article class="wcard">
+        <div class="wcard__in">
+          <span class="wcard__icon" aria-hidden="true"><svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><path d="M9 4H7a2 2 0 0 0-2 2v13a2 2 0 0 0 2 2h10a2 2 0 0 0 2-2V6a2 2 0 0 0-2-2h-2"/><rect x="9" y="2" width="6" height="4" rx="1"/><path d="M9 11h6M9 15h4"/></svg></span>
+          <h3 class="wcard__h">Inventory &amp; Invoice Management</h3>
+          <p class="wcard__b">A custom inventory and invoicing system built for a university department, replacing manual tracking with one system everyone works from.</p>
+          <div class="wcard__mock">
+            <span class="label">Built to replace spreadsheets</span>
+            <div class="bar bar--wide bar--solid"></div>
+            <div class="bar bar--mid"></div>
+            <div class="row"><button class="wcard__more" type="button" data-wmodal="inventory" aria-haspopup="dialog">View more</button></div>
+          </div>
+        </div>
+      </article>
+      <article class="wcard">
+        <div class="wcard__in">
+          <span class="wcard__icon" aria-hidden="true"><svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><path d="M21 11.5a8.5 8.5 0 0 1-8.5 8.5 8.4 8.4 0 0 1-3.8-.9L3 21l1.9-5.7a8.4 8.4 0 0 1-.9-3.8 8.5 8.5 0 0 1 8.5-8.5h.5a8.5 8.5 0 0 1 8 8z"/><circle cx="9" cy="11.5" r=".9" fill="currentColor" stroke="none"/><circle cx="12.5" cy="11.5" r=".9" fill="currentColor" stroke="none"/><circle cx="16" cy="11.5" r=".9" fill="currentColor" stroke="none"/></svg></span>
+          <h3 class="wcard__h">Quinn AI</h3>
+          <p class="wcard__b">An agent that answers on the page in real time, so the enquiry that used to arrive at midnight and sit unread turns into a booking instead.</p>
+          <div class="wcard__mock">
+            <span class="label">Visitors &rarr; bookings</span>
+            <p class="bubble">Best time to see the islands?</p>
+            <p class="bubble bubble--me">Late afternoon. I can hold 4:30.</p>
+            <div class="row"><button class="wcard__more" type="button" data-wmodal="ai-agents" aria-haspopup="dialog">View more</button></div>
+          </div>
+        </div>
+      </article>
+      <article class="wcard">
+        <div class="wcard__in">
+          <span class="wcard__icon" aria-hidden="true"><svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="3" width="7" height="9" rx="1"/><rect x="14" y="3" width="7" height="5" rx="1"/><rect x="14" y="12" width="7" height="9" rx="1"/><rect x="3" y="16" width="7" height="5" rx="1"/></svg></span>
+          <h3 class="wcard__h">Custom CRM Portal</h3>
+          <p class="wcard__b">A $40k/yr SaaS subscription replaced with a system shaped around how the business already worked, rather than the other way round.</p>
+          <div class="wcard__mock">
+            <span class="label">&minus;70&#37; software cost</span>
+            <div class="bar bar--wide"></div>
+            <div class="bar bar--mid bar--solid"></div>
+            <div class="bar bar--short"></div>
+          </div>
+        </div>
+      </article>
+      <article class="wcard">
+        <div class="wcard__in">
+          <span class="wcard__icon" aria-hidden="true"><svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><path d="M3 3v18h18"/><path d="M7 16v-5M12 16V7M17 16v-8"/></svg></span>
+          <h3 class="wcard__h">Revenue Dashboards</h3>
+          <p class="wcard__b">Where the leads came from, what they cost and which ones turned into money &mdash; on one screen, pulled from the live system rather than a spreadsheet someone updates on Fridays.</p>
+          <div class="wcard__mock">
+            <span class="label">Built per client</span>
+            <div class="bar bar--mid bar--solid"></div>
+            <div class="bar bar--wide"></div>
+          </div>
+        </div>
+      </article>
+      <span class="rail__spacer" aria-hidden="true"></span>
+    </div>
+    </div>
+    </div>
+    </div>
+    </div>
 
-		  <button onclick="toggleVimeo('vm1', this)" style="
-			position:absolute;
-			bottom:16px;
-			right:16px;
-			width:44px;
-			height:44px;
-			border-radius:50%;
-			border:none;
-			background:rgba(255,255,255,0.92);
-			cursor:pointer;
-			font-size:16px;
-			box-shadow:0 4px 12px rgba(0,0,0,0.2);
-			z-index:10;
-		  ">🔊</button>
-		</div>
-		</div>
-    <!--    <div class="video-card"><div class="video-placeholder" style="background:linear-gradient(135deg,#fa709a,#fee140)"><div class="play-button"></div></div></div> -->
-    <!--    <div class="video-card"><div class="video-placeholder" style="background:linear-gradient(135deg,#a18cd1,#fbc2eb)"><div class="play-button"></div></div></div> -->
+    <div class="railnav">
+      <button class="railbtn" id="rail-prev" type="button" aria-label="Previous project" aria-controls="rail-viewport">
+        <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M19 12H5M11 18l-6-6 6-6"/></svg>
+      </button>
+      <button class="railbtn" id="rail-next" type="button" aria-label="Next project" aria-controls="rail-viewport">
+        <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M5 12h14M13 6l6 6-6 6"/></svg>
+      </button>
+    </div>
+
+    <!-- Screenshot modals, one per card that has a View more button.
+         Each caption <b> is the matching card's <h3> VERBATIM and each
+         --ar is that image's real measured ratio (see .wmodal__panel).
+         If a card heading is ever reworded, reword its caption too -
+         they are meant to read as the same label twice.
+
+         loading is "eager", not "lazy", on purpose: an unopened
+         <dialog> is display:none, and a lazy image inside a
+         display:none subtree is never fetched, so the first click
+         would have opened onto an empty panel and filled in
+         afterwards. Four of these five are already downloaded anyway
+         for the .work-bg collage behind this section, so eager costs
+         exactly one extra request (inventory, 9.9KB).
+         fetchpriority="low" keeps them behind real above-the-fold
+         content. -->
+    <dialog class="wmodal" id="wm-websites" aria-labelledby="wm-websites-cap" style="--ar:900/491">
+      <div class="wmodal__panel">
+        <button class="wmodal__close" type="button" data-wmodal-close aria-label="Close preview">
+          <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" aria-hidden="true"><path d="M18 6 6 18M6 6l12 12"/></svg>
+        </button>
+        <img src="websites.hover.webp" alt="Luxury appliance showcase &mdash; scroll-driven brand site" loading="eager" fetchpriority="low" decoding="async">
+        <p class="wmodal__cap" id="wm-websites-cap"><span>Premium e-commerce</span><b>Luxury Appliance Showcase</b></p>
       </div>
-    </div>
-    <div class="carousel-controls">
-      <button class="carousel-btn" id="prevBtn" onclick="moveCarousel(-1)">←</button>
-      <div class="carousel-dots">
-        <span class="dot active" onclick="goToSlide(0)"></span>
-        <span class="dot" onclick="goToSlide(1)"></span>
+    </dialog>
+    <dialog class="wmodal" id="wm-apps" aria-labelledby="wm-apps-cap" style="--ar:900/471">
+      <div class="wmodal__panel">
+        <button class="wmodal__close" type="button" data-wmodal-close aria-label="Close preview">
+          <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" aria-hidden="true"><path d="M18 6 6 18M6 6l12 12"/></svg>
+        </button>
+        <img src="apps.hover.webp" alt="Clinic scheduling and patient-records dashboard" loading="eager" fetchpriority="low" decoding="async">
+        <p class="wmodal__cap" id="wm-apps-cap"><span>Healthcare systems</span><b>Clinic Scheduling &amp; Records</b></p>
       </div>
-      <button class="carousel-btn" id="nextBtn" onclick="moveCarousel(1)">→</button>
+    </dialog>
+    <dialog class="wmodal" id="wm-seo" aria-labelledby="wm-seo-cap" style="--ar:900/563">
+      <div class="wmodal__panel">
+        <button class="wmodal__close" type="button" data-wmodal-close aria-label="Close preview">
+          <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" aria-hidden="true"><path d="M18 6 6 18M6 6l12 12"/></svg>
+        </button>
+        <img src="SEO.hover.webp" alt="Before-and-after organic search performance comparison" loading="eager" fetchpriority="low" decoding="async">
+        <p class="wmodal__cap" id="wm-seo-cap"><span>Local SEO</span><b>Home Services &mdash; Search &amp; Conversion</b></p>
+      </div>
+    </dialog>
+    <dialog class="wmodal" id="wm-inventory" aria-labelledby="wm-inventory-cap" style="--ar:900/431">
+      <div class="wmodal__panel">
+        <button class="wmodal__close" type="button" data-wmodal-close aria-label="Close preview">
+          <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" aria-hidden="true"><path d="M18 6 6 18M6 6l12 12"/></svg>
+        </button>
+        <img src="inventory.hover.webp" alt="Inventory and invoice management system &mdash; stock and invoice records" loading="eager" fetchpriority="low" decoding="async">
+        <p class="wmodal__cap" id="wm-inventory-cap"><span>Internal software</span><b>Inventory &amp; Invoice Management</b></p>
+      </div>
+    </dialog>
+    <dialog class="wmodal" id="wm-ai-agents" aria-labelledby="wm-ai-agents-cap" style="--ar:900/563">
+      <div class="wmodal__panel">
+        <button class="wmodal__close" type="button" data-wmodal-close aria-label="Close preview">
+          <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" aria-hidden="true"><path d="M18 6 6 18M6 6l12 12"/></svg>
+        </button>
+        <img src="AI-agents.hover.webp" alt="AI chat and voice agent handling a customer enquiry live" loading="eager" fetchpriority="low" decoding="async">
+        <p class="wmodal__cap" id="wm-ai-agents-cap"><span>AI chatbot</span><b>Quinn AI</b></p>
+      </div>
+    </dialog>
+      </div>
+
+  </div>
+</section>
+
+<!-- ============ 10 · TESTIMONIALS ============ -->
+<section class="section" id="voices">
+  <div class="wrap">
+    <div class="sec-head">
+      <h2 class="h2 wipe">What clients say.</h2>
+      <p class="lede">Attributed by industry. We don’t publish client names or logos without written permission, and we haven’t asked for it.</p>
+    </div>
+
+    <div class="quotes">
+      <figure class="quote">
+        <blockquote>&ldquo;Sulo Systems built exactly what we needed — no bloat, no unnecessary features. Fast turnaround and it just works.&rdquo;</blockquote>
+        <figcaption>Tourism &amp; hospitality client, Canada</figcaption>
+      </figure>
+      <figure class="quote">
+        <blockquote>&ldquo;The AI chatbot they built handles questions we used to answer manually all day. It paid for itself in the first month.&rdquo;</blockquote>
+        <figcaption>Small business owner, Ontario, Canada</figcaption>
+      </figure>
+
+      <figure class="quote">
+        <blockquote>&ldquo;We were spending on Google Ads every month just to keep the phone ringing. Sulo rebuilt the site and got us ranking for what we actually do. We’ve since turned the ads off and the calls haven’t stopped.&rdquo;</blockquote>
+        <figcaption>Service business owner, Ontario, Canada</figcaption>
+      </figure>
     </div>
   </div>
 </section>
 
-<!-- Recent Work: Emerald -->
-<section class="work" id="work">
-  <div class="section-eyebrow" style="color:#10B981;margin-bottom:0.6rem;">Recent work</div>
-  <h2 class="section-title">What we've shipped</h2>
-  <p class="section-sub" style="color:#065F46;margin-bottom:3rem;">Real projects. Real results.</p>
-  <div class="work-grid">
-    <div class="work-item">
-      <div class="work-category">AI · Chatbot</div>
-      <h3 class="work-title">Quinn AI</h3>
-      <p class="work-desc">Intelligent trip planning chatbot with real-time recommendations that converts visitors into bookings.</p>
-      <a href="#" class="work-link">View project →</a>
+<!-- ============ 11 · ABOUT ============ -->
+<section class="section" id="about">
+  <div class="wrap">
+    <div class="sec-head">
+      <h2 class="h2 wipe">Built by onshore engineers.</h2>
+      <p class="lede">Every line of this is written in Toronto by people you can get on a call. No offshore contractors, no overnight handoffs, no account manager relaying your changes to someone you will never meet.</p>
     </div>
-    <div class="work-item">
-      <div class="work-category">Web App</div>
-      <h3 class="work-title">Custom CRM Portal</h3>
-      <p class="work-desc">Replaced a $40k/yr SaaS subscription with a fully custom system — reduced software costs by 70%.</p>
-      <a href="#" class="work-link">View project →</a>
-    </div>
-    <div class="work-item">
-      <div class="work-category">Integration</div>
-      <h3 class="work-title">Salesforce Data Bridge</h3>
-      <p class="work-desc">Real-time sync between legacy ERP and Salesforce. Zero manual entry. Live reporting across both systems.</p>
-      <a href="#" class="work-link">View project →</a>
+
+    <div class="about__grid">
+      <div class="about__pt"><h3>Onshore, end to end</h3><p>Designed, built and maintained by our own team in Toronto. The person who takes your call is the person who changes the page.</p></div>
+      <div class="about__pt"><h3>One team, all five parts</h3><p>The people who design the site also wire up the tracking and read the numbers. Nothing gets lost between an agency, a developer and whoever runs your ads.</p></div>
+      <div class="about__pt"><h3>Fixed scope, no drift</h3><p>Scope and price agreed before we start. If it changes you see the cost first, and you get to say no.</p></div>
     </div>
   </div>
 </section>
 
-<!-- Services Grid -->
-<section class="services-grid-section" id="services-detail">
-  <div class="section-eyebrow" style="color:#7C3AED;margin-bottom:0.6rem;">What we build</div>
-  <h2 class="section-title">Our services</h2>
-  <p class="section-sub">Enterprise-grade tools, built for your scale</p>
-  <div class="services-grid">
-    <div class="service-card">
-      <div class="service-icon">⚙️</div>
+<!-- ============ 13 · CONTACT ============ -->
+<section class="section" id="contact">
+  <div class="wrap">
+    <div class="contact__grid">
       <div>
-        <h3 class="service-card-title">Custom Web Apps & CRM</h3>
-        <p class="service-card-desc">Tailored systems built around your workflow. From customer portals to full CRM replacements that actually fit your business.</p>
+        <p class="kicker">Contact</p>
+        <h2 class="h2 wipe">Let&rsquo;s build something.</h2>
+        <p class="lede" style="margin-top:var(--s-3)">Tell us what you sell and who you sell it to. We’ll tell you whether we’re the right people for it, and roughly what it costs, on the first call.</p>
+        <p class="hint" style="margin-top:var(--s-4)">One business day reply. Toronto, Canada.</p>
       </div>
-    </div>
-    <div class="service-card">
-      <div class="service-icon">🤖</div>
-      <div>
-        <h3 class="service-card-title">AI Agents, Chatbots & Voice</h3>
-        <p class="service-card-desc">Intelligent agents that convert visitors, answer questions 24/7, and integrate with your existing systems seamlessly.</p>
-      </div>
-    </div>
-    <div class="service-card">
-      <div class="service-icon">🔗</div>
-      <div>
-        <h3 class="service-card-title">Salesforce Integrations</h3>
-        <p class="service-card-desc">Enterprise-grade data bridges between your tools — without the enterprise complexity or the enterprise price tag.</p>
-      </div>
-    </div>
-    <div class="service-card">
-      <div class="service-icon">🚀</div>
-      <div>
-        <h3 class="service-card-title">Landing Pages</h3>
-        <p class="service-card-desc">High-converting pages built fast, tested thoroughly, and deployed with confidence. Performance-driven from pixel one.</p>
-      </div>
+
+      <form class="form" id="contact-form" data-sent="false" novalidate>
+        <div class="form__summary glass glass--sm" id="form-summary" tabindex="-1" role="alert" data-show="false">
+          <h3>Check these fields</h3>
+          <ul id="form-summary-list"></ul>
+        </div>
+
+        <div class="form__fields">
+          <div class="field">
+            <label for="c-name">Name</label>
+            <input class="input" type="text" id="c-name" name="name" autocomplete="name" required aria-describedby="c-name-err">
+            <p class="field__err" id="c-name-err" aria-live="polite"></p>
+          </div>
+          <div class="field">
+            <label for="c-email">Email</label>
+            <input class="input" type="email" id="c-email" name="email" autocomplete="email" inputmode="email" required aria-describedby="c-email-err">
+            <p class="field__err" id="c-email-err" aria-live="polite"></p>
+          </div>
+          <div class="field">
+            <label for="c-what">What are you building?</label>
+            <textarea class="input" id="c-what" name="what" rows="4" required aria-describedby="c-what-err"></textarea>
+            <p class="field__err" id="c-what-err" aria-live="polite"></p>
+          </div>
+          <button class="btn" type="submit" id="c-submit" style="justify-self:start">Send message</button>
+        </div>
+
+        <div class="form__ok glass glass--sm" role="status">
+          <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="#201e1d" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true" style="flex:none;margin-top:2px"><path d="M20 6 9 17l-5-5"/></svg>
+          <div><strong>Message sent.</strong> <span style="color:var(--ink-70)">We reply within one business day.</span></div>
+        </div>
+      </form>
     </div>
   </div>
 </section>
 
-<!-- Testimonials: Deep Indigo -->
-<section class="testimonials">
-  <div class="section-eyebrow" style="color:#A78BFA;text-align:center;margin-bottom:0.6rem;">What clients say</div>
-  <h2 class="section-title" style="text-align:center;color:#fff;margin-bottom:0.5rem;">Trusted by builders</h2>
-  <p class="section-sub" style="text-align:center;color:rgba(255,255,255,0.45);margin-bottom:3rem;">Real feedback from real partners</p>
-  <div class="testimonials-grid">
-    <div class="testimonial">
-      <p class="testimonial-text">Sulo Systems built exactly what we needed — no bloat, no unnecessary features. They understood our business from day one and delivered ahead of schedule.</p>
-      <div class="testimonial-author">Tourism & Hospitality Client</div>
-      <div class="testimonial-role">Canada</div>
-    </div>
-    <div class="testimonial">
-      <p class="testimonial-text">The AI chatbot they built handles questions we used to answer manually all day. Our team can focus on what matters now. The ROI was immediate.</p>
-      <div class="testimonial-author">Small Business Owner</div>
-      <div class="testimonial-role">Ontario, Canada</div>
-    </div>
-  </div>
-</section>
+</main>
 
-<!-- About -->
-<section class="about" id="about">
-  <div class="about-content">
-    <div class="section-eyebrow" style="color:#10B981;text-align:center;margin-bottom:0.6rem;">About us</div>
-    <h2 class="section-title" style="text-align:center;margin-bottom:1rem;">Built by engineers.<br>Priced for growth.</h2>
-    <p class="about-text">Sulo Systems was founded on a simple idea: small businesses deserve the same quality of technology as enterprise companies — without the enterprise price tag or the offshore handoff. Every project is delivered by our team in Toronto. No outsourcing, no surprises. Just clean, reliable software built to last.</p>
-    <div class="about-pillars">
-      <div class="pillar">
-        <div class="pillar-icon">🇨🇦</div>
-        <div class="pillar-title">100% Canadian</div>
-        <div class="pillar-text">All talent is onshore in Canada. You always know who you're working with.</div>
-      </div>
-      <div class="pillar">
-        <div class="pillar-icon">⚡</div>
-        <div class="pillar-title">AI-first approach</div>
-        <div class="pillar-text">We build AI into every engagement — not as an add-on, but from the ground up.</div>
-      </div>
-      <div class="pillar">
-        <div class="pillar-icon">🎯</div>
-        <div class="pillar-title">Fixed scope, no drift</div>
-        <div class="pillar-text">We define the project clearly before we start. No bill shock at the end.</div>
-      </div>
-    </div>
+<!-- ============ 14 · FOOTER ============ -->
+<footer class="foot">
+  <div class="wrap foot__in">
+    <a class="lockup" href="#top" aria-label="Sulo Systems, back to top">
+      <svg class="lockup__mark" width="24" height="28" viewBox="0 0 28 32" fill="none" aria-hidden="true">
+        <path d="M14 1 27 8.5v15L14 31 1 23.5v-15L14 1Z" stroke="#201e1d" stroke-width="1.5" stroke-linejoin="round"/>
+        <path d="M14 1v15m0 0 13-7.5M14 16 1 8.5M14 16v15" stroke="#201e1d" stroke-width="1.5" stroke-linejoin="round"/>
+      </svg>
+      <span class="lockup__txt">Sulo<span>Systems</span></span>
+    </a>
+    <nav class="foot__links" aria-label="Footer">
+      <a href="#work">Work</a><a href="#contact">Contact</a>
+    </nav>
+    <p class="foot__meta">&copy; 2026 Sulo Systems Inc. · Toronto, Canada</p>
   </div>
-</section>
-
-<!-- Contact: Violet gradient -->
-<section class="contact" id="contact">
-  <div class="section-eyebrow" style="color:rgba(255,255,255,0.55);text-align:center;margin-bottom:0.6rem;">Get in touch</div>
-  <h2 class="section-title" style="margin-bottom:0.6rem;">Let's build something.</h2>
-  <p class="section-sub" style="color:rgba(255,255,255,0.6);margin-bottom:2.5rem;">Tell us what you're working on. We'll reply within one business day.</p>
-  <div class="contact-content">
-    <form class="contact-form" action="https://formspree.io/f/mgodnvaq" method="POST">
-      <div class="form-group">
-        <label for="name">Name</label>
-        <input type="text" id="name" name="name" placeholder="Your name" required>
-      </div>
-      <div class="form-group">
-        <label for="email">Email</label>
-        <input type="email" id="email" name="email" placeholder="your@email.com" required>
-      </div>
-      <div class="form-group">
-        <label for="message">What are you building?</label>
-        <textarea id="message" name="message" placeholder="Tell us about your project…" required></textarea>
-      </div>
-      <button type="submit" class="form-submit">Send message →</button>
-    </form>
-  </div>
-</section>
-
-<!-- Footer -->
-<footer>
-  <p>© 2025 Sulo Systems Inc. · Toronto, Canada</p>
 </footer>
 
+<script src="js/main.js" defer></script>
+<script src="js/scroll-animations.js" defer></script>
+
 <script>
-  let carouselSlide = 0;
-  const totalSlides = 2;
-
-  function moveCarousel(direction) {
-    carouselSlide = (carouselSlide + direction + totalSlides) % totalSlides;
-    updateCarousel();
-  }
-  function goToSlide(i) { carouselSlide = i; updateCarousel(); }
-
-  function updateCarousel() {
-    const track = document.getElementById('carouselTrack');
-    if (!track) return;
-    const container = track.parentElement;
-    const cardW = container.offsetWidth / 3;
-    const gap = 24;
-    track.style.transform = `translateX(-${carouselSlide * 3 * (cardW + gap)}px)`;
-    document.querySelectorAll('.dot').forEach((d, i) => d.classList.toggle('active', i === carouselSlide));
-  }
-
-  updateCarousel();
-  window.addEventListener('resize', updateCarousel);
+/* Pointer-tracked specular — the one part of the shader that needs JS.
+   Everything else (refraction, chromatic aberration, rim) is the SVG filter. */
+(function(){
+  var inner = document.querySelector('.nav__inner');
+  if (!inner) return;
+  var raf = false, px = 50, py = 50;
+  function paint(){ inner.style.setProperty('--lg-x', px + '%');
+                    inner.style.setProperty('--lg-y', py + '%'); raf = false; }
+  window.addEventListener('pointermove', function(e){
+    var r = inner.getBoundingClientRect();
+    var near = e.clientY < r.bottom + 140;
+    inner.style.setProperty('--lg-spec', near ? '1' : '0');
+    if (!near) return;
+    px = ((e.clientX - r.left) / r.width) * 100;
+    py = ((e.clientY - r.top) / r.height) * 100;
+    if (!raf){ raf = true; requestAnimationFrame(paint); }
+  }, {passive:true});
+  window.addEventListener('pointerleave', function(){
+    inner.style.setProperty('--lg-spec','0');
+  }, {passive:true});
+})();
 </script>
+
+
+
+
+
+
+
+
+
 <script>
-  function toggleVideo(id, btn) {
-    const vid = document.getElementById(id);
-    if (vid.muted) {
-      // First click: unmute, play from start with sound
-      vid.muted = false;
-      vid.currentTime = 0;
-      vid.loop = false;
-      vid.play();
-      btn.textContent = '⏸';
-    } else if (vid.paused) {
-      vid.play();
-      btn.textContent = '⏸';
+/* vanlent motion runtime: loader, wipe/pop/corner triggers, spotlight,
+   and the spotlight. Native scrolling only — no scroll library. Everything
+   degrades to a plain, readable page if any of it fails to load. */
+(function(){
+  "use strict";
+  var reduce = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+
+  /* --- wipe + pop observer REMOVED ---
+     frontend-design anti-pattern: identical scroll-triggered fade/wipe on
+     every section heading and card, with no narrative purpose. .wipe and
+     .pop now render permanently visible from CSS alone (see the style
+     block above), so no observer is needed to un-hide them. */
+
+  /* --- dashboard chart draw-in: kept deliberately ---
+     Unlike the generic reveal removed above, this one is specific to its
+     content — the trend line, channel bars and funnel actually draw in,
+     which is the climax of the page's narrative (the proof the earlier
+     sections argued toward). One-shot, scoped to just .dash, not reused
+     anywhere else on the page. */
+  var dash = document.querySelector('.dash');
+  if (dash){
+    if (reduce || !('IntersectionObserver' in window)){
+      dash.classList.add('is-live');
     } else {
-      vid.pause();
-      btn.textContent = '▶';
+      var dashIO = new IntersectionObserver(function(es){
+        es.forEach(function(en){
+          if (!en.isIntersecting) return;
+          dash.classList.add('is-live');
+          dashIO.unobserve(en.target);
+        });
+      }, {rootMargin:'0px 0px -15% 0px', threshold:.25});
+      dashIO.observe(dash);
     }
   }
-</script>
-<script src="https://www.youtube.com/iframe_api"></script>
-<script>
-  const ytPlayers = {};
 
-  function onYouTubeIframeAPIReady() {
-    document.querySelectorAll('iframe[id^="yt"]').forEach(iframe => {
-      ytPlayers[iframe.id] = new YT.Player(iframe.id, {
-        events: {
-          onReady: e => e.target.mute()
-        }
-      });
-    });
+  /* --- scroll ownership ---
+     Lenis was here. It was removed deliberately: smooth-scroll libraries
+     intercept the wheel event and drive scrollTop themselves, which takes
+     scroll away from the user — momentum stops matching the trackpad,
+     scrollbar drags fight the animation, and Page Up/Down and screen-reader
+     jumps get re-animated. The page now uses native scrolling only. Do not
+     reintroduce a scroll library without re-reading the go-live checklist. */
+})();
+</script>
+
+<script>
+/* ============================================================
+   WORK RAIL — vertical scroll drives the cards sideways (index25)
+   ============================================================
+   Same scroll-ownership rule as everything else on this page: the
+   visitor scrolls, nothing hijacks scrollTop, no preventDefault
+   anywhere below. .rail__track is a plain block that scrolls at the
+   page's own rate; .rail__stage (its child) pins via CSS
+   position:sticky while the track's extra height runs out under it;
+   this script only ever reads scroll position (via
+   getBoundingClientRect, passively, rAF-throttled) and writes a
+   transform to .rail__row — the one thing sticky positioning can't
+   do on its own, since it has no "and also slide sideways" mode.
+
+   Track height is DERIVED from the row's real scrollWidth (see
+   measure()), never hardcoded, so adding an eighth card or resizing
+   the window can't drift the pacing out of sync the way a fixed
+   "300vh" guess would.
+
+   Below 821px, or under prefers-reduced-motion, this hands off to a
+   real native horizontal scroller instead (see the CSS media query
+   next to .rail__viewport) — a pinned, JS-driven rail fights a touch
+   swipe rather than using it, and reduced motion should never leave
+   the page stuck mid-animation with no way to finish it. pinned()
+   below is the single source of truth both this script and that CSS
+   query key off of; keep the 820px number identical in both places
+   if it ever changes. */
+(function(){
+  "use strict";
+
+  var track    = document.getElementById("rail-track");
+  var stage    = document.getElementById("rail-stage");
+  var viewport = document.getElementById("rail-viewport");
+  var row      = document.getElementById("rail-row");
+  if (!track || !stage || !viewport || !row) return;
+
+  var prevBtn = document.getElementById("rail-prev");
+  var nextBtn = document.getElementById("rail-next");
+
+  function pinned(){
+    return window.matchMedia("(min-width:821px)").matches &&
+           !window.matchMedia("(prefers-reduced-motion:reduce)").matches;
   }
 
-  function toggleYT(id, btn) {
-    const player = ytPlayers[id];
-    if (!player) return;
-    if (player.isMuted()) {
-      player.unMute();
-      player.setVolume(100);
-      btn.textContent = '⏸';
-    } else if (player.getPlayerState() === YT.PlayerState.PLAYING) {
-      player.pauseVideo();
-      btn.textContent = '▶';
-    } else {
-      player.playVideo();
-      btn.textContent = '⏸';
+  var distance = 0;
+  var stageTopOffset = 0;   /* cached; see measure() — was re-read via
+                               getComputedStyle on every scroll frame */
+
+  function measure(){
+    if (!pinned()){
+      track.style.height = "";
+      row.style.transform = "";
+      distance = 0;
+      return;
+    }
+    distance = Math.max(0, row.scrollWidth - viewport.clientWidth);
+    track.style.height = (stage.offsetHeight + distance) + "px";
+    /* .rail__stage's own `top` (calc(var(--nav-h) + 24px) in CSS) is
+       read back here, once, rather than duplicating that number as a
+       second hardcoded value that could drift out of sync with the
+       stylesheet. Caching it is new in this pass: reading it via
+       getComputedStyle on every single scroll frame was pure waste —
+       it only ever changes on resize, exactly when measure() already
+       reruns. */
+    stageTopOffset = parseFloat(getComputedStyle(stage).top) || 0;
+  }
+
+  /* ---------- smoothing: a real spring, sampled every frame ----------
+
+     History, so this doesn't get "fixed" back to an earlier shape:
+
+     v1 wrote the raw scroll math straight to the transform. Any
+     irregularity in how the browser reports scroll (trackpads batching
+     deltas unevenly, momentum deceleration — normal, not a browser
+     bug) landed directly on screen as stutter.
+
+     v2 added exponential damping — current += (target-current)*0.18
+     once per scroll event. Better, but still not smooth, for two
+     reasons that are worth writing down because neither is visible in
+     the code:
+
+       1. The target was only recomputed inside a scroll event. Scroll
+          events do not arrive once per frame; the browser coalesces
+          them, and during momentum deceleration they arrive in
+          clumps and then stop while the page is still moving. So the
+          spring was chasing a target that updated in steps, and the
+          steps were the stutter. It is now recomputed EVERY frame
+          from a fresh getBoundingClientRect while the section is on
+          screen, so the input is continuous.
+
+       2. A fixed per-frame factor is frame-rate dependent. `*0.18`
+          per frame converges twice as fast on a 120Hz display as on
+          60Hz — the same page felt different on different machines,
+          and a dropped frame changed the easing rather than just
+          delaying it. The integrator below is driven by real elapsed
+          time, so the curve is identical at any refresh rate.
+
+     What replaced it is the one genuinely transferable idea from the
+     Motion-One/Lenis reference: spring(), not easing. Exponential
+     decay is fast then crawls — it covers most of the gap in the
+     first few frames and then creeps through the last pixels, which
+     is exactly the part the eye tracks. A critically-damped spring
+     carries velocity, so it arrives with continuous motion and no
+     overshoot. Damping ratio is pinned at 1.0 on purpose: any
+     underdamping means the cards briefly travel AGAINST the
+     scroll direction, which on scroll-linked content reads as a bug,
+     not as bounce.
+
+     Tuning: STIFFNESS is the only knob. Higher tracks the scroll more
+     tightly (less lag, less smoothing); lower is smoother but the row
+     trails further behind the wheel. ~200 settles in about 0.45s.
+
+     Note this still never touches real scroll position — it smooths a
+     SEPARATE derived visual, the row's own transform, the same way a
+     parallax layer would. "The visitor scrolls the page; the page
+     never scrolls the visitor" is intact. That is the line a
+     smooth-scroll library would cross and this does not. */
+  var STIFFNESS = 200;
+  var MASS      = 1;
+  var DAMPING_C = 2 * Math.sqrt(STIFFNESS * MASS);  /* ratio 1.0 exactly */
+  var SETTLE_PX = 0.05;   /* px  */
+  var SETTLE_V  = 1.0;    /* px/s — both must be met to call it settled */
+  var MAX_SUBSTEP = 1 / 240; /* s — semi-implicit Euler goes unstable if
+                                a single step is large relative to the
+                                spring period, so long frames are
+                                integrated as several short ones rather
+                                than one big inaccurate one */
+  var MAX_FRAME   = 0.05;    /* s — clamp the first frame back from a
+                                background tab or a long GC pause, or
+                                dt is a whole second and the row lurches */
+
+  var current = 0, target = 0, velocity = 0;
+  var raf = null, lastT = 0, onScreen = false, painted = null;
+
+  function computeTarget(){
+    if (!distance){ target = 0; return; }
+    var top = track.getBoundingClientRect().top;
+    var p = Math.min(1, Math.max(0, (stageTopOffset - top) / distance));
+    target = -distance * p;
+  }
+
+  function paint(){
+    /* two decimals, not one: Chrome composites transforms at subpixel
+       precision, and rounding to 0.1px put a visible quantization
+       stair in slow travel. Skipping the write when the string is
+       unchanged keeps the idle-but-on-screen frames free. */
+    var v = current.toFixed(2);
+    if (v === painted) return;
+    painted = v;
+    row.style.transform = "translate3d(" + v + "px,0,0)";
+  }
+
+  function integrate(dt){
+    var left = dt;
+    while (left > 0){
+      var h = left > MAX_SUBSTEP ? MAX_SUBSTEP : left;
+      var a = (-STIFFNESS * (current - target) - DAMPING_C * velocity) / MASS;
+      velocity += a * h;
+      current  += velocity * h;
+      left     -= h;
     }
   }
-</script>
-<script src="https://player.vimeo.com/api/player.js"></script>
-<script>
-  const vimeoPlayers = {};
 
-  document.querySelectorAll('iframe[id^="vm"]').forEach(iframe => {
-    vimeoPlayers[iframe.id] = new Vimeo.Player(iframe);
+  function frame(now){
+    if (!distance){ raf = null; return; }
+
+    var dt = (now - lastT) / 1000;
+    lastT = now;
+    if (!(dt > 0)) dt = 1 / 60;          /* first frame, or a clock tie */
+    if (dt > MAX_FRAME) dt = MAX_FRAME;
+
+    computeTarget();
+    integrate(dt);
+
+    var settled = Math.abs(target - current) < SETTLE_PX &&
+                  Math.abs(velocity) < SETTLE_V;
+    if (settled){ current = target; velocity = 0; }
+    paint();
+
+    /* Keep sampling while the section is on screen even once settled —
+       that is what makes the target continuous (point 1 above). Once
+       it scrolls away AND has come to rest, stop completely rather
+       than holding an idle rAF open. */
+    if (settled && !onScreen){ raf = null; return; }
+    raf = window.requestAnimationFrame(frame);
+  }
+
+  function start(){
+    if (raf !== null) return;
+    lastT = window.performance ? window.performance.now() : Date.now();
+    raf = window.requestAnimationFrame(frame);
+  }
+
+  function updateInstant(){
+    /* resize/reduced-motion/mobile-toggle paths: jumping straight to
+       target is correct here — springing a viewport resize would just
+       look like a delayed snap, not smoothing anything real. Velocity
+       has to be cleared too, or the spring carries the pre-resize
+       momentum into a layout that no longer matches it. */
+    computeTarget();
+    current = target;
+    velocity = 0;
+    painted = null;
+    paint();
+    if (raf !== null){ window.cancelAnimationFrame(raf); raf = null; }
+    if (onScreen && distance) start();
+  }
+
+  /* The loop runs off the frame clock, not off scroll events, so
+     there is no rAF-throttled scroll handler any more. This one only
+     has to wake the loop if it had stopped; start() is idempotent and
+     returns immediately in the common case. */
+  window.addEventListener("scroll", function(){
+    if (distance) start();
+  }, { passive: true });
+
+  if (window.IntersectionObserver){
+    new window.IntersectionObserver(function(entries){
+      onScreen = entries[0].isIntersecting;
+      if (onScreen && distance) start();
+    }, { rootMargin: "300px 0px 300px 0px" }).observe(track);
+  } else {
+    onScreen = true;   /* no IO: fall back to the scroll listener alone */
+  }
+
+  var resizeTimer;
+  window.addEventListener("resize", function(){
+    window.clearTimeout(resizeTimer);
+    resizeTimer = window.setTimeout(function(){ measure(); updateInstant(); }, 150);
+  }, { passive: true });
+
+  measure();
+  updateInstant();
+  /* re-measure once webfonts/images are actually in, not just DOM-ready —
+     a late font swap can nudge a card's rendered height and leave the
+     derived track distance measured against a stale layout */
+  window.addEventListener("load", function(){ measure(); updateInstant(); }, { passive: true });
+
+  /* ---------- fallback mode: native scroller + the buttons as its
+     touch/keyboard equivalent (see .railnav, hidden while pinned) ---------- */
+  if (prevBtn && nextBtn){
+    function fallbackStep(){
+      var card = row.querySelector(".wcard");
+      if (!card) return viewport.clientWidth;
+      var gap = parseInt(getComputedStyle(row).columnGap || "24", 10) || 24;
+      return card.getBoundingClientRect().width + gap;
+    }
+    function syncButtons(){
+      if (pinned()){ prevBtn.disabled = true; nextBtn.disabled = true; return; }
+      var max = viewport.scrollWidth - viewport.clientWidth - 2;
+      prevBtn.disabled = viewport.scrollLeft <= 2;
+      nextBtn.disabled = viewport.scrollLeft >= max;
+    }
+    prevBtn.addEventListener("click", function(){ viewport.scrollBy({ left: -fallbackStep(), behavior: "smooth" }); });
+    nextBtn.addEventListener("click", function(){ viewport.scrollBy({ left: fallbackStep(), behavior: "smooth" }); });
+    var btnTicking = false;
+    viewport.addEventListener("scroll", function(){
+      if (btnTicking) return;
+      btnTicking = true;
+      window.requestAnimationFrame(function(){ syncButtons(); btnTicking = false; });
+    }, { passive: true });
+    window.addEventListener("resize", syncButtons, { passive: true });
+    syncButtons();
+  }
+})();
+</script>
+
+<script>
+/* ============================================================
+   HERO WORD-CYCLE — time-driven box flip + synced preview image
+   ============================================================
+   See the CSS comment above .hero__h1--cycle for why this is a plain
+   interval rather than the sandbox's scroll-pinned track, and why
+   reduced motion shows the full sentence rather than freezing on one
+   word. Both of those are handled by CSS/markup already (the interval
+   below simply never starts under reduced motion, matching the
+   display:none already on .hcube-wrap in that case) — nothing here
+   needs its own reduced-motion branch beyond that early return.
+
+   Pause-on-hover doubles as the answer to "the image changes based on
+   what we're hovering": the cube only ever has ONE face with
+   pointer-events on (.is-current, see CSS), so on this hero "current"
+   and "hovered" are the same word by construction — hovering it stops
+   the clock and is also what the hero-shot panel already reflects. */
+(function(){
+  "use strict";
+  if (window.matchMedia("(prefers-reduced-motion: reduce)").matches) return;
+
+  var cube  = document.getElementById("hcube");
+  var wrap  = document.getElementById("hcube-wrap");
+  var faces = cube && cube.querySelectorAll(".hcube__face");
+  var shots     = document.querySelectorAll(".hero-shot__img");
+  var shotLabel = document.getElementById("hero-shot-label");
+  if (!cube || !wrap || !faces || !faces.length || !shots.length) return;
+
+  var WORDS = ["Websites", "Apps", "SEO", "AI-agents"];
+  var N = WORDS.length;
+  var INTERVAL_MS = 2600;
+
+  /* --halfh measured, not guessed — see the box-flip variants this
+     was ported from for the full reasoning (half the box's real
+     rendered height, so the four faces close at true corners). */
+  function setHalfHeight(){
+    cube.style.setProperty("--halfh", (wrap.getBoundingClientRect().height / 2) + "px");
+  }
+  setHalfHeight();
+  window.addEventListener("resize", setHalfHeight, { passive: true });
+  window.addEventListener("load", setHalfHeight, { passive: true });
+
+  var current = 0;
+  function goTo(i){
+    current = i;
+    cube.style.transform = "rotateX(" + (-i * 90) + "deg)";
+    faces.forEach(function(f){ f.classList.toggle("is-current", parseInt(f.dataset.i, 10) === i); });
+
+    shots.forEach(function(im){ im.classList.toggle("is-on", parseInt(im.dataset.i, 10) === i); });
+    if (shotLabel) shotLabel.textContent = WORDS[i];
+  }
+
+  var timer = null;
+  function start(){
+    if (timer) return;
+    timer = window.setInterval(function(){ goTo((current + 1) % N); }, INTERVAL_MS);
+  }
+  function stop(){
+    window.clearInterval(timer);
+    timer = null;
+  }
+
+  wrap.addEventListener("mouseenter", stop);
+  wrap.addEventListener("mouseleave", start);
+  wrap.addEventListener("focusin", stop);
+  wrap.addEventListener("focusout", start);
+  document.addEventListener("visibilitychange", function(){
+    if (document.hidden) stop(); else start();
   });
 
-  async function toggleVimeo(id, btn) {
-    const player = vimeoPlayers[id];
-    const paused = await player.getPaused();
-    const volume = await player.getVolume();
-
-    if (volume === 0) {
-      // Currently muted — unmute and play
-      await player.setVolume(1);
-      await player.play();
-      btn.textContent = '⏸';
-    } else if (paused) {
-      await player.play();
-      btn.textContent = '⏸';
-    } else {
-      await player.pause();
-      btn.textContent = '▶';
-    }
-  }
+  start();
+})();
 </script>
+
+
+<script>
+/* ============================================================
+   DOT FIELD — vanilla port (see the markup comment in <body>)
+   ============================================================ */
+(function(){
+  "use strict";
+  var TWO_PI = Math.PI * 2;
+  var OPTS = {
+    dotRadius: 2.4,          /* was 1.5 — bigger dots, more obvious as a texture */
+    dotSpacing: 14,
+    cursorRadius: 500,
+    bulgeStrength: 67,
+    gradientFrom: 'rgba(0,0,0,0.55)',   /* was 0.30 — darker, still black not ink */
+    gradientTo:   'rgba(0,0,0,0.30)'    /* was 0.12 */
+  };
+
+  var wrap   = document.getElementById('dotfield');
+  var canvas = document.getElementById('dotfield-canvas');
+  if (!wrap || !canvas) return;
+
+  var ctx = canvas.getContext('2d', { alpha: true });
+  var dpr = Math.min(window.devicePixelRatio || 1, 2);
+  var reduce = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+
+  var dots = [], size = { w:0, h:0 };
+  var mouse = { x:-9999, y:-9999, prevX:-9999, prevY:-9999, speed:0 };
+  var engagement = 0, raf = null, speedTimer = null;   /* still drives the dot bulge below */
+  var grad = null;               /* cached; see the comment in resize() */
+  var idleFrames = 0;
+  var IDLE_LIMIT = 90;           /* ~1.5s of nothing moving before pausing rAF */
+  var MAX_DOTS = 9000;           /* see the comment in buildDots() */
+
+  /* MAX_DOTS caps the grid on large/high-DPI screens: at the stock 14px
+     spacing, a 1440p viewport is already ~15,000 dots redrawn every
+     frame forever, and 4K is ~34,000 — both continuous, unconditional
+     costs regardless of whether the visitor's mouse ever moves. Rather
+     than shrink dotSpacing (which changes the look) this only widens
+     the EFFECTIVE spacing once the natural grid would exceed the
+     budget, so a normal laptop screen renders at the authored density
+     and only very large viewports get a coarser, still-correct grid. */
+  function buildDots(w, h){
+    var step = OPTS.dotRadius + OPTS.dotSpacing;
+    var cols = Math.floor(w / step), rows = Math.floor(h / step);
+    if (cols * rows > MAX_DOTS){
+      var scale = Math.sqrt((cols * rows) / MAX_DOTS);
+      step *= scale;
+      cols = Math.floor(w / step); rows = Math.floor(h / step);
+    }
+    var padX = (w % step) / 2, padY = (h % step) / 2;
+    var out = new Array(rows * cols), i = 0;
+    for (var r = 0; r < rows; r++){
+      for (var c = 0; c < cols; c++){
+        var ax = padX + c * step + step / 2, ay = padY + r * step + step / 2;
+        out[i++] = { ax:ax, ay:ay, sx:ax, sy:ay };
+      }
+    }
+    dots = out;
+  }
+
+  function resize(){
+    var w = window.innerWidth, h = window.innerHeight;
+    size.w = w; size.h = h;
+    canvas.width = Math.round(w * dpr); canvas.height = Math.round(h * dpr);
+    canvas.style.width = w + 'px'; canvas.style.height = h + 'px';
+    ctx.setTransform(dpr, 0, 0, dpr, 0, 0);
+    buildDots(w, h);
+    /* Built once here, not every frame in draw(): a gradient only
+       depends on viewport size, which doesn't change mid-scroll or
+       mid-cursor-move — recreating it 60x/sec was pure allocation
+       churn for a value that was already correct. */
+    grad = ctx.createLinearGradient(0, 0, w, h);
+    grad.addColorStop(0, OPTS.gradientFrom);
+    grad.addColorStop(1, OPTS.gradientTo);
+  }
+
+  /* fixed layer => viewport coords, never page coords (see markup note) */
+  function onMove(e){
+    mouse.x = e.clientX; mouse.y = e.clientY;
+    idleFrames = 0;
+    start();               /* re-arm if a prior idle timeout paused it */
+  }
+
+  function updateSpeed(){
+    var dx = mouse.prevX - mouse.x, dy = mouse.prevY - mouse.y;
+    var dist = Math.sqrt(dx*dx + dy*dy);
+    mouse.speed += (dist - mouse.speed) * 0.5;
+    if (mouse.speed < 0.001) mouse.speed = 0;
+    mouse.prevX = mouse.x; mouse.prevY = mouse.y;
+  }
+
+  function draw(){
+    var w = size.w, h = size.h, len = dots.length;
+    ctx.clearRect(0, 0, w, h);
+    ctx.fillStyle = grad;
+    var cr = OPTS.cursorRadius, crSq = cr * cr, rad = OPTS.dotRadius / 2;
+    ctx.beginPath();
+    for (var i = 0; i < len; i++){
+      var d = dots[i];
+      var dx = mouse.x - d.ax, dy = mouse.y - d.ay, distSq = dx*dx + dy*dy;
+      if (distSq < crSq && engagement > 0.01){
+        var dist = Math.sqrt(distSq);
+        var t = 1 - dist / cr;
+        var push = t * t * OPTS.bulgeStrength * engagement;
+        var ang = Math.atan2(dy, dx);
+        d.sx += (d.ax - Math.cos(ang) * push - d.sx) * 0.15;
+        d.sy += (d.ay - Math.sin(ang) * push - d.sy) * 0.15;
+      } else {
+        d.sx += (d.ax - d.sx) * 0.1;
+        d.sy += (d.ay - d.sy) * 0.1;
+      }
+      ctx.moveTo(d.sx + rad, d.sy);
+      ctx.arc(d.sx, d.sy, rad, 0, TWO_PI);
+    }
+    ctx.fill();
+  }
+
+  function tick(){
+    var target = Math.min(mouse.speed / 5, 1);
+    engagement += (target - engagement) * 0.06;
+    if (engagement < 0.001) engagement = 0;
+    draw();
+
+    /* Idle pause: once every dot has settled back to rest and the
+       cursor hasn't moved for ~1.5s, stop redrawing entirely instead
+       of running a full-viewport canvas loop 60x/sec for a frame that
+       is pixel-identical to the last one. onMove() re-arms it on the
+       very next mousemove — see there. This is the single biggest
+       win available here: for most of a visit the mouse ISN'T moving
+       (reading, or scrolling by trackpad/keyboard with the mouse
+       still), and the previous version paid full price regardless. */
+    if (engagement === 0 && mouse.speed === 0){
+      idleFrames++;
+      if (idleFrames > IDLE_LIMIT){ stop(); return; }
+    } else {
+      idleFrames = 0;
+    }
+    raf = requestAnimationFrame(tick);
+  }
+
+  function start(){
+    if (raf || reduce) return;
+    idleFrames = 0;
+    speedTimer = setInterval(updateSpeed, 20);
+    raf = requestAnimationFrame(tick);
+  }
+  function stop(){
+    if (raf) cancelAnimationFrame(raf);
+    clearInterval(speedTimer);
+    raf = null; speedTimer = null;
+  }
+
+  var rt;
+  window.addEventListener('resize', function(){
+    clearTimeout(rt);
+    rt = setTimeout(function(){ resize(); if (reduce) draw(); }, 100);
+  }, { passive:true });
+
+  resize();
+  draw();                      /* reduced motion keeps this static frame */
+  if (!reduce){
+    window.addEventListener('mousemove', onMove, { passive:true });
+    document.addEventListener('visibilitychange', function(){
+      if (document.hidden) stop(); else start();
+    });
+    start();
+  }
+})();
+</script>
+
+<!-- ============ WORK SCREENSHOT MODAL (index43) ============
+     Replaces the CSS-only :has() hover overlay of index41-42. The
+     browser does the hard parts via showModal(): Esc, the focus trap,
+     inert-ing the rest of the page, and returning focus to the button
+     that opened it. This script only exists to (a) route clicks and
+     (b) keep the open/close TRANSITION, which a bare
+     showModal()/close() pair skips entirely on the way out because
+     close() sets display:none on the same frame.
+
+     Hence the is-open class rather than styling dialog[open]: the
+     element must already be displayed for a transition to have a
+     first frame, so open() calls showModal() and adds the class on
+     the NEXT frame, and close() removes the class and waits for the
+     panel's opacity transition to finish before calling close(). -->
+<script>
+(function(){
+  "use strict";
+
+  var dialogs = document.querySelectorAll("dialog.wmodal");
+  if (!dialogs.length) return;
+
+  var reduce = window.matchMedia("(prefers-reduced-motion:reduce)").matches;
+  var opener = null;
+
+  function open(key, btn){
+    var d = document.getElementById("wm-" + key);
+    if (!d || d.open) return;
+    opener = btn || null;
+    if (typeof d.showModal === "function") d.showModal();
+    else d.setAttribute("open", "");        /* pre-dialog browsers: no
+                                               backdrop or focus trap,
+                                               but the panel still shows */
+    if (reduce){ d.classList.add("is-open"); return; }
+    window.requestAnimationFrame(function(){ d.classList.add("is-open"); });
+  }
+
+  function close(d){
+    if (!d || !d.open) return;
+    d.classList.remove("is-open");
+
+    var panel = d.querySelector(".wmodal__panel");
+    var done = false;
+    function finish(){
+      if (done) return;
+      done = true;
+      d.removeEventListener("transitionend", onEnd);
+      if (typeof d.close === "function") d.close();
+      else d.removeAttribute("open");
+      /* showModal() restores focus by itself, but only for closes it
+         initiated; ours go through close() so do it explicitly */
+      if (opener){ try { opener.focus(); } catch (e) {} opener = null; }
+    }
+    function onEnd(e){
+      if (e.target === panel && e.propertyName === "opacity") finish();
+    }
+    if (reduce) return finish();
+    d.addEventListener("transitionend", onEnd);
+    /* belt and braces: a transition that never fires (interrupted,
+       display change, tab backgrounded mid-close) must not leave the
+       dialog open and the page inert forever */
+    window.setTimeout(finish, 450);
+  }
+
+  document.addEventListener("click", function(e){
+    var t = e.target.closest ? e.target.closest("[data-wmodal]") : null;
+    if (t){ e.preventDefault(); open(t.getAttribute("data-wmodal"), t); return; }
+
+    var c = e.target.closest ? e.target.closest("[data-wmodal-close]") : null;
+    if (c){ close(c.closest("dialog.wmodal")); return; }
+
+    /* The dialog element itself fills the viewport, so "clicked the
+       dimmed area" is "inside the dialog but outside the panel". */
+    var d = e.target.closest ? e.target.closest("dialog.wmodal") : null;
+    if (d && !e.target.closest(".wmodal__panel")) close(d);
+  });
+
+  /* Esc fires cancel -> close on the same frame, which would skip the
+     transition. Take it over and run the animated path instead. */
+  [].forEach.call(dialogs, function(d){
+    d.addEventListener("cancel", function(e){ e.preventDefault(); close(d); });
+  });
+})();
+</script>
+
+<script>
+/* ============================================================
+   REAL FORM DELIVERY (index47)
+   ------------------------------------------------------------
+   "Book a call" scrolls to #contact; the hero brief form is the
+   other way to reach us. Both used to be fake: js/main.js (shared,
+   not edited here) validates the fields, then just flips a
+   data-sent attribute and shows the success message — there was no
+   backend, so nothing ever left the browser. A client filling
+   either one believed a message had gone out; it hadn't.
+
+   Fix keeps it to exactly what the live site already does — same
+   endpoint, same mechanism, nothing new invented: the current
+   production form (sulosystems.com, this repo's index.html) is a
+   plain <form action="https://formspree.io/f/mgodnvaq"
+   method="POST">, no JS. Confirmed live: GET on that URL returns
+   405 (Formspree's answer for a real, registered form; a deleted
+   one 404s).
+
+   This build's forms have a validation/success UX worth keeping,
+   so rather than reverting to a bare native <form> post (which
+   would also mean a full navigation away to Formspree's own thank-
+   you page, losing the on-page success state), this fires the
+   exact same POST via fetch at the moment main.js already decides
+   the message is valid and "sent" — data-sent flipping to "true"
+   is that signal, and it fires only once real validation passed
+   (the hero form flips it only on the SECOND submit, once email,
+   name and what are all filled — never on step one). A
+   MutationObserver is used instead of a second submit listener so
+   there is no dependency on script load order between this and
+   the deferred js/main.js.
+
+   No new fields, no _subject, no fallback UI added — matching the
+   live form's own simplicity, not layering something new on top of
+   it. If delivery ever needs to be swapped to a different address
+   or provider, this constant is the only line to change.
+
+   FOUND WHILE VERIFYING THIS FILE: an earlier pass wrapped this
+   note in an HTML-style comment outside the tag but closed it
+   using the JS comment-close token instead of the HTML one.
+   Mismatched comment delimiters like that don't error — the
+   browser just keeps treating everything as an HTML comment until
+   it finds the next HTML comment-close token anywhere later in the
+   document, which silently deleted this entire script (and the
+   analytics-beacon comment below it) with no console error at
+   all. Caught only by checking document.querySelectorAll('script')
+   for this text and finding zero matches. The convention elsewhere
+   in this file, a JS comment INSIDE the script tag rather than an
+   HTML comment wrapped around it, exists for exactly this reason
+   and is followed here now. */
+(function(){
+  "use strict";
+  var ENDPOINT = "https://formspree.io/f/mgodnvaq"; // same form the live site posts to
+
+  function wireRealSend(successEl, form, attr){
+    if (!successEl || !form) return;
+    var sent = false;
+    new MutationObserver(function(){
+      if (sent || successEl.getAttribute(attr) !== "true") return;
+      sent = true;
+      fetch(ENDPOINT, {
+        method: "POST",
+        headers: { Accept: "application/json" },
+        body: new FormData(form)
+      }).catch(function(e){
+        // Delivery failing must not be visible as a second, contradictory
+        // UI state layered on top of what main.js already shows — but it
+        // must not vanish silently either.
+        if (window.console && console.error) console.error("[contact] Formspree delivery failed:", e);
+      });
+    }).observe(successEl, { attributes: true, attributeFilter: [attr] });
+  }
+
+  wireRealSend(document.getElementById("contact-form"), document.getElementById("contact-form"), "data-sent");
+  wireRealSend(document.getElementById("gate"), document.getElementById("gate-form"), "data-sent");
+})();
+</script>
+
+<!-- ============ ANALYTICS BEACON ============
+     Records one pageview to Cloud Firestore. type="module" so it is
+     deferred by definition and never blocks rendering, and the file
+     exits before any network call while js/firebase-config.js still
+     holds the PASTE_ placeholders — so this is inert until the
+     project is actually configured. Nothing on the page depends on
+     it; every path inside is wrapped. See ANALYTICS-SETUP.md. -->
+<script type="module" src="js/sulo-analytics.js"></script>
+
 </body>
 </html>
