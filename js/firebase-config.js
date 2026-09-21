@@ -36,7 +36,8 @@ export const firebaseConfig = {
    servers. Editing this array alone grants nobody anything; editing
    the rules alone is enough. Keep the two in sync. */
 export const ADMIN_EMAILS = [
-  "sulo@stempowering.ca"
+  "sulo@stempowering.ca",
+  "sulosystems@gmail.com"
 ];
 
 export const ANALYTICS = {
