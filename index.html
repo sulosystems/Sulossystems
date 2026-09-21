@@ -17,6 +17,54 @@
 <link rel="stylesheet" href="css/styles.css">
 <style>
 /* ============================================================
+   BODY BACKGROUND IMAGE (index52)
+   ------------------------------------------------------------
+   Replaces the shared body{} rule's flat --ground colour + 4
+   radial-gradient "luminance field" (css/styles.css, untouched)
+   with background.png — converted to background.webp here,
+   1.3MB -> 46KB at 2400px wide/q82 (this is a soft, low-detail
+   photo — smooth gradients, almost no hard edges — so it
+   compresses far better than the work-card screenshots did).
+
+   CONTRAST, measured rather than assumed: sampled across a 9-point
+   grid the image reads 197-250/255 luminance, giving ink-text
+   contrast of 9.6:1 to 14.3:1 with NO scrim at all — better than
+   the site's own flat --ground background. But a full-image scan
+   (every 6th pixel) found one real outlier: a dark shadow pocket
+   at roughly 2%/79% (under a glass panel's edge) at rgb(42,91,113),
+   82/255 luminance, contrast only 2.24:1 against ink — a WCAG
+   failure if any text ever lands there. Solved algebraically for
+   the scrim needed to fix exactly that point: a flat 36% --ground
+   overlay brings it to 4.65:1, comfortably past AA's 4.5:1, while
+   costing very little visually everywhere else since the rest of
+   the image was already this light or lighter.
+
+   The two brightening corner glows from the original luminance
+   field are kept layered on top (they only ever ADD light, so they
+   can't reintroduce a contrast problem); the two DARKENING corner
+   glows are dropped for this version — one of them targets almost
+   exactly the same bottom-left corner as the shadow pocket above,
+   so keeping it would have fought the scrim that exists specifically
+   to fix that spot. background-attachment:fixed is kept, matching
+   the original rule, so panels still reveal different parts of the
+   image as the page scrolls rather than the image scrolling with
+   the content. */
+body{
+  background-color:var(--ground);
+  background-image:
+    radial-gradient(78% 52% at 8% -6%,  rgba(255,255,255,.95), transparent 62%),
+    radial-gradient(62% 46% at 98% 4%,  rgba(255,255,255,.80), transparent 58%),
+    linear-gradient(rgba(238,236,234,.36), rgba(238,236,234,.36)),
+    url('background.webp');
+  background-size:auto, auto, cover, cover;
+  background-position:top left, top right, center, center;
+  background-repeat:no-repeat, no-repeat, no-repeat, no-repeat;
+  background-attachment:fixed, fixed, fixed, fixed;
+}
+</style>
+
+<style>
+/* ============================================================
    index3.html — REGRESSION FIX
 
    The liquid-glass nav rewrite replaced everything between the NAV and HERO
@@ -842,6 +890,31 @@ main, .foot{ position:relative; z-index:1; }
   .nav__cta, .gate__start{ animation:none; box-shadow:0 8px 22px rgba(32,30,29,.22); }
 }
 </style>
+
+<style>
+/* ---------- FOOTER · Instagram (index51) ----------
+   Verified @sulosystemsinc is real before wiring it in — fetched the
+   page's own og:title/og:description rather than trusting the handle
+   as typed: "Sulo Systems Inc | Digital Growth Systems", confirming
+   it's the business account, not a squat or a typo of someone else's.
+
+   An icon-only link, not a fourth text item in .foot__links — a
+   glyph reads as "external/social" at a glance the way another line
+   of the same underlined text wouldn't, and it keeps this addition
+   out of css/styles.css (shared; index39-50 render footers from that
+   file as-is and shouldn't inherit an icon nobody asked to add to
+   them). Monochrome stroke, no chroma accent, matching the design
+   system's accent===ink rule same as every other icon on this page. */
+.foot__social{
+  display:inline-flex; align-items:center; justify-content:center;
+  width:34px; height:34px; border-radius:50%; flex:none;
+  color:var(--ink); opacity:.72;
+  transition:opacity .16s ease, transform .16s var(--e-hover);
+}
+.foot__social:hover{ opacity:1; transform:translateY(-1px); }
+.foot__social:focus-visible{ outline:2px solid var(--ink); outline-offset:2px; }
+.foot__social svg{ display:block; }
+</style>
 </head>
 <body>
 
@@ -1351,6 +1424,13 @@ main, .foot{ position:relative; z-index:1; }
     <nav class="foot__links" aria-label="Footer">
       <a href="#work">Work</a><a href="#contact">Contact</a>
     </nav>
+    <a class="foot__social" href="https://www.instagram.com/sulosystemsinc/" target="_blank" rel="noopener noreferrer" aria-label="Sulo Systems on Instagram">
+      <svg width="19" height="19" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+        <rect x="3" y="3" width="18" height="18" rx="5"/>
+        <circle cx="12" cy="12" r="4.2"/>
+        <circle cx="17.4" cy="6.6" r="1" fill="currentColor" stroke="none"/>
+      </svg>
+    </a>
     <p class="foot__meta">&copy; 2026 Sulo Systems Inc. · Toronto, Canada</p>
   </div>
 </footer>
