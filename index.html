@@ -918,7 +918,7 @@ main, .foot{ position:relative; z-index:1; }
 
 <style>
 /* ============================================================
-   index54-60 - CONVERSION PASS
+   index54-61 - CONVERSION PASS
    ============================================================
    Scoped to new class names only. Nothing here overrides a shared
    rule in css/styles.css, so every earlier numbered version renders
@@ -990,13 +990,12 @@ main, .foot{ position:relative; z-index:1; }
 }
 .hero__book{ font-size:1.0625rem; padding:15px 26px; }
 .hero__actions-note{ font-size:var(--t-meta); color:var(--ink-muted); }
-/* Tight to the button on purpose: price and CTA are one group. */
-.hero__price{
-  margin-top:var(--s-2); font-size:.9375rem; color:var(--ink-70);
-}
-.hero__price b{ color:var(--ink); font-weight:700; }
-.hero__price i{ color:var(--ink-muted); font-style:normal; margin:0 2px; }
-.hero__price span{ color:var(--ink-muted); }
+/* .hero__price retired in index61. A number directly under the primary
+   CTA is an objection raised at the exact moment you want none, and a
+   single "$3,000" also screened out everyone who wanted the $39/month
+   product or SEO work. Pricing now lives in the FAQ, where someone
+   looking for it goes deliberately. The big gap below the CTA comes
+   from .gate__lead's own margin, so spacing is unaffected. */
 .gate__lead{
   margin-top:var(--s-6); margin-bottom:var(--s-2);
   font-size:var(--t-meta); font-weight:700; letter-spacing:.06em;
@@ -1095,6 +1094,19 @@ textarea.input-opt{ min-height:112px; }
 .team__m figcaption span{ font-size:var(--t-meta); color:var(--ink-70); }
 
 /* ---- FAQ ---- */
+/* The shared .sec-head splits into two columns at >=900px: heading in the
+   left half, lede in the right. That suits a section whose lede is its own
+   standalone statement, but here it strands the subtitle out to the right
+   of the heading it belongs to, reading as centred rather than as part of
+   the same block. Single column, tighter gap, and the same 76ch measure as
+   the accordion below - so heading, subtitle and questions all share one
+   left edge. */
+#faq .sec-head{
+  grid-template-columns:1fr;
+  gap:var(--s-2);
+  align-items:start;
+  max-width:76ch;
+}
 .faq{ display:grid; gap:var(--s-2); max-width:76ch; }
 .faq__i{
   border-radius:var(--r-sm); background:var(--glass);
@@ -1317,7 +1329,6 @@ textarea.input-opt{ min-height:112px; }
           <span class="hero__actions-note">15&nbsp;min &middot; no pitch</span>
         </div>
 
-        <p class="hero__price">From <b>$3,000&nbsp;CAD</b> <i>&middot;</i> <b>2&ndash;6 weeks</b> <i>&middot;</i> <span>rough on the call, fixed once scoped</span></p>
 
         <!-- Secondary path: the email brief. Same form and same Formspree
              delivery as before - only the labels changed, so the CTA no
@@ -1755,8 +1766,8 @@ textarea.input-opt{ min-height:112px; }
     </div>
     <div class="faq">
       <details class="faq__i">
-        <summary>What does a project cost?<span class="faq__x" aria-hidden="true"></span></summary>
-        <div class="faq__a"><p><span>Most projects start around <b>$3,000 CAD</b>.</span> Scope and price are agreed in writing before we start, and if the scope changes you see the cost first and get to say no. No hourly surprises.</p></div>
+        <summary>What does it cost?<span class="faq__x" aria-hidden="true"></span></summary>
+        <div class="faq__a"><p>Depends on the work. Subscriptions to our existing products start at <b>$39/month&nbsp;CAD</b>. New projects start at <b>$3,000&nbsp;CAD</b>. Whichever it is, scope and price are agreed in writing before we start &mdash; and if the scope changes, you see the cost first and get to say no. No hourly surprises.</p></div>
       </details>
       <details class="faq__i">
         <summary>How long does it take?<span class="faq__x" aria-hidden="true"></span></summary>
@@ -2469,7 +2480,7 @@ textarea.input-opt{ min-height:112px; }
 
 <script>
 /* ============================================================
-   index54-60 - booking hand-off, event hooks, content audit
+   index54-61 - booking hand-off, event hooks, content audit
    ============================================================ */
 (function(){
   "use strict";
