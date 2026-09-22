@@ -1,0 +1,27 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!-- Only <loc> and <lastmod>. <priority> and <changefreq> are deliberately
+     omitted: Google has stated publicly that it ignores both, so they are
+     noise that implies a control you do not actually have. Pages not listed
+     here are excluded on purpose; see HANDOFF.md. -->
+<urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
+  <url>
+    <loc>https://sulosystems.com/</loc>
+    <lastmod>2026-09-22</lastmod>
+  </url>
+  <url>
+    <loc>https://sulosystems.com/portfolio.html</loc>
+    <lastmod>2026-07-03</lastmod>
+  </url>
+  <url>
+    <loc>https://sulosystems.com/media/quinn-vq-reel.html</loc>
+    <lastmod>2026-07-31</lastmod>
+  </url>
+  <url>
+    <loc>https://sulosystems.com/media/therapybyniha-reel.html</loc>
+    <lastmod>2026-07-31</lastmod>
+  </url>
+  <url>
+    <loc>https://sulosystems.com/media/opus-panel-video.html</loc>
+    <lastmod>2026-07-31</lastmod>
+  </url>
+</urlset>
