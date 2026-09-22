@@ -1,0 +1,6 @@
+# sulosystems.com
+
+User-agent: *
+Allow: /
+
+Sitemap: https://sulosystems.com/sitemap.xml
