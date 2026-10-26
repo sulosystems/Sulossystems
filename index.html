@@ -1304,6 +1304,7 @@ textarea.input-opt{ min-height:112px; }
   font-size:11px; font-weight:700; letter-spacing:.1em; text-transform:uppercase;
   color:var(--on-dark); text-decoration:none; border-bottom:1px solid currentColor;
 }
+.wmodal__visit + .wmodal__visit{ margin-left:18px; }
 .wmodal__visit:hover{ opacity:.8; }
 .wmodal__visit:focus-visible{ outline:2px solid var(--on-dark); outline-offset:3px; }
 </style>
@@ -1609,6 +1610,20 @@ textarea.input-opt{ min-height:112px; }
       </article>
       <article class="wcard">
         <div class="wcard__in">
+          <span class="wcard__icon" aria-hidden="true"><svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><path d="M12 3v18M7 21h10M5 7h14"/><path d="m5 7-3 7a3.5 3.5 0 0 0 6 0L5 7zM19 7l-3 7a3.5 3.5 0 0 0 6 0l-3-7z"/></svg></span>
+          <p class="wcard__out">Profile, schema and tracking live in month one</p>
+          <h3 class="wcard__h">Law Firm SEO &mdash; Ang Law PC</h3>
+          <p class="wcard__b">An ongoing local SEO program for a North York law firm: a rebuilt Google Business Profile with 23 described services, structured data and FAQ markup, call and form tracking, and a rewritten homepage.</p>
+          <div class="wcard__mock">
+            <span class="label">Local SEO &middot; North York law firm</span>
+            <div class="bar bar--mid bar--solid"></div>
+            <div class="bar bar--wide"></div>
+            <div class="row"><button class="wcard__more" type="button" data-wmodal="anglaw" aria-haspopup="dialog">View more</button></div>
+          </div>
+        </div>
+      </article>
+      <article class="wcard">
+        <div class="wcard__in">
           <span class="wcard__icon" aria-hidden="true"><svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="3" width="7" height="9" rx="1"/><rect x="14" y="3" width="7" height="5" rx="1"/><rect x="14" y="12" width="7" height="9" rx="1"/><rect x="3" y="16" width="7" height="5" rx="1"/></svg></span>
           <p class="wcard__out">$40k/yr SaaS replaced &mdash; 70% less software cost</p>
           <h3 class="wcard__h">Custom CRM Portal</h3>
@@ -1852,7 +1867,16 @@ textarea.input-opt{ min-height:112px; }
           <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" aria-hidden="true"><path d="M18 6 6 18M6 6l12 12"/></svg>
         </button>
         <img src="AI-agents.hover.webp" alt="AI chat and voice agent handling a customer enquiry live" loading="eager" fetchpriority="low" decoding="async">
-        <p class="wmodal__cap" id="wm-ai-agents-cap"><span>AI chatbot</span><b>Quinn AI</b></p>
+        <p class="wmodal__cap" id="wm-ai-agents-cap"><span>AI chatbot</span><b>Quinn AI</b><a class="wmodal__visit" href="https://voyageurquest.com/" target="_blank" rel="noopener">See it on Voyageur Quest &#8599;</a><a class="wmodal__visit" href="media/quinn-vq-reel.html">Watch the reel</a></p>
+      </div>
+    </dialog>
+    <dialog class="wmodal" id="wm-anglaw" aria-labelledby="wm-anglaw-cap" style="--ar:1280/735">
+      <div class="wmodal__panel">
+        <button class="wmodal__close" type="button" data-wmodal-close aria-label="Close preview">
+          <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" aria-hidden="true"><path d="M18 6 6 18M6 6l12 12"/></svg>
+        </button>
+        <img src="media/portfolio/ang-law.jpg" alt="Ang Law PC homepage: Real Estate and Family Lawyers in North York" loading="eager" fetchpriority="low" decoding="async">
+        <p class="wmodal__cap" id="wm-anglaw-cap"><span>Local SEO &middot; Legal</span><b>Law Firm SEO &mdash; Ang Law PC</b><a class="wmodal__visit" href="https://anglawpc.com/" target="_blank" rel="noopener">Visit site &#8599;</a></p>
       </div>
     </dialog>
     <dialog class="wmodal" id="wm-willow" aria-labelledby="wm-willow-cap" style="--ar:1280/800">
