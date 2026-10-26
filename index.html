@@ -7,6 +7,104 @@
 <meta name="description" content="Websites, apps, SEO and AI agents for small and medium businesses. Built in Toronto by the people you'll actually talk to. Fixed scope, agreed up front.">
 <link rel="canonical" href="https://sulosystems.com/">
 
+<!-- Structured data. Organization + ProfessionalService (a LocalBusiness
+     subtype) share one @id so Google treats them as the same entity, and the
+     address/phone match the verified Google Business Profile exactly - keep
+     them in sync if either changes. Deliberately omitted: openingHours (the
+     profile's hours are being corrected) and aggregateRating (Google ignores
+     self-published ratings for a business's own site). The FAQPage answers
+     are the visible FAQ text, as Google requires. -->
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@graph": [
+    {
+      "@type": ["Organization", "ProfessionalService"],
+      "@id": "https://sulosystems.com/#organization",
+      "name": "Sulo Systems Inc.",
+      "alternateName": "Sulo Systems",
+      "url": "https://sulosystems.com/",
+      "logo": "https://sulosystems.com/Log.png",
+      "image": "https://sulosystems.com/og-card.png",
+      "description": "Websites, apps, SEO and AI agents for small and medium businesses. Built in Toronto by the people you'll actually talk to. Fixed scope, agreed up front.",
+      "telephone": "+1-647-524-6974",
+      "address": {
+        "@type": "PostalAddress",
+        "streetAddress": "2 Grandstand Pl",
+        "addressLocality": "East York",
+        "addressRegion": "ON",
+        "postalCode": "M4H 1E2",
+        "addressCountry": "CA"
+      },
+      "areaServed": [
+        { "@type": "City", "name": "Toronto" },
+        { "@type": "AdministrativeArea", "name": "Greater Toronto Area" },
+        { "@type": "City", "name": "Vaughan" },
+        { "@type": "City", "name": "Mississauga" }
+      ],
+      "founder": [
+        { "@type": "Person", "name": "Muaz Masood" },
+        { "@type": "Person", "name": "Sadeed Bari" }
+      ],
+      "knowsAbout": ["Web design", "Web development", "Search engine optimization", "Local SEO", "AI agents", "Custom software"],
+      "sameAs": ["https://www.instagram.com/sulosystemsinc/"],
+      "hasOfferCatalog": {
+        "@type": "OfferCatalog",
+        "name": "Sulo Systems services",
+        "itemListElement": [
+          { "@type": "Offer", "itemOffered": { "@type": "Service", "name": "Website design and development", "description": "Fast, mobile-friendly business and e-commerce websites built in-house in Toronto." } },
+          { "@type": "Offer", "itemOffered": { "@type": "Service", "name": "Search engine optimization and local SEO", "description": "SEO and local search programs, including Google Business Profile optimization." } },
+          { "@type": "Offer", "itemOffered": { "@type": "Service", "name": "Custom apps and internal software", "description": "CRM portals, inventory and invoice systems, clinic scheduling and patient records, and revenue dashboards." } },
+          { "@type": "Offer", "itemOffered": { "@type": "Service", "name": "AI chat and voice agents", "description": "Quinn AI answers enquiries in real time and books appointments." } }
+        ]
+      }
+    },
+    {
+      "@type": "ProfessionalService",
+      "@id": "https://sulosystems.com/#woodbridge",
+      "name": "Sulo Systems Inc. (Woodbridge)",
+      "url": "https://sulosystems.com/",
+      "image": "https://sulosystems.com/og-card.png",
+      "telephone": "+1-647-524-6974",
+      "parentOrganization": { "@id": "https://sulosystems.com/#organization" },
+      "address": {
+        "@type": "PostalAddress",
+        "streetAddress": "681 Chancellor Dr",
+        "addressLocality": "Woodbridge",
+        "addressRegion": "ON",
+        "postalCode": "L4L 4A8",
+        "addressCountry": "CA"
+      },
+      "areaServed": [
+        { "@type": "City", "name": "Vaughan" },
+        { "@type": "City", "name": "Woodbridge" },
+        { "@type": "AdministrativeArea", "name": "Greater Toronto Area" }
+      ]
+    },
+    {
+      "@type": "WebSite",
+      "@id": "https://sulosystems.com/#website",
+      "url": "https://sulosystems.com/",
+      "name": "Sulo Systems",
+      "publisher": { "@id": "https://sulosystems.com/#organization" },
+      "inLanguage": "en-CA"
+    },
+    {
+      "@type": "FAQPage",
+      "@id": "https://sulosystems.com/#faq",
+      "mainEntity": [
+        { "@type": "Question", "name": "What does it cost?", "acceptedAnswer": { "@type": "Answer", "text": "Depends on the work. Subscriptions to our existing products start at $39/month CAD. New projects start at $3,000 CAD. Whichever it is, scope and price are agreed in writing before we start, and if the scope changes, you see the cost first and get to say no. No hourly surprises." } },
+        { "@type": "Question", "name": "How long does it take?", "acceptedAnswer": { "@type": "Answer", "text": "Typically 2-6 weeks from kickoff, depending on scope. We scope the work first; once we have agreed exactly what is being built, you get a firm finish date in writing before any work starts." } },
+        { "@type": "Question", "name": "Can I edit it myself afterwards?", "acceptedAnswer": { "@type": "Answer", "text": "That depends on what we build. Where a content-managed setup is the right fit we hand over an admin panel and walk you through it, so the day-to-day changes are yours to make. On more custom builds some changes are better kept with us, and we will tell you which is which before we start, not after. Either way, you are never locked out of your own system." } },
+        { "@type": "Question", "name": "What happens after launch?", "acceptedAnswer": { "@type": "Answer", "text": "Two weeks of post-launch support are included: anything broken, or not behaving the way we agreed, is fixed inside that window at no extra cost. After that, ongoing support moves to a monthly rate scoped to what you actually need. Either way the people maintaining it are the people who built it." } },
+        { "@type": "Question", "name": "Who actually does the work?", "acceptedAnswer": { "@type": "Answer", "text": "We do, in Toronto. No offshore contractors, no subcontracted build, no account manager relaying your changes to someone you will never meet. The person who takes your call is the person who writes the code." } },
+        { "@type": "Question", "name": "What happens on the call?", "acceptedAnswer": { "@type": "Answer", "text": "Fifteen minutes. You tell us what you sell and who buys it; we tell you whether we're the right people for it and roughly what it would cost. If we're not the right fit we say so on that call; there is no follow-up sequence." } }
+      ]
+    }
+  ]
+}
+</script>
+
 <!-- Open Graph / Twitter (index62). Before this, sharing any sulosystems.com
      link in WhatsApp, LinkedIn, Slack or iMessage produced a bare URL with no
      preview card at all. og-card.png is generated at 1200x630 from the site's
@@ -1190,6 +1288,16 @@ textarea.input-opt{ min-height:112px; }
   .faq__x, .faq__x::after{ transition:none; }
 }
 </style>
+<style>
+/* Footer NAP (name/address/phone). Inline here, not in css/styles.css, to
+   match how every other late addition on this page is handled. Matches the
+   existing .foot__meta type, and sits on its own row on narrow screens. */
+.foot__nap{ font-style:normal; font-size:var(--t-meta); color:var(--ink-muted); }
+.foot__nap span, .foot__nap a{ display:block; }
+.foot__nap a{ color:inherit; text-decoration:underline; text-underline-offset:3px; }
+.foot__nap a:hover{ color:var(--ink); }
+.hint a{ color:inherit; text-decoration:underline; text-underline-offset:3px; }
+</style>
 </head>
 <body>
 
@@ -1824,7 +1932,7 @@ textarea.input-opt{ min-height:112px; }
         <p class="kicker">Contact</p>
         <h2 class="h2 wipe">Let&rsquo;s build something.</h2>
         <p class="lede" style="margin-top:var(--s-3)">Tell us what you sell and who you sell it to. We’ll tell you whether we’re the right people for it, and roughly what it costs, on the first call.</p>
-        <p class="hint" style="margin-top:var(--s-4)">One business day reply. Toronto, Canada.</p>
+        <p class="hint" style="margin-top:var(--s-4)">One business day reply. Serving Toronto and the GTA from East York and Woodbridge &middot; <a href="tel:+16475246974" data-track="contact_phone_click">(647) 524-6974</a></p>
 
         <!-- index54: booking is the primary path here too, and saying what
              the call actually is removes the last reason to hesitate. -->
@@ -1903,6 +2011,11 @@ textarea.input-opt{ min-height:112px; }
         <circle cx="17.4" cy="6.6" r="1" fill="currentColor" stroke="none"/>
       </svg>
     </a>
+    <address class="foot__nap">
+      <span>2 Grandstand Pl, East York, Toronto, ON M4H&nbsp;1E2</span>
+      <span>681 Chancellor Dr, Woodbridge, ON L4L&nbsp;4A8</span>
+      <a href="tel:+16475246974" data-track="footer_phone_click">(647) 524-6974</a>
+    </address>
     <p class="foot__meta">&copy; 2026 Sulo Systems Inc. · Toronto, Canada</p>
   </div>
 </footer>
