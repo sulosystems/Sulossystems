@@ -1297,6 +1297,15 @@ textarea.input-opt{ min-height:112px; }
 .foot__nap a{ color:inherit; text-decoration:underline; text-underline-offset:3px; }
 .foot__nap a:hover{ color:var(--ink); }
 .hint a{ color:inherit; text-decoration:underline; text-underline-offset:3px; }
+/* "Visit site" link inside the work-screenshot modal captions. The caption
+   already sets the title block; this sits under it as a quiet text link. */
+.wmodal__visit{
+  display:inline-block; margin-top:10px;
+  font-size:11px; font-weight:700; letter-spacing:.1em; text-transform:uppercase;
+  color:var(--on-dark); text-decoration:none; border-bottom:1px solid currentColor;
+}
+.wmodal__visit:hover{ opacity:.8; }
+.wmodal__visit:focus-visible{ outline:2px solid var(--on-dark); outline-offset:3px; }
 </style>
 </head>
 <body>
@@ -1626,6 +1635,79 @@ textarea.input-opt{ min-height:112px; }
           </div>
         </div>
       </article>
+      <!-- Live products and sites added index63. Each outcome line is the
+           project's own on-page headline/tagline (nothing new is claimed),
+           and every card opens a screenshot modal with a Visit site link. -->
+      <article class="wcard">
+        <div class="wcard__in">
+          <span class="wcard__icon" aria-hidden="true"><svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><path d="M12 21s-7-4.5-7-10a4 4 0 0 1 7-2.6A4 4 0 0 1 19 11c0 5.5-7 10-7 10z"/></svg></span>
+          <p class="wcard__out">Practice software that feels good to use</p>
+          <h3 class="wcard__h">Willow</h3>
+          <p class="wcard__b">Scheduling, telehealth, session notes, billing and a client portal in one app for Ontario therapists &mdash; designed around PHIPA, with client data hosted in Canada.</p>
+          <div class="wcard__mock">
+            <span class="label">Live product &middot; Ontario therapists</span>
+            <div class="bar bar--wide"></div>
+            <div class="bar bar--mid bar--solid"></div>
+            <div class="row"><button class="wcard__more" type="button" data-wmodal="willow" aria-haspopup="dialog">View more</button></div>
+          </div>
+        </div>
+      </article>
+      <article class="wcard">
+        <div class="wcard__in">
+          <span class="wcard__icon" aria-hidden="true"><svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="9"/><path d="M12 7v5l3 2"/></svg></span>
+          <p class="wcard__out">Booking, made effortless</p>
+          <h3 class="wcard__h">Tempo</h3>
+          <p class="wcard__b">Online booking for salons, clinics, studios and mobile services &mdash; appointments and classes, Stripe deposits, reminders and Google or Outlook calendar sync.</p>
+          <div class="wcard__mock">
+            <span class="label">Live product &middot; service businesses</span>
+            <div class="bar bar--mid bar--solid"></div>
+            <div class="bar bar--wide"></div>
+            <div class="row"><button class="wcard__more" type="button" data-wmodal="tempo" aria-haspopup="dialog">View more</button></div>
+          </div>
+        </div>
+      </article>
+      <article class="wcard">
+        <div class="wcard__in">
+          <span class="wcard__icon" aria-hidden="true"><svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><path d="M7 3v8M5 3v5a2 2 0 0 0 4 0V3M7 11v10"/><path d="M17 3c-2 2-3 5-3 8h3v10"/></svg></span>
+          <p class="wcard__out">Fill every table, without the phone tag</p>
+          <h3 class="wcard__h">Table Ready</h3>
+          <p class="wcard__b">Online reservations and a waitlist for restaurants &mdash; choose which tables are open to guests and tell waitlisted guests the moment a table frees up.</p>
+          <div class="wcard__mock">
+            <span class="label">Live product &middot; restaurants</span>
+            <div class="bar bar--wide bar--solid"></div>
+            <div class="bar bar--mid"></div>
+            <div class="row"><button class="wcard__more" type="button" data-wmodal="tableready" aria-haspopup="dialog">View more</button></div>
+          </div>
+        </div>
+      </article>
+      <article class="wcard">
+        <div class="wcard__in">
+          <span class="wcard__icon" aria-hidden="true"><svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><rect x="4" y="3" width="16" height="18" rx="2"/><path d="m8 9 1.5 1.5L12 8M8 15l1.5 1.5L12 14M14 9h3M14 15h3"/></svg></span>
+          <p class="wcard__out">Every repair, from drop-off to pickup</p>
+          <h3 class="wcard__h">Counter</h3>
+          <p class="wcard__b">Check-in and job tracking for walk-in shops &mdash; log a job in seconds, follow it through the workshop, and let customers know the moment it&rsquo;s ready.</p>
+          <div class="wcard__mock">
+            <span class="label">Live product &middot; walk-in shops</span>
+            <div class="bar bar--mid"></div>
+            <div class="bar bar--wide bar--solid"></div>
+            <div class="row"><button class="wcard__more" type="button" data-wmodal="counter" aria-haspopup="dialog">View more</button></div>
+          </div>
+        </div>
+      </article>
+      <article class="wcard">
+        <div class="wcard__in">
+          <span class="wcard__icon" aria-hidden="true"><svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="13" width="18" height="5" rx="1"/><path d="m5 13 1.5-4.5A2 2 0 0 1 8.4 7h7.2a2 2 0 0 1 1.9 1.5L19 13"/><path d="M6 18v2M18 18v2"/></svg></span>
+          <p class="wcard__out">Luxury mobile detailing, booked online</p>
+          <h3 class="wcard__h">A1 Auto Detailing</h3>
+          <p class="wcard__b">A booking-focused site for a mobile detailing company serving Raleigh, Durham and Cary &mdash; package pricing, a before-and-after gallery and online booking.</p>
+          <div class="wcard__mock">
+            <span class="label">Packages, gallery, booking</span>
+            <div class="bar bar--wide"></div>
+            <div class="bar bar--mid bar--solid"></div>
+            <div class="row"><button class="wcard__more" type="button" data-wmodal="a1" aria-haspopup="dialog">View more</button></div>
+          </div>
+        </div>
+      </article>
       <article class="wcard">
         <div class="wcard__in">
           <span class="wcard__icon" aria-hidden="true"><svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="4" width="18" height="18" rx="2"/><path d="M16 2v4M8 2v4M3 10h18M7.5 15.5h2l1.5 2.5 1.5-5 1.2 2.5h2.8"/></svg></span>
@@ -1771,6 +1853,51 @@ textarea.input-opt{ min-height:112px; }
         </button>
         <img src="AI-agents.hover.webp" alt="AI chat and voice agent handling a customer enquiry live" loading="eager" fetchpriority="low" decoding="async">
         <p class="wmodal__cap" id="wm-ai-agents-cap"><span>AI chatbot</span><b>Quinn AI</b></p>
+      </div>
+    </dialog>
+    <dialog class="wmodal" id="wm-willow" aria-labelledby="wm-willow-cap" style="--ar:1280/800">
+      <div class="wmodal__panel">
+        <button class="wmodal__close" type="button" data-wmodal-close aria-label="Close preview">
+          <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" aria-hidden="true"><path d="M18 6 6 18M6 6l12 12"/></svg>
+        </button>
+        <img src="media/portfolio/willow.jpg" alt="Willow practice management software for Ontario therapists, showing the scheduling calendar" loading="eager" fetchpriority="low" decoding="async">
+        <p class="wmodal__cap" id="wm-willow-cap"><span>Software &middot; Healthcare</span><b>Willow</b><a class="wmodal__visit" href="https://willowtherapy.ca/" target="_blank" rel="noopener">Visit site &#8599;</a></p>
+      </div>
+    </dialog>
+    <dialog class="wmodal" id="wm-tempo" aria-labelledby="wm-tempo-cap" style="--ar:1280/800">
+      <div class="wmodal__panel">
+        <button class="wmodal__close" type="button" data-wmodal-close aria-label="Close preview">
+          <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" aria-hidden="true"><path d="M18 6 6 18M6 6l12 12"/></svg>
+        </button>
+        <img src="media/portfolio/tempo.jpg" alt="Tempo online booking software for salons, clinics and studios" loading="eager" fetchpriority="low" decoding="async">
+        <p class="wmodal__cap" id="wm-tempo-cap"><span>Software &middot; Booking</span><b>Tempo</b><a class="wmodal__visit" href="https://tempo.sulosystems.com/" target="_blank" rel="noopener">Visit site &#8599;</a></p>
+      </div>
+    </dialog>
+    <dialog class="wmodal" id="wm-tableready" aria-labelledby="wm-tableready-cap" style="--ar:1280/800">
+      <div class="wmodal__panel">
+        <button class="wmodal__close" type="button" data-wmodal-close aria-label="Close preview">
+          <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" aria-hidden="true"><path d="M18 6 6 18M6 6l12 12"/></svg>
+        </button>
+        <img src="media/portfolio/table-ready.jpg" alt="Table Ready restaurant reservations and waitlist website" loading="eager" fetchpriority="low" decoding="async">
+        <p class="wmodal__cap" id="wm-tableready-cap"><span>Software &middot; Restaurants</span><b>Table Ready</b><a class="wmodal__visit" href="https://tableready.sulosystems.com/" target="_blank" rel="noopener">Visit site &#8599;</a></p>
+      </div>
+    </dialog>
+    <dialog class="wmodal" id="wm-counter" aria-labelledby="wm-counter-cap" style="--ar:1280/800">
+      <div class="wmodal__panel">
+        <button class="wmodal__close" type="button" data-wmodal-close aria-label="Close preview">
+          <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" aria-hidden="true"><path d="M18 6 6 18M6 6l12 12"/></svg>
+        </button>
+        <img src="media/portfolio/counter.jpg" alt="Counter check-in and job tracking software for walk-in shops" loading="eager" fetchpriority="low" decoding="async">
+        <p class="wmodal__cap" id="wm-counter-cap"><span>Software &middot; Walk-in shops</span><b>Counter</b><a class="wmodal__visit" href="https://counter.sulosystems.com/" target="_blank" rel="noopener">Visit site &#8599;</a></p>
+      </div>
+    </dialog>
+    <dialog class="wmodal" id="wm-a1" aria-labelledby="wm-a1-cap" style="--ar:1280/800">
+      <div class="wmodal__panel">
+        <button class="wmodal__close" type="button" data-wmodal-close aria-label="Close preview">
+          <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" aria-hidden="true"><path d="M18 6 6 18M6 6l12 12"/></svg>
+        </button>
+        <img src="media/portfolio/a1-detailing.jpg" alt="A1 Auto Detailing website: luxury mobile detailing with a before-and-after interior photo" loading="eager" fetchpriority="low" decoding="async">
+        <p class="wmodal__cap" id="wm-a1-cap"><span>Auto detailing &middot; Local services</span><b>A1 Auto Detailing</b><a class="wmodal__visit" href="https://a1detailer.com/" target="_blank" rel="noopener">Visit site &#8599;</a></p>
       </div>
     </dialog>
       </div>
