@@ -1199,19 +1199,18 @@ textarea.input-opt{ min-height:112px; }
 }
 
 /* ---- team ---- */
-.team{ display:grid; gap:var(--s-3); margin-top:var(--s-5); }
+.team{ display:grid; grid-template-columns:1fr 1fr; gap:var(--s-3); margin-top:var(--s-5); }
 .team__m{
-  display:flex; align-items:center; gap:var(--s-3);
-  padding:var(--s-3); border-radius:var(--r-sm);
+  display:flex; flex-direction:column; gap:var(--s-3);
+  padding:var(--s-2); border-radius:var(--r-sm);
   background:var(--glass); border:1px solid var(--glass-rim);
 }
-/* .team__img is what a real photo uses once one exists; it matches
-   .avatar--lg's box exactly so dropping one in changes nothing else. */
+/* Photos fill the card width as squares, name and title sit underneath. */
 .team__img{
-  flex:none; width:88px; height:88px; border-radius:var(--r-sm);
-  object-fit:cover;
+  display:block; width:100%; height:auto; aspect-ratio:1/1;
+  border-radius:calc(var(--r-sm) - 4px); object-fit:cover;
 }
-.team__m figcaption{ display:grid; gap:2px; }
+.team__m figcaption{ display:grid; gap:2px; padding:0 var(--s-1) var(--s-1); }
 .team__m figcaption b{ font-size:1.0625rem; font-weight:700; }
 .team__m figcaption span{ font-size:var(--t-meta); color:var(--ink-70); }
 
@@ -1273,7 +1272,6 @@ textarea.input-opt{ min-height:112px; }
 
 /* ---- responsive ---- */
 @media (min-width:760px){
-  .team{ grid-template-columns:1fr 1fr; }
   .midcta{ grid-template-columns:1fr auto; gap:var(--s-5); }
   .midcta .btn{ justify-self:end; }
   .contact__book{ grid-template-columns:auto 1fr; align-items:start; gap:var(--s-4); }
@@ -2031,14 +2029,14 @@ textarea.input-opt{ min-height:112px; }
          page. Two placeholders below: yours and your partner's. -->
     <div class="team">
       <figure class="team__m">
-        <img class="team__img" src="media/team/muaz-masood.webp" alt="Muaz Masood, Partner at Sulo Systems" width="88" height="88" loading="lazy" decoding="async">
+        <img class="team__img" src="media/team/muaz-masood.webp" alt="Muaz Masood, Partner at Sulo Systems" width="1000" height="1000" loading="lazy" decoding="async">
         <figcaption>
           <b>Muaz Masood</b>
           <span>Partner &middot; Tech Consultant &middot; Toronto</span>
         </figcaption>
       </figure>
       <figure class="team__m">
-        <img class="team__img" src="media/team/sadeed-bari.webp" alt="Sadeed Bari, Partner at Sulo Systems" width="88" height="88" loading="lazy" decoding="async">
+        <img class="team__img" src="media/team/sadeed-bari.webp" alt="Sadeed Bari, Partner at Sulo Systems" width="1000" height="1000" loading="lazy" decoding="async">
         <figcaption>
           <b>Sadeed Bari</b>
           <span>Partner &middot; Tech Consultant &middot; Toronto</span>
