@@ -1215,6 +1215,10 @@ textarea.input-opt{ min-height:112px; }
 .team__m figcaption span{ font-size:var(--t-meta); color:var(--ink-70); }
 
 /* ---- FAQ ---- */
+/* Tighten the join between the team cards and the FAQ heading: the two
+   stacked section paddings left ~256px of empty space on desktop. */
+#about{ padding-bottom:var(--s-4); }
+#faq{ padding-top:var(--s-6); }
 /* The shared .sec-head splits into two columns at >=900px: heading in the
    left half, lede in the right. That suits a section whose lede is its own
    standalone statement, but here it strands the subtitle out to the right
