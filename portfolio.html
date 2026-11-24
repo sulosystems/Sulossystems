@@ -1,456 +1,278 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-<meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
 <link rel="icon" href="/favicon.svg" type="image/svg+xml">
 <link rel="icon" href="/favicon.ico" sizes="48x48">
 <link rel="apple-touch-icon" href="/apple-touch-icon.png">
 <title>Portfolio | Sulo Systems Inc.</title>
-<meta name="description" content="A selection of client websites, apps and systems built by Sulo Systems — designed, built and maintained in Toronto.">
+<meta name="description" content="Client websites, apps and systems built by Sulo Systems: designed, built and maintained in Toronto.">
 <link rel="canonical" href="https://sulosystems.com/portfolio.html">
 <meta property="og:type" content="website">
 <meta property="og:site_name" content="Sulo Systems">
 <meta property="og:locale" content="en_CA">
 <meta property="og:url" content="https://sulosystems.com/portfolio.html">
-<meta property="og:title" content="A few things we've built">
-<meta property="og:description" content="A selection of client websites, apps and systems built by Sulo Systems — designed, built and maintained in Toronto.">
+<meta property="og:title" content="Portfolio | Sulo Systems Inc.">
+<meta property="og:description" content="Client websites, apps and systems built by Sulo Systems: designed, built and maintained in Toronto.">
 <meta property="og:image" content="https://sulosystems.com/og-card.png">
 <meta property="og:image:width" content="1200">
 <meta property="og:image:height" content="630">
 <meta name="twitter:card" content="summary_large_image">
+<meta name="twitter:title" content="Portfolio | Sulo Systems Inc.">
+<meta name="twitter:description" content="Client websites, apps and systems built by Sulo Systems: designed, built and maintained in Toronto.">
 <meta name="twitter:image" content="https://sulosystems.com/og-card.png">
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@graph": [
+    {
+      "@type": "CollectionPage",
+      "@id": "https://sulosystems.com/portfolio.html#page",
+      "url": "https://sulosystems.com/portfolio.html",
+      "name": "Portfolio | Sulo Systems Inc.",
+      "description": "Client websites, apps and systems built by Sulo Systems: designed, built and maintained in Toronto.",
+      "isPartOf": {
+        "@id": "https://sulosystems.com/#website"
+      },
+      "breadcrumb": {
+        "@id": "https://sulosystems.com/portfolio.html#breadcrumb"
+      }
+    },
+    {
+      "@type": "BreadcrumbList",
+      "@id": "https://sulosystems.com/portfolio.html#breadcrumb",
+      "itemListElement": [
+        {
+          "@type": "ListItem",
+          "position": 1,
+          "name": "Home",
+          "item": "https://sulosystems.com/"
+        },
+        {
+          "@type": "ListItem",
+          "position": 2,
+          "name": "Portfolio",
+          "item": "https://sulosystems.com/portfolio.html"
+        }
+      ]
+    }
+  ]
+}
+</script>
 <link rel="preconnect" href="https://fonts.googleapis.com">
-<link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:wght@300;400;500&family=DM+Sans:wght@300;400;500&display=swap" rel="stylesheet">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Archivo:wght@100;200;400;500;600;700;800&display=swap">
+<link rel="stylesheet" href="/css/styles.css">
+<link rel="stylesheet" href="/css/work.css">
 <style>
-  *, *::before, *::after { margin: 0; padding: 0; box-sizing: border-box; }
+body{
+  background-color:var(--ground);
+  background-image:
+    radial-gradient(78% 52% at 8% -6%,  rgba(255,255,255,.95), transparent 62%),
+    radial-gradient(62% 46% at 98% 4%,  rgba(255,255,255,.80), transparent 58%),
+    linear-gradient(rgba(238,236,234,.36), rgba(238,236,234,.36)),
+    url('/background.webp');
+  background-size:auto, auto, cover, cover;
+  background-position:top left, top right, center, center;
+  background-repeat:no-repeat, no-repeat, no-repeat, no-repeat;
+  background-attachment:fixed, fixed, fixed, fixed;
+}
+.nav__cta{ display:inline-flex; }
+.nav__links{ display:none; }
+@media(min-width:768px){ .nav__links{ display:flex; } }
 
-  body {
-    background: #0c0c0e;
-    color: #e8e4dc;
-    font-family: 'DM Sans', sans-serif;
-    min-height: 100vh;
-  }
+.crumbs{ font-size:var(--t-meta); color:var(--ink-muted); margin-bottom:var(--s-3); }
+.crumbs a{ text-decoration:underline; text-underline-offset:3px; }
+.crumbs span{ margin-inline:6px; }
+.sv-hero{ padding-block:var(--s-6) var(--s-5); }
+.sv-hero h1{ font-size:var(--t-h1); font-weight:800; line-height:1.03; letter-spacing:-.03em; max-width:18ch; }
+.sv-hero .lede{ margin-top:var(--s-4); font-size:clamp(1.05rem,1.3vw,1.25rem); }
+.sv-actions{ display:flex; flex-wrap:wrap; gap:var(--s-2); margin-top:var(--s-4); }
 
-  /* ── Nav ── */
-  nav {
-    display: flex;
-    align-items: center;
-    justify-content: space-between;
-    padding: 2rem 4rem;
-    border-bottom: 1px solid rgba(255,255,255,0.06);
-    position: sticky;
-    top: 0;
-    background: #0c0c0e;
-    z-index: 100;
-  }
-  .logo {
-    font-family: 'Cormorant Garamond', serif;
-    font-size: 1.4rem;
-    font-weight: 300;
-    letter-spacing: 0.08em;
-    color: #e8e4dc;
-    text-decoration: none;
-    line-height: 1;
-  }
-  .logo span { color: #c9aa71; }
-  .logo-sub {
-    font-size: 0.6rem;
-    letter-spacing: 0.18em;
-    text-transform: uppercase;
-    color: rgba(201,170,113,0.5);
-    display: block;
-    margin-top: 3px;
-    font-family: 'DM Sans', sans-serif;
-    font-weight: 300;
-  }
-  .nav-links {
-    display: flex;
-    gap: 2.5rem;
-    list-style: none;
-  }
-  .nav-links a {
-    font-size: 0.8rem;
-    letter-spacing: 0.12em;
-    text-transform: uppercase;
-    color: rgba(232,228,220,0.5);
-    text-decoration: none;
-    transition: color 0.2s;
-  }
-  .nav-links a:hover,
-  .nav-links a.active { color: #c9aa71; }
+.sv{ padding-block:var(--s-5); }
+.sv h2{ font-size:var(--t-h2); font-weight:700; line-height:1.08; letter-spacing:-.022em; max-width:24ch; }
+.sv__intro{ margin-top:var(--s-2); color:var(--ink-70); max-width:64ch; }
+.sv__prose{ margin-top:var(--s-3); display:grid; gap:var(--s-2); max-width:70ch; color:var(--ink-70); font-size:clamp(1rem,1.1vw,1.1rem); }
+.sv__prose p:first-child{ color:var(--ink); }
 
-  /* ── Header ── */
-  header {
-    padding: 6rem 4rem 4rem;
-    max-width: 1200px;
-    margin: 0 auto;
-  }
-  .eyebrow {
-    font-size: 0.7rem;
-    letter-spacing: 0.25em;
-    text-transform: uppercase;
-    color: #c9aa71;
-    margin-bottom: 1.2rem;
-  }
-  h1 {
-    font-family: 'Cormorant Garamond', serif;
-    font-size: clamp(3rem, 6vw, 5rem);
-    font-weight: 300;
-    line-height: 1.05;
-    letter-spacing: -0.01em;
-    color: #e8e4dc;
-  }
-  h1 em {
-    font-style: italic;
-    color: #c9aa71;
-  }
-  .header-sub {
-    font-size: 0.95rem;
-    color: rgba(232,228,220,0.45);
-    margin-top: 1.5rem;
-    max-width: 440px;
-    line-height: 1.7;
-    font-weight: 300;
-  }
+.sv__cards{ display:grid; gap:var(--s-2); margin-top:var(--s-4); }
+@media(min-width:700px){ .sv__cards{ grid-template-columns:repeat(2,1fr); } }
+@media(min-width:1100px){ .sv__cards{ grid-template-columns:repeat(3,1fr); } }
+.sv__card{ padding:var(--s-3); display:flex; flex-direction:column; gap:8px; }
+.sv__card h3{ font-size:var(--t-h3); font-weight:700; line-height:1.2; }
+.sv__card p{ color:var(--ink-70); font-size:.9375rem; }
+a.sv__card{ transition:transform .2s var(--e-hover), box-shadow .2s var(--e-hover); }
+a.sv__card:hover{ transform:translateY(-3px); box-shadow:var(--glass-shadow-lg); }
+.sv__more{ margin-top:auto; padding-top:8px; font-size:var(--t-meta); font-weight:700; letter-spacing:.1em; text-transform:uppercase; }
 
-  .divider {
-    width: 100%;
-    height: 1px;
-    background: rgba(255,255,255,0.06);
-  }
+.sv__steps{ counter-reset:s; display:grid; gap:var(--s-2); margin-top:var(--s-4); }
+@media(min-width:900px){ .sv__steps{ grid-template-columns:repeat(5,1fr); } }
+.sv__step{ padding:var(--s-3); counter-increment:s; }
+.sv__step::before{ content:counter(s, decimal-leading-zero); display:block; font-size:var(--t-meta); font-weight:700; letter-spacing:.14em; color:var(--ink-muted); margin-bottom:8px; }
+.sv__step h3{ font-size:1.05rem; font-weight:700; margin-bottom:6px; }
+.sv__step p{ color:var(--ink-70); font-size:.9375rem; }
 
-  /* ── Grid ── */
-  .projects-section {
-    padding: 5rem 4rem;
-    max-width: 1200px;
-    margin: 0 auto;
-  }
-  .projects-grid {
-    display: grid;
-    grid-template-columns: 1fr 1fr;
-    gap: 2px;
-    background: rgba(255,255,255,0.06);
-  }
+.sv__list{ display:grid; gap:10px; margin-top:var(--s-3); max-width:64ch; }
+.sv__list li{ position:relative; padding-left:20px; color:var(--ink-70); }
+.sv__list li::before{ content:""; position:absolute; left:0; top:.65em; width:7px; height:7px; border-radius:50%; background:var(--ink); opacity:.55; }
 
-  /* ── Cards ── */
-  .project-card {
-    background: #0c0c0e;
-    padding: 3rem;
-    position: relative;
-    overflow: hidden;
-    cursor: pointer;
-    transition: background 0.3s;
-  }
-  .project-card:hover { background: #141416; }
-  .project-card::before {
-    content: '';
-    position: absolute;
-    top: 0; left: 0; right: 0;
-    height: 2px;
-    background: #c9aa71;
-    transform: scaleX(0);
-    transition: transform 0.4s ease;
-    transform-origin: left;
-  }
-  .project-card:hover::before { transform: scaleX(1); }
+.sv__faq{ margin-top:var(--s-4); display:grid; gap:10px; max-width:820px; }
+.sv__faq details{ padding:0; }
+.sv__faq summary{ cursor:pointer; list-style:none; padding:var(--s-3); font-weight:700; display:flex; justify-content:space-between; gap:var(--s-2); align-items:center; }
+.sv__faq summary::-webkit-details-marker{ display:none; }
+.sv__faq summary::after{ content:"+"; font-size:1.4rem; line-height:1; flex:none; transition:transform .2s var(--e-hover); }
+.sv__faq details[open] summary::after{ transform:rotate(45deg); }
+.sv__faq details p{ padding:0 var(--s-3) var(--s-3); color:var(--ink-70); max-width:64ch; }
 
-  .card-wide { grid-column: 1 / -1; }
-  .card-wide .card-image { aspect-ratio: 16 / 6; }
+.sv-end{ margin-block:var(--s-5) var(--s-7); padding:var(--s-5); display:grid; gap:var(--s-3); align-items:center; }
+@media(min-width:900px){ .sv-end{ grid-template-columns:1fr auto; } }
+.sv-end h2{ font-size:var(--t-h2); font-weight:700; line-height:1.08; letter-spacing:-.022em; max-width:22ch; }
+.sv-end p{ color:var(--ink-70); margin-top:var(--s-2); max-width:60ch; }
 
-  .card-number {
-    font-size: 0.68rem;
-    letter-spacing: 0.2em;
-    color: rgba(232,228,220,0.2);
-    margin-bottom: 3rem;
-    font-weight: 400;
-  }
-  .card-image {
-    width: 100%;
-    aspect-ratio: 16 / 8;
-    background: #171719;
-    overflow: hidden;
-    margin-bottom: 2rem;
-    position: relative;
-  }
-  .card-image img {
-    width: 100%;
-    height: 100%;
-    object-fit: cover;
-    filter: grayscale(30%) brightness(0.85);
-    transition: filter 0.4s, transform 0.5s;
-  }
-  .project-card:hover .card-image img {
-    filter: grayscale(0%) brightness(1);
-    transform: scale(1.03);
-  }
-  .card-placeholder {
-    width: 100%; height: 100%;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    background: linear-gradient(135deg, #171719 0%, #1e1e22 100%);
-    position: absolute;
-    inset: 0;
-  }
-  .card-placeholder-text {
-    font-family: 'Cormorant Garamond', serif;
-    font-size: 1.8rem;
-    font-weight: 300;
-    color: rgba(201,170,113,0.25);
-    letter-spacing: 0.05em;
-  }
-  .card-tag {
-    display: inline-block;
-    font-size: 0.65rem;
-    letter-spacing: 0.18em;
-    text-transform: uppercase;
-    color: #c9aa71;
-    background: rgba(201,170,113,0.08);
-    padding: 0.3rem 0.8rem;
-    border: 1px solid rgba(201,170,113,0.2);
-    margin-bottom: 1rem;
-  }
-  .card-title {
-    font-family: 'Cormorant Garamond', serif;
-    font-size: 1.8rem;
-    font-weight: 400;
-    color: #e8e4dc;
-    margin-bottom: 0.5rem;
-    letter-spacing: 0.01em;
-  }
-  .card-desc {
-    font-size: 0.82rem;
-    color: rgba(232,228,220,0.4);
-    line-height: 1.7;
-    margin-bottom: 2rem;
-    font-weight: 300;
-  }
-  .card-link {
-    display: inline-flex;
-    align-items: center;
-    gap: 0.5rem;
-    font-size: 0.72rem;
-    letter-spacing: 0.15em;
-    text-transform: uppercase;
-    color: #c9aa71;
-    text-decoration: none;
-    transition: gap 0.2s;
-  }
-  .card-link:hover { gap: 0.9rem; }
-  .card-link svg {
-    width: 14px; height: 14px;
-    stroke: #c9aa71;
-    fill: none;
-    stroke-width: 1.5;
-    transition: transform 0.2s;
-  }
-  .card-link:hover svg { transform: translateX(3px); }
-
-  /* ── Footer ── */
-  footer {
-    border-top: 1px solid rgba(255,255,255,0.06);
-    padding: 2.5rem 4rem;
-    display: flex;
-    align-items: center;
-    justify-content: space-between;
-  }
-  .footer-copy {
-    font-size: 0.72rem;
-    color: rgba(232,228,220,0.25);
-    letter-spacing: 0.05em;
-  }
-  .footer-links { display: flex; gap: 2rem; }
-  .footer-links a {
-    font-size: 0.72rem;
-    color: rgba(232,228,220,0.3);
-    text-decoration: none;
-    letter-spacing: 0.05em;
-    transition: color 0.2s;
-  }
-  .footer-links a:hover { color: #c9aa71; }
-
-  /* ── Responsive ── */
-  @media (max-width: 768px) {
-    nav { padding: 1.5rem 1.5rem; }
-    .nav-links { display: none; }
-    header { padding: 4rem 1.5rem 2.5rem; }
-    .projects-section { padding: 3rem 1.5rem; }
-    .projects-grid { grid-template-columns: 1fr; }
-    .card-wide { grid-column: 1; }
-    .card-wide .card-image { aspect-ratio: 16 / 8; }
-    .project-card { padding: 2rem 1.5rem; }
-    footer { padding: 2rem 1.5rem; flex-direction: column; gap: 1rem; text-align: center; }
-  }
-</style>
+.foot__nap{ font-style:normal; font-size:var(--t-meta); color:var(--ink-muted); }
+.foot__nap span, .foot__nap a{ display:block; }
+.foot__nap a{ color:inherit; text-decoration:underline; text-underline-offset:3px; }
+.foot__nap a:hover{ color:var(--ink); }
+.sv__prose a, .sv__intro a, .sv__list a{ text-decoration:underline; text-underline-offset:3px; }
+.g-meta{ margin-top:var(--s-3); font-size:var(--t-meta); color:var(--ink-muted); }</style>
 </head>
 <body>
-
-<nav>
-  <a class="logo" href="index.html">SULO <span>SYSTEMS</span><span class="logo-sub">Inc.</span></a>
-  <ul class="nav-links">
-    <li><a href="index.html">Home</a></li>
-  </ul>
-</nav>
-
-<header>
-  <p class="eyebrow">Portfolio</p>
-  <h1>A few things<br>we've <em>built</em></h1>
-  <p class="header-sub">Each project starts with listening. Here's a look at some of the work we've had the privilege of doing for our clients.</p>
-</header>
-
-<div class="divider"></div>
-
-<section class="projects-section">
-  <div class="projects-grid">
-
-    <!-- 01 IP Silver House -->
-    <div class="project-card">
-      <p class="card-number">01 / 11</p>
-      <div class="card-image">
-        <img src="https://static.wixstatic.com/media/2f0e31_f87bf122ae2745bfbd1d624b77b92de6~mv2.png/v1/fit/w_774,h_366,q_87,enc_avif,quality_auto/2f0e31_f87bf122ae2745bfbd1d624b77b92de6~mv2.png" alt="IP Silver House" onerror="this.style.display='none';this.nextElementSibling.style.display='flex'">
-        <div class="card-placeholder" style="display:none"><span class="card-placeholder-text">IP Silver House</span></div>
-      </div>
-      <span class="card-tag">Real Estate</span>
-      <h2 class="card-title">IP Silver House</h2>
-      <p class="card-desc">A refined property showcase website for a premium real estate brand, emphasising elegance and trust.</p>
-      <a class="card-link" href="https://ipsilverhouse.com/" target="_blank" rel="noopener">Visit site<svg viewBox="0 0 24 24"><line x1="5" y1="12" x2="19" y2="12"/><polyline points="12 5 19 12 12 19"/></svg></a>
-    </div>
-
-    <!-- 02 Gems by Abi -->
-    <div class="project-card">
-      <p class="card-number">02 / 11</p>
-      <div class="card-image">
-        <img src="https://static.wixstatic.com/media/2f0e31_86fd299430604d2b8fbf6913849c73f0~mv2.png/v1/fit/w_774,h_439,q_87,enc_avif,quality_auto/2f0e31_86fd299430604d2b8fbf6913849c73f0~mv2.png" alt="Gems by Abi" onerror="this.style.display='none';this.nextElementSibling.style.display='flex'">
-        <div class="card-placeholder" style="display:none"><span class="card-placeholder-text">Gems by Abi</span></div>
-      </div>
-      <span class="card-tag">Jewellery & Retail</span>
-      <h2 class="card-title">Gems by Abi</h2>
-      <p class="card-desc">A boutique jewellery brand brought to life online — warm, luxurious, and crafted for a discerning audience.</p>
-      <a class="card-link" href="https://gemsbyabi.com/" target="_blank" rel="noopener">Visit site<svg viewBox="0 0 24 24"><line x1="5" y1="12" x2="19" y2="12"/><polyline points="12 5 19 12 12 19"/></svg></a>
-    </div>
-
-    <!-- 03 OutNo.d -->
-    <div class="project-card">
-      <p class="card-number">03 / 11</p>
-      <div class="card-image">
-        <img src="http://outnod.com/cdn/shop/files/IIIES12001.jpg?v=1668882858" alt="OutNo.d" onerror="this.style.display='none';this.nextElementSibling.style.display='flex'">
-        <div class="card-placeholder" style="display:none"><span class="card-placeholder-text">OutNo.d</span></div>
-      </div>
-      <span class="card-tag">Beauty & Wellness</span>
-      <h2 class="card-title">OutNo.d</h2>
-      <p class="card-desc">A premium curly hair care brand — researched formulas, thoughtful design, and an e-commerce experience built around healthy hair.</p>
-      <a class="card-link" href="https://outnod.com/" target="_blank" rel="noopener">Visit site<svg viewBox="0 0 24 24"><line x1="5" y1="12" x2="19" y2="12"/><polyline points="12 5 19 12 12 19"/></svg></a>
-    </div>
-
-    <!-- 04 LinenBNB -->
-    <div class="project-card">
-      <p class="card-number">04 / 11</p>
-      <div class="card-image">
-        <div class="card-placeholder" style="display:flex"><span class="card-placeholder-text">LinenBNB</span></div>
-      </div>
-      <span class="card-tag">Hospitality & Services</span>
-      <h2 class="card-title">LinenBNB</h2>
-      <p class="card-desc">A service website for a premium linen and towel rental company catering to Airbnb and vacation rental hosts in Miami and Orlando.</p>
-      <a class="card-link" href="https://linenbnb.com/" target="_blank" rel="noopener">Visit site<svg viewBox="0 0 24 24"><line x1="5" y1="12" x2="19" y2="12"/><polyline points="12 5 19 12 12 19"/></svg></a>
-    </div>
-
-    <!-- 05 Ang Law PC -->
-    <div class="project-card">
-      <p class="card-number">05 / 11</p>
-      <div class="card-image">
-        <img src="https://i0.wp.com/anglawpc.com/wp-content/uploads/2025/03/1-1-Photoroom-2.png?fit=236%2C236&ssl=1" alt="Ang Law PC" onerror="this.style.display='none';this.nextElementSibling.style.display='flex'">
-        <div class="card-placeholder" style="display:none"><span class="card-placeholder-text">Ang Law PC</span></div>
-      </div>
-      <span class="card-tag">Legal</span>
-      <h2 class="card-title">Ang Law PC</h2>
-      <p class="card-desc">A professional and trustworthy web presence for a North York law firm specialising in real estate, wills, and family law.</p>
-      <a class="card-link" href="https://anglawpc.com/" target="_blank" rel="noopener">Visit site<svg viewBox="0 0 24 24"><line x1="5" y1="12" x2="19" y2="12"/><polyline points="12 5 19 12 12 19"/></svg></a>
-    </div>
-
-    <!-- 06 Teambuilding Adventure -->
-    <div class="project-card">
-      <p class="card-number">06 / 11</p>
-      <div class="card-image">
-        <div class="card-placeholder" style="display:flex"><span class="card-placeholder-text">Teambuilding Adventure</span></div>
-      </div>
-      <span class="card-tag">Events & Recreation</span>
-      <h2 class="card-title">Teambuilding Adventure</h2>
-      <p class="card-desc">An outdoor team building platform for corporate and school groups — connecting organisations with guided programs across Toronto Island and Algonquin Park.</p>
-      <a class="card-link" href="https://teambuildingadventure.ca/" target="_blank" rel="noopener">Visit site<svg viewBox="0 0 24 24"><line x1="5" y1="12" x2="19" y2="12"/><polyline points="12 5 19 12 12 19"/></svg></a>
-    </div>
-
-    <!-- 07 A1 Auto Detailing -->
-    <div class="project-card">
-      <p class="card-number">07 / 11</p>
-      <div class="card-image">
-        <img src="media/portfolio/a1-detailing.jpg" alt="A1 Auto Detailing website: luxury mobile detailing with a before-and-after interior photo" width="1280" height="800" loading="lazy" decoding="async">
-      </div>
-      <span class="card-tag">Auto Detailing & Local Services</span>
-      <h2 class="card-title">A1 Auto Detailing</h2>
-      <p class="card-desc">A booking-focused website for a luxury mobile detailing company serving Raleigh, Durham and Cary &mdash; package pricing, a before-and-after gallery and online booking.</p>
-      <a class="card-link" href="https://a1detailer.com/" target="_blank" rel="noopener">Visit site<svg viewBox="0 0 24 24"><line x1="5" y1="12" x2="19" y2="12"/><polyline points="12 5 19 12 12 19"/></svg></a>
-    </div>
-
-    <!-- 08 Willow -->
-    <div class="project-card">
-      <p class="card-number">08 / 11</p>
-      <div class="card-image">
-        <img src="media/portfolio/willow.jpg" alt="Willow practice management software for Ontario therapists, showing the scheduling calendar" width="1280" height="800" loading="lazy" decoding="async">
-      </div>
-      <span class="card-tag">Software &middot; Healthcare</span>
-      <h2 class="card-title">Willow</h2>
-      <p class="card-desc">Practice management software for Ontario therapists &mdash; scheduling, telehealth, session notes, billing and a client portal in one app, designed around PHIPA with client data hosted in Canada.</p>
-      <a class="card-link" href="https://willowtherapy.ca/" target="_blank" rel="noopener">Visit site<svg viewBox="0 0 24 24"><line x1="5" y1="12" x2="19" y2="12"/><polyline points="12 5 19 12 12 19"/></svg></a>
-    </div>
-
-    <!-- 09 Tempo -->
-    <div class="project-card">
-      <p class="card-number">09 / 11</p>
-      <div class="card-image">
-        <img src="media/portfolio/tempo.jpg" alt="Tempo online booking software for salons, clinics and studios" width="1280" height="800" loading="lazy" decoding="async">
-      </div>
-      <span class="card-tag">Software &middot; Booking</span>
-      <h2 class="card-title">Tempo</h2>
-      <p class="card-desc">Online booking software for salons, clinics, studios and mobile services &mdash; appointments and classes, Stripe deposits, reminders and Google or Outlook calendar sync.</p>
-      <a class="card-link" href="https://tempo.sulosystems.com/" target="_blank" rel="noopener">Visit site<svg viewBox="0 0 24 24"><line x1="5" y1="12" x2="19" y2="12"/><polyline points="12 5 19 12 12 19"/></svg></a>
-    </div>
-
-    <!-- 10 Table Ready -->
-    <div class="project-card">
-      <p class="card-number">10 / 11</p>
-      <div class="card-image">
-        <img src="media/portfolio/table-ready.jpg" alt="Table Ready restaurant reservations and waitlist website" width="1280" height="800" loading="lazy" decoding="async">
-      </div>
-      <span class="card-tag">Software &middot; Restaurants</span>
-      <h2 class="card-title">Table Ready</h2>
-      <p class="card-desc">Online reservations and a waitlist for restaurants &mdash; choose which tables are open to guests, set service hours by weekday, and tell waitlisted guests the moment a table opens.</p>
-      <a class="card-link" href="https://tableready.sulosystems.com/" target="_blank" rel="noopener">Visit site<svg viewBox="0 0 24 24"><line x1="5" y1="12" x2="19" y2="12"/><polyline points="12 5 19 12 12 19"/></svg></a>
-    </div>
-
-    <!-- 11 Counter -->
-    <div class="project-card">
-      <p class="card-number">11 / 11</p>
-      <div class="card-image">
-        <img src="media/portfolio/counter.jpg" alt="Counter check-in and job tracking software for walk-in shops" width="1280" height="800" loading="lazy" decoding="async">
-      </div>
-      <span class="card-tag">Software &middot; Walk-in Shops</span>
-      <h2 class="card-title">Counter</h2>
-      <p class="card-desc">Check-in and job tracking for walk-in shops &mdash; log a repair in seconds, follow it through the workshop, and let customers know the moment it&rsquo;s ready.</p>
-      <a class="card-link" href="https://counter.sulosystems.com/" target="_blank" rel="noopener">Visit site<svg viewBox="0 0 24 24"><line x1="5" y1="12" x2="19" y2="12"/><polyline points="12 5 19 12 12 19"/></svg></a>
-    </div>
-
+<a class="skip-link" href="#main">Skip to content</a>
+<header class="nav">
+  <div class="nav__inner">
+    <a class="lockup" href="/" aria-label="Sulo Systems, home"><svg class="lockup__mark" width="28" height="32" viewBox="0 0 28 32" fill="none" aria-hidden="true"><path d="M14 1 27 8.5v15L14 31 1 23.5v-15L14 1Z" stroke="#201e1d" stroke-width="1.5" stroke-linejoin="round"/><path d="M14 1v15m0 0 13-7.5M14 16 1 8.5M14 16v15" stroke="#201e1d" stroke-width="1.5" stroke-linejoin="round"/></svg><span class="lockup__txt">Sulo<span>Systems</span></span></a>
+    <nav class="nav__links" aria-label="Primary">
+      <a href="/work/">Work</a>
+      <a href="/services/">Services</a>
+      <a href="/platforms.html">Platforms</a>
+      <a href="/#about">About</a>
+    </nav>
+    <a class="btn nav__cta" href="https://cal.com/sulo-systems-tqbzqw/15min" target="_blank" rel="noopener" data-track="services_nav_book_click">Book a call</a>
   </div>
-</section>
-
-<footer>
-  <p class="footer-copy">© 2024 Sulo Systems Inc. All rights reserved.</p>
-  <div class="footer-links">
-    <a href="https://www.instagram.com/" target="_blank" rel="noopener">Instagram</a>
-    <a href="https://www.linkedin.com/" target="_blank" rel="noopener">LinkedIn</a>
-    <a href="https://www.facebook.com/" target="_blank" rel="noopener">Facebook</a>
+</header>
+<main id="main">
+<section class="sv-hero wk-hero"><div class="wrap"><p class="crumbs" aria-label="Breadcrumb"><a href="/">Home</a><span>/</span><span style="margin:0">Portfolio</span></p>
+<h1>Portfolio</h1>
+<p class="lede">Client websites and products we&rsquo;ve designed, built and maintained in Toronto. Looking for results by kind of business? <a href="/work/" style="text-decoration:underline;text-underline-offset:3px">See our work</a>.</p></div></section>
+<section class="wk"><div class="wrap"><div class="wk-grid is-all">
+<article class="wk-card wk-card--plain glass glass--sm">
+  <div class="wk-card__media"><img src="/media/portfolio/ip-silver-house.jpg" alt="IP Silver House homepage: wedding bands in gold, silver and platinum" width="1280" height="800" loading="eager" decoding="async"></div>
+  <div class="wk-card__body">
+    <h2 class="wk-card__result"><a class="wk-card__link" href="https://ipsilverhouse.com/" target="_blank" rel="noopener">IP Silver House</a></h2>
+    <ul class="wk-tags"><li>Jewellery</li></ul>
+    <p class="wk-card__desc">A jewellery storefront for wedding bands, custom-name pieces and antique gold and silver.</p>
+    <p class="wk-card__foot"><span class="wk-card__go" aria-hidden="true">Visit site <svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M7 17 17 7M8 7h9v9"/></svg></span></p>
+  </div>
+</article>
+<article class="wk-card wk-card--plain glass glass--sm">
+  <div class="wk-card__media"><img src="/media/portfolio/gems-by-abi.jpg" alt="Gems by Abi homepage: South Asian jewellery boutique" width="1280" height="700" loading="eager" decoding="async"></div>
+  <div class="wk-card__body">
+    <h2 class="wk-card__result"><a class="wk-card__link" href="https://gemsbyabi.com/" target="_blank" rel="noopener">Gems by Abi</a></h2>
+    <ul class="wk-tags"><li>Jewellery &amp; Retail</li></ul>
+    <p class="wk-card__desc">An online boutique for South Asian jewellery: necklace sets, earrings, bridal pieces and gift cards.</p>
+    <p class="wk-card__foot"><span class="wk-card__go" aria-hidden="true">Visit site <svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M7 17 17 7M8 7h9v9"/></svg></span></p>
+  </div>
+</article>
+<article class="wk-card wk-card--plain glass glass--sm">
+  <div class="wk-card__media"><img src="/media/portfolio/outnod.jpg" alt="OutNo.d hair care product, a hydrating hair crème held in two hands" width="1280" height="800" loading="eager" decoding="async"></div>
+  <div class="wk-card__body">
+    <h2 class="wk-card__result"><a class="wk-card__link" href="https://outnod.com/" target="_blank" rel="noopener">OutNo.d</a></h2>
+    <ul class="wk-tags"><li>Beauty &amp; Wellness</li></ul>
+    <p class="wk-card__desc">A premium curly hair care brand with researched formulas, thoughtful design and an e-commerce experience built around healthy hair.</p>
+    <p class="wk-card__foot"><span class="wk-card__go" aria-hidden="true">Visit site <svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M7 17 17 7M8 7h9v9"/></svg></span></p>
+  </div>
+</article>
+<article class="wk-card wk-card--plain glass glass--sm">
+  <div class="wk-card__media"><img src="/media/portfolio/linenbnb.jpg" alt="LinenBNB homepage: premium linens for rental guest experience" width="1280" height="800" loading="lazy" decoding="async"></div>
+  <div class="wk-card__body">
+    <h2 class="wk-card__result"><a class="wk-card__link" href="https://linenbnb.com/" target="_blank" rel="noopener">LinenBNB</a></h2>
+    <ul class="wk-tags"><li>Hospitality &amp; Services</li></ul>
+    <p class="wk-card__desc">A service website for a premium linen and towel rental company serving Airbnb and vacation rental hosts in Miami and Orlando.</p>
+    <p class="wk-card__foot"><span class="wk-card__go" aria-hidden="true">Visit site <svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M7 17 17 7M8 7h9v9"/></svg></span></p>
+  </div>
+</article>
+<article class="wk-card wk-card--plain glass glass--sm">
+  <div class="wk-card__media"><img src="/media/portfolio/ang-law.jpg" alt="Ang Law PC homepage: Real Estate and Family Lawyers in North York" width="1285" height="736" loading="lazy" decoding="async"></div>
+  <div class="wk-card__body">
+    <h2 class="wk-card__result"><a class="wk-card__link" href="/ang-law-pc-seo-case-study/">Ang Law PC</a></h2>
+    <ul class="wk-tags"><li>Legal</li></ul>
+    <p class="wk-card__desc">Local SEO and enquiry capture for a North York law firm covering real estate, family, wills and estates, immigration and business law.</p>
+    <p class="wk-card__foot"><span class="wk-card__go" aria-hidden="true">Read the case study <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M5 12h14M13 6l6 6-6 6"/></svg></span><a class="wk-card__visit" href="https://anglawpc.com/" target="_blank" rel="noopener">Visit site <svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M7 17 17 7M8 7h9v9"/></svg></a></p>
+  </div>
+</article>
+<article class="wk-card wk-card--plain glass glass--sm">
+  <div class="wk-card__media"><img src="/media/portfolio/teambuilding-adventure.jpg" alt="Teambuilding Adventure website: Toronto Island and Algonquin outdoor team building programs for corporate and school groups" width="1285" height="736" loading="lazy" decoding="async"></div>
+  <div class="wk-card__body">
+    <h2 class="wk-card__result"><a class="wk-card__link" href="/teambuilding-adventure-website-seo-case-study/">Teambuilding Adventure</a></h2>
+    <ul class="wk-tags"><li>Events &amp; Recreation</li></ul>
+    <p class="wk-card__desc">An outdoor team building site for corporate and school groups, connecting organisations with guided programs on Toronto Island and in Algonquin Park.</p>
+    <p class="wk-card__foot"><span class="wk-card__go" aria-hidden="true">Read the case study <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M5 12h14M13 6l6 6-6 6"/></svg></span><a class="wk-card__visit" href="https://www.teambuildingadventure.ca/" target="_blank" rel="noopener">Visit site <svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M7 17 17 7M8 7h9v9"/></svg></a></p>
+  </div>
+</article>
+<article class="wk-card wk-card--plain glass glass--sm">
+  <div class="wk-card__media"><img src="/media/portfolio/a1-detailing.jpg" alt="A1 Auto Detailing website: luxury mobile detailing with a before-and-after interior photo" width="1280" height="800" loading="lazy" decoding="async"></div>
+  <div class="wk-card__body">
+    <h2 class="wk-card__result"><a class="wk-card__link" href="/a1-auto-detailing-website-seo-case-study/">A1 Auto Detailing</a></h2>
+    <ul class="wk-tags"><li>Auto Detailing &amp; Local Services</li></ul>
+    <p class="wk-card__desc">A booking-focused website for a luxury mobile detailing company serving Raleigh, Durham and Cary, with package pricing, a before-and-after gallery and online booking.</p>
+    <p class="wk-card__foot"><span class="wk-card__go" aria-hidden="true">Read the case study <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M5 12h14M13 6l6 6-6 6"/></svg></span><a class="wk-card__visit" href="https://a1detailer.com/" target="_blank" rel="noopener">Visit site <svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M7 17 17 7M8 7h9v9"/></svg></a></p>
+  </div>
+</article>
+<article class="wk-card wk-card--plain glass glass--sm">
+  <div class="wk-card__media"><img src="/media/portfolio/willow.jpg" alt="Willow practice management software for Ontario therapists, showing the scheduling calendar" width="1280" height="800" loading="lazy" decoding="async"></div>
+  <div class="wk-card__body">
+    <h2 class="wk-card__result"><a class="wk-card__link" href="/platforms.html#willow">Willow</a></h2>
+    <ul class="wk-tags"><li>Software, Healthcare</li></ul>
+    <p class="wk-card__desc">Practice management software for Ontario therapists: scheduling, telehealth, session notes, billing and a client portal, designed around PHIPA with client data hosted in Canada.</p>
+    <p class="wk-card__foot"><span class="wk-card__go" aria-hidden="true">Read the story <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M5 12h14M13 6l6 6-6 6"/></svg></span><a class="wk-card__visit" href="https://willowtherapy.ca/" target="_blank" rel="noopener">Visit site <svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M7 17 17 7M8 7h9v9"/></svg></a></p>
+  </div>
+</article>
+<article class="wk-card wk-card--plain glass glass--sm">
+  <div class="wk-card__media"><img src="/media/portfolio/tempo.jpg" alt="Tempo online booking software for salons, clinics and studios" width="1280" height="800" loading="lazy" decoding="async"></div>
+  <div class="wk-card__body">
+    <h2 class="wk-card__result"><a class="wk-card__link" href="/platforms.html#tempo">Tempo</a></h2>
+    <ul class="wk-tags"><li>Software, Booking</li></ul>
+    <p class="wk-card__desc">Online booking for salons, clinics, studios and mobile services: appointments and classes, Stripe deposits, reminders and Google or Outlook calendar sync.</p>
+    <p class="wk-card__foot"><span class="wk-card__go" aria-hidden="true">Read the story <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M5 12h14M13 6l6 6-6 6"/></svg></span><a class="wk-card__visit" href="https://tempo.sulosystems.com/" target="_blank" rel="noopener">Visit site <svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M7 17 17 7M8 7h9v9"/></svg></a></p>
+  </div>
+</article>
+<article class="wk-card wk-card--plain glass glass--sm">
+  <div class="wk-card__media"><img src="/media/portfolio/table-ready.jpg" alt="Table Ready restaurant reservations and waitlist website" width="1280" height="800" loading="lazy" decoding="async"></div>
+  <div class="wk-card__body">
+    <h2 class="wk-card__result"><a class="wk-card__link" href="/platforms.html#tableready">Table Ready</a></h2>
+    <ul class="wk-tags"><li>Software, Restaurants</li></ul>
+    <p class="wk-card__desc">Online reservations and a waitlist for restaurants: choose which tables are open to guests, set service hours by weekday and tell waitlisted guests the moment a table opens.</p>
+    <p class="wk-card__foot"><span class="wk-card__go" aria-hidden="true">Read the story <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M5 12h14M13 6l6 6-6 6"/></svg></span><a class="wk-card__visit" href="https://tableready.sulosystems.com/" target="_blank" rel="noopener">Visit site <svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M7 17 17 7M8 7h9v9"/></svg></a></p>
+  </div>
+</article>
+<article class="wk-card wk-card--plain glass glass--sm">
+  <div class="wk-card__media"><img src="/media/portfolio/counter.jpg" alt="Counter check-in and job tracking software for walk-in shops" width="1280" height="800" loading="lazy" decoding="async"></div>
+  <div class="wk-card__body">
+    <h2 class="wk-card__result"><a class="wk-card__link" href="/platforms.html#counter">Counter</a></h2>
+    <ul class="wk-tags"><li>Software, Walk-in Shops</li></ul>
+    <p class="wk-card__desc">Check-in and job tracking for walk-in shops: log a repair in seconds, follow it through the workshop and let customers know the moment it is ready.</p>
+    <p class="wk-card__foot"><span class="wk-card__go" aria-hidden="true">Read the story <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M5 12h14M13 6l6 6-6 6"/></svg></span><a class="wk-card__visit" href="https://counter.sulosystems.com/" target="_blank" rel="noopener">Visit site <svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M7 17 17 7M8 7h9v9"/></svg></a></p>
+  </div>
+</article>
+</div></div></section>
+<section class="wrap"><div class="sv-end glass"><div><h2>Want a site like one of these?</h2><p>Tell us what you sell and who buys it. In 15 minutes we will say what we would do first, whether we are the right people, and roughly what it would cost.</p></div>
+<a class="btn" href="https://cal.com/sulo-systems-tqbzqw/15min" target="_blank" rel="noopener" data-track="work_end_book_click">Book a call <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M5 12h14M13 6l6 6-6 6"/></svg></a></div></section>
+</main>
+<footer class="foot">
+  <div class="wrap foot__in">
+    <a class="lockup" href="/" aria-label="Sulo Systems, home"><svg class="lockup__mark" width="24" height="28" viewBox="0 0 28 32" fill="none" aria-hidden="true"><path d="M14 1 27 8.5v15L14 31 1 23.5v-15L14 1Z" stroke="#201e1d" stroke-width="1.5" stroke-linejoin="round"/><path d="M14 1v15m0 0 13-7.5M14 16 1 8.5M14 16v15" stroke="#201e1d" stroke-width="1.5" stroke-linejoin="round"/></svg><span class="lockup__txt">Sulo<span>Systems</span></span></a>
+    <nav class="foot__links" aria-label="Footer">
+      <a href="/work/">Work</a><a href="/services/">Services</a><a href="/platforms.html">Platforms</a><a href="/locations/">Locations</a><a href="/guides/">Guides</a><a href="/#contact">Contact</a>
+    </nav>
+    <address class="foot__nap">
+      <a href="/locations/east-york/">2 Grandstand Pl, East York, Toronto, ON M4H&nbsp;1E2</a>
+      <a href="/locations/woodbridge/">681 Chancellor Dr, Woodbridge, ON L4L&nbsp;4A8</a>
+      <a href="tel:+16475246974" data-track="services_footer_phone_click">(647) 524-6974</a>
+    </address>
+    <p class="foot__meta">&copy; 2026 Sulo Systems Inc. &middot; Toronto, Canada</p>
   </div>
 </footer>
-
+<script type="module" src="/js/sulo-analytics.js"></script>
 </body>
 </html>
