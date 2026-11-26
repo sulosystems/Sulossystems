@@ -2530,8 +2530,7 @@ textarea.input-opt{ min-height:112px; }
   if (BOOKING_URL) {
     Array.prototype.forEach.call(document.querySelectorAll("[data-book]"), function(a){
       a.setAttribute("href", BOOKING_URL);
-      a.setAttribute("target", "_blank");
-      a.setAttribute("rel", "noopener");
+      a.setAttribute("data-tempo-open", ""); // opens the Tempo booking pop-up over the page (the link still works without JavaScript)
     });
   }
 
@@ -2600,5 +2599,6 @@ textarea.input-opt{ min-height:112px; }
 })();
 </script>
 
+<script src="https://tempo.sulosystems.com/embed.js" data-slug="sulo-systems" async></script>
 </body>
 </html>
